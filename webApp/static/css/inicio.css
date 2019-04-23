@@ -1,0 +1,21 @@
+body{
+    background: url("grupo-amigos-diversion.jpg");
+}
+h1{
+    font-family: "Helve";
+    font-size: 100px;
+}
+button, a{
+    font-family: "Comic Sans MS";
+    margin: 70px;
+}
+h5{
+    color: darkred;
+}
+#userName, #password, #repeat_password{
+    margin: 30px;
+    align-items: center;
+}
+p{
+    margin: 5px;
+}
