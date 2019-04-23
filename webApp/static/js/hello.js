@@ -23,3 +23,7 @@ function getUsers(){
         }
     }
 }
+
+function signOut() {
+    
+}
