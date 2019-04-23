@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {
-        RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.GET, RequestMethod.OPTIONS})
 public class EventController {
 
 
@@ -32,29 +30,29 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
-    @RequestMapping("/users/{name}/events")
-    public List<Event> getAllEventsFromUser(@PathVariable String name){
-        return eventService.getAllEventsFromUser(name);
+    @RequestMapping("/users/{id}/events")
+    public List<Event> getAllEventsFromUser(@PathVariable Long id){
+        return eventService.getAllEventsFromUser(id);
     }
 
-    @RequestMapping("/users/{name}/events/{id}")
+    @RequestMapping("/users/{userId}/events/{id}")
     public Optional<Event> getEvent(@PathVariable String id){
         return eventService.getEvent(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users/{name}/events")
-    public void addEvent(@RequestBody Event event, @PathVariable String name){
-        event.setUser(userService.getUserByName(name));
+    @RequestMapping(method = RequestMethod.POST, value = "/users/{userId}/events")
+    public void addEvent(@RequestBody Event event, @PathVariable Long userId){
+        event.setUser(userService.getUserById(userId));
         eventService.addEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/{name}/events/{id}")
-    public void updateEvent(@RequestBody Event event, @PathVariable String name){
-        event.setUser(userService.getUserByName(name));
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}/events/{id}")
+    public void updateEvent(@RequestBody Event event, @PathVariable Long userId){
+        event.setUser(userService.getUserById(userId));
         eventService.updateEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{name}/events/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}/events/{id}")
     public void deleteEvent(@PathVariable String id){
         eventService.deleteEvent(id);
     }
