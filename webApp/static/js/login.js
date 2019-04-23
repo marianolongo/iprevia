@@ -15,8 +15,10 @@ function login() {
     request.setRequestHeader('Authorization', 'Basic ' + authorizationBasic);
     request.setRequestHeader('Accept', 'application/json');
     request.send(data);
+    console.log("Data " + data);
     request.onload = () => {
+        console.log("Response " + request.response);
         window.sessionStorage.token = JSON.parse(request.response).access_token;
-        location.replace("hello.html");
+        location.replace("home.html");
     }
 }

@@ -26,7 +26,7 @@ public class EventService {
         return events;
     }
 
-    public List<Event> getAllEventsFromUser(Long id) {
+    public List<Event> getAllEventsFromUser(String id) {
         return eventRepository.findByUserId(id);
     }
 
