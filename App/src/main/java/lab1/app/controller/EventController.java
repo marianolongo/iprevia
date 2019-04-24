@@ -6,6 +6,8 @@ import lab1.app.model.Event;
 import lab1.app.service.EventService;
 import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,9 +42,10 @@ public class EventController {
         return eventService.getEvent(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users/{userId}/events")
-    public void addEvent(@RequestBody Event event, @PathVariable Long userId){
-        event.setUser(userService.getUserById(userId));
+    @RequestMapping(method = RequestMethod.POST, value = "/events")
+    public void addEvent(Authentication authentication, @RequestBody Event event, @PathVariable Long userId){
+        OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
+        event.setUser(userService.getUserById((Long) oAuth2Authentication.getUserAuthentication().getPrincipal()));
         eventService.addEvent(event);
     }
 

@@ -52,12 +52,12 @@
 
 <script type="text/javascript">
 
-    var username = document.getElementById("userName");
+    var name = document.getElementById("userName");
     var pass = document.getElementById("password");
 
     function getUser(){
         var request = new XMLHttpRequest();
-        request.open('GET', '/users/{username}');
+        request.open('GET', '/users/{name}');
         request.send();
     }
 

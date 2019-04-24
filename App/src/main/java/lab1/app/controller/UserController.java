@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping("/users/{id}")
     public Optional<User> getUser(@PathVariable Long id){
-        return userService.getTopic(id);
+        return userService.getUser(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable Long id){
+    public void updateUser(@RequestBody User user, @PathVariable String name){
         userService.updateUser(user);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
     public void deleteUser(@PathVariable Long id){
-        userService.deleteTopic(id);
+        userService.deleteUser(id);
     }
 
     @RequestMapping("/validate")

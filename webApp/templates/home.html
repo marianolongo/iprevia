@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Welcome!</h1>
-        <a href="login.html">Login</a>
-        <br>
-        <br>
-        <a href="register.html">Register</a>
-    </body>
+<head>
+    <title>Hello World!</title>
+    <script src="../static/js/home.js"></script>
+    <script src="../static/js/validate.js"></script>
+</head>
+<body>
+<h1>Hello</h1>
+<button onclick="signOut()">Sign Out</button>
+<button onclick="getUsers()">Users</button>
+<button onclick="getEvents()">Events</button>
+<ul id="users"></ul>
+<ul id="events"></ul>
+
+
+<form onsubmit="crearEvento()">
+    <input id="nombre-evento" type="text" placeholder="Nombre evento">
+    <br>
+    <br>
+    <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Crear evento">
+</form>
+</body>
 </html>

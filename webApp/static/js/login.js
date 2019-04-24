@@ -17,6 +17,6 @@ function login() {
     request.send(data);
     request.onload = () => {
         window.sessionStorage.token = JSON.parse(request.response).access_token;
-        location.replace("hello.html");
+        location.replace("home.html");
     }
 }
