@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", methods = {
+        RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.GET, RequestMethod.OPTIONS})
 public class EventController {
 
 
@@ -43,7 +45,7 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/events")
-    public void addEvent(Authentication authentication, @RequestBody Event event, @PathVariable Long userId){
+    public void addEvent(Authentication authentication, @RequestBody Event event){
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
         event.setUser(userService.getUserById((Long) oAuth2Authentication.getUserAuthentication().getPrincipal()));
         eventService.addEvent(event);
