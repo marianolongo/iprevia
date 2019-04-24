@@ -1,40 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>iPrevia</title>
+
+    <!-- IMPORTING BOOTSTRAP -->
+    <!--  	Con el siguiente link se arregla toda la pagina, IMPORTANTE, no modificar -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/css/home.css">
+
+    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="animation.js"></script>
     <script src="../static/js/home.js"></script>
     <script src="../static/js/validate.js"></script>
 </head>
 <body>
-<h1>Hello</h1>
+<h1>iPrevia</h1>
+<!--<div class="container">-->
+<!--    <button class="btn btn-warning"></button>-->
+<!--    <button class="btn btn-warning">2</button>-->
+<!--    <button class="btn btn-warning">2</button>-->
+<!--    <button class="btn btn-warning">3</button>-->
+<!--</div>-->
+<div class="container col-md-4" style="text-align: center">
+    <button class="btn btn-warning" onclick="getUsers()">Users</button>
+    <ul id="users"></ul>
+    <br>
+    <button class="btn btn-warning" onclick="getEvents()">Events</button>
+    <ul id="events"></ul>
 
-<button onclick="signOut()">Sign Out</button>
-<button onclick="getUsers()">Users</button>
-<button onclick="getEvents()">Events</button>
-<ul id="users"></ul>
-<ul id="events"></ul>
-<form onsubmit="crearEvento()">
-    <input id="nombre-evento" type="text" placeholder="Nombre evento">
-    <br>
-    <br>
-    <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
-    <br>
-    <br>
-    <input type="submit" value="Crear evento">
-</form>
-<br>
-<br>
-<input id="evento-buscado" type="text" placeholder="Buscar evento">
-<br>
-<br>
-<button onclick="buscarEvento()">Buscar</button>
-<ul id="evento"></ul>
-<br>
-<br>
-<input id="usuario-buscado" type="text" placeholder="Buscar usuario">
-<br>
-<br>
-<button onclick="buscarUsuario()">Buscar</button>
-<ul id="usuario"></ul>
+</div>
+<div class="container col-md-4" style="text-align: center">
+        <form onsubmit="crearEvento()">
+            <input id="nombre-evento" type="text" placeholder="Nombre evento">
+            <br>
+            <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
+            <br>
+            <input type="submit" value="Crear evento">
+        </form>
+</div>
+<div class="container col-md-4" style="text-align: center">
+    <input id="evento-buscado" type="text" placeholder="Buscar evento">
+    <button class="btn btn-warning" onclick="buscarEvento()">Buscar</button>
+    <ul id="evento"></ul>
+    <input id="usuario-buscado" type="text" placeholder="Buscar usuario">
+    <button class="btn btn-warning" onclick="buscarUsuario()">Buscar</button>
+    <ul id="usuario"></ul>
+</div>
+<!--<button onclick="signOut()">Sign Out</button>-->
+
+
+
 </body>
 </html>
