@@ -64,8 +64,8 @@
             var contra = document.getElementById("pwd").value;
             var mail = document.getElementById("mail").value;
 
-           var request = new XMLHttpRequest();
-           request.open('POST', "http://localhost:8080/users");
+            var request = new XMLHttpRequest();
+            request.open('POST', "http://localhost:8080/users");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({ "email": mail, "name": usuario, "password": contra}));
         }
