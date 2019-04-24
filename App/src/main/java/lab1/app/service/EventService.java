@@ -30,8 +30,8 @@ public class EventService {
         return eventRepository.findByUserId(id);
     }
 
-    public Optional<Event> getEvent(String id) {
-        return eventRepository.findById(id);
+    public Optional<Event> getEvent(String name) {
+        return eventRepository.findByName(name);
     }
 
     public void addEvent(Event event) {

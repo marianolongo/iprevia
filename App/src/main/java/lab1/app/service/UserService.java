@@ -25,8 +25,8 @@ public class UserService {
         return users;
     }
 
-    public Optional<User> getUser(Long id) {
-        return userRepository.findById(id);
+    public User getUser(String name) {
+        return userRepository.findByName(name);
     }
 
     public void addUser(User user) {

@@ -61,3 +61,33 @@ function crearEvento(){
     request.setRequestHeader('Accept', 'application/json');
     request.send(event);
 }
+
+function buscarEvento() {
+    const name = document.getElementById("evento-buscado").value;
+    const url = "http://localhost:8080/events/" + name;
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        const htmlList = document.getElementById("evento");
+        htmlList.innerHTML = request.responseText;
+    }
+}
+
+function buscarUsuario() {
+    const name = document.getElementById("usuario-buscado").value;
+    const url = "http://localhost:8080/users/" + name;
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        const htmlList = document.getElementById("usuario");
+        htmlList.innerHTML = request.responseText;
+    }
+}

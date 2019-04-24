@@ -39,9 +39,9 @@ public class EventController {
         return eventService.getAllEventsFromUser(id);
     }
 
-    @RequestMapping("/users/{userId}/events/{id}")
-    public Optional<Event> getEvent(@PathVariable String id){
-        return eventService.getEvent(id);
+    @RequestMapping("/events/{name}")
+    public Optional<Event> getEvent(@PathVariable String name){
+        return eventService.getEvent(name);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/events")

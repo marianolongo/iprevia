@@ -24,9 +24,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping("/users/{id}")
-    public Optional<User> getUser(@PathVariable Long id){
-        return userService.getUser(id);
+    @RequestMapping("/users/{name}")
+    public User getUser(@PathVariable String name){
+        return userService.getUser(name);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
