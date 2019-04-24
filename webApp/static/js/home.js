@@ -53,8 +53,7 @@ function crearEvento(){
     const url = "http://localhost:8080/events";
     const name = document.getElementById("nombre-evento").value;
     const description = document.getElementById("descripcion-evento").value;
-    const event = JSON.stringify({"name":name, "description": description});
-    console.log(event);
+    const event = JSON.stringify({"name": name, "description": description});
     const request = new XMLHttpRequest();
     request.open("POST", url, true);
     request.setRequestHeader('Content-Type', 'application/json');

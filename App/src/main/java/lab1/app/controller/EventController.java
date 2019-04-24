@@ -47,7 +47,7 @@ public class EventController {
     @RequestMapping(method = RequestMethod.POST, value = "/events")
     public void addEvent(Authentication authentication, @RequestBody Event event){
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
-        event.setUser(userService.getUserById((Long) oAuth2Authentication.getUserAuthentication().getPrincipal()));
+        event.setUser(userService.getUserByName((String) oAuth2Authentication.getUserAuthentication().getPrincipal()));
         eventService.addEvent(event);
     }
 
