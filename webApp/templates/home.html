@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>iPrevia</title>
-
-    <!-- IMPORTING BOOTSTRAP -->
-    <!--  	Con el siguiente link se arregla toda la pagina, IMPORTANTE, no modificar -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="../static/css/home.css">
-
-    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
-    <script src="animation.js"></script>
+    <title>Hello World!</title>
     <script src="../static/js/home.js"></script>
     <script src="../static/js/validate.js"></script>
 </head>
@@ -35,16 +19,20 @@
     <br>
     <button class="btn btn-warning" onclick="getEvents()">Events</button>
     <ul id="events"></ul>
+    <br>
+    <button onclick="showEventsFromUser()">Events from User</button>
+    <ul id="events-from-user"></ul>
+    <br>
 
 </div>
 <div class="container col-md-4" style="text-align: center">
-        <form onsubmit="crearEvento()">
-            <input id="nombre-evento" type="text" placeholder="Nombre evento">
-            <br>
-            <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
-            <br>
-            <input type="submit" value="Crear evento">
-        </form>
+    <form onsubmit="crearEvento()">
+        <input id="nombre-evento" type="text" placeholder="Nombre evento">
+        <br>
+        <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
+        <br>
+        <input type="submit" value="Crear evento">
+    </form>
 </div>
 <div class="container col-md-4" style="text-align: center">
     <input id="evento-buscado" type="text" placeholder="Buscar evento">
@@ -55,8 +43,6 @@
     <ul id="usuario"></ul>
 </div>
 <!--<button onclick="signOut()">Sign Out</button>-->
-
-
 
 </body>
 </html>

@@ -26,8 +26,8 @@ public class EventService {
         return events;
     }
 
-    public List<Event> getAllEventsFromUser(Long id) {
-        return eventRepository.findByUserId(id);
+    public List<Event> getAllEventsFromUser(String name) {
+        return eventRepository.findByUser_Name(name);
     }
 
     public Optional<Event> getEvent(String name) {
