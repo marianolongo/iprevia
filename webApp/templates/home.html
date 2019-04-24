@@ -8,11 +8,6 @@
 <body>
 <h1>Hello</h1>
 
-<button onclick="signOut()">Sign Out</button>
-<button onclick="getUsers()">Users</button>
-<button onclick="getEvents()">Events</button>
-<ul id="users"></ul>
-<ul id="events"></ul>
 <form onsubmit="crearEvento()">
     <input id="nombre-evento" type="text" placeholder="Nombre evento">
     <br>
@@ -22,6 +17,21 @@
     <br>
     <input type="submit" value="Crear evento">
 </form>
+
+<button onclick="signOut()">Sign Out</button>
+<button onclick="getUsers()">Users</button>
+<button onclick="getEvents()">Events</button>
+<button onclick="showEventsFromUser()">Events from User</button>
+<h3>Users</h3>
+<ul id="users"></ul>
+<br>
+<br>
+<h3>Events</h3>
+<ul id="events"></ul>
+<br>
+<br>
+<h3>Events from User</h3>
+<ul id="events-from-user"></ul>
 <br>
 <br>
 <input id="evento-buscado" type="text" placeholder="Buscar evento">
