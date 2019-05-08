@@ -12,7 +12,7 @@ button, a{
 h5{
     color: darkred;
 }
-#userName, #password, #repeat_password{
+#userNameTag, #passwordTag, #repeat_password{
     margin: 30px;
     align-items: center;
 }

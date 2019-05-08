@@ -14,10 +14,9 @@
     <!--  	Con el siguiente link se arregla toda la pagina, IMPORTANTE, no modificar -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../static/css/inicio.css">
+    <link rel="stylesheet" href="static/css/inicio.css">
+    <script src="static/js/login.js"></script>
 
-    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
-    <script src="animation.js"></script>
 </head>
 <body>
 <header>
@@ -29,32 +28,26 @@
 </header>
 <div class="container" style="text-align: center;" id="input">
 
-    <div id="userName">
+    <div id="userNameTag">
         <div><p>Nombre de Usuario</p></div>
-        <input type="text">
+        <input type="text" name="username" id="username"/>
     </div>
-    <div id="password">
+    <div id="passwordTag">
         <div><p>Contraseña</p></div>
-        <input type="password">
+        <input type="password" name="password" id="password"/>
     </div>
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
         <label class="custom-control-label" for="defaultUnchecked">Recordarme</label>
     </div>
-    <button class="btn btn-warning" id="enter"> Entrar </button>
+    <!--<div>-->
+    <!--Invalid name and password.-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--You have been logged out.-->
+    <!--</div>-->
+    <button onclick="login()" class="btn btn-warning" id="enter"> Entrar </button>
 </div>
 
-<script type="text/javascript">
-
-    var name = document.getElementById("userName");
-    var pass = document.getElementById("password");
-
-    function getUser(){
-        var request = new XMLHttpRequest();
-        request.open('GET', '/users/{name}');
-        request.send();
-    }
-
-</script>
 </body>
 </html>
