@@ -81,6 +81,7 @@ function showEventsFromUser(){
             const li = document.createElement("li");
             const a = document.createElement("a");
             a.innerText = eventList[i].name;
+            a.href = "";
             li.appendChild(a);
             htmlList.appendChild(li);
         }
@@ -114,5 +115,17 @@ function buscarUsuario() {
     request.onload = () => {
         const htmlList = document.getElementById("usuario");
         htmlList.innerHTML = request.responseText;
+    }
+}
+
+
+function signOut() {
+    const url = "http://localhost:8081/oauth/remove-token";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send();
+    request.onload = () => {
+        location.replace("index.html");
+        sessionStorage.removeItem("token");
     }
 }

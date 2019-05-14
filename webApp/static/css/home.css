@@ -22,3 +22,7 @@ h5{
 p{
     margin: 5px;
 }
+
+textarea{
+    resize: none;
+}
