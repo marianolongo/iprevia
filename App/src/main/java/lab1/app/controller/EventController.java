@@ -49,17 +49,23 @@ public class EventController {
     public void addEvent(Authentication authentication, @RequestBody Event event){
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
         event.setHost(userService.getUserByName((String) oAuth2Authentication.getUserAuthentication().getPrincipal()));
+        event.setPrivate(false);
         eventService.addEvent(event);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}/events/{id}")
     public void updateEvent(@RequestBody Event event, @PathVariable Long userId){
-        event.setHost(userService.getUserById(userId));
+//        event.setHost(userService.getUserById(userId));
         eventService.updateEvent(event);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}/events/{id}")
     public void deleteEvent(@PathVariable String id){
         eventService.deleteEvent(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest/{guestId}")
+    public void addGuest(@PathVariable Long id, @PathVariable Long guestId){
+        eventService.addGuest(id, guestId);
     }
 }

@@ -13,4 +13,6 @@ public interface EventRepository extends CrudRepository<Event, String> {
 
     List<Event> findByHost_Name(String user_name);
     Optional<Event> findByName(String name);
+
+    Event findById(Long id);
 }

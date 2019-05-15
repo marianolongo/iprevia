@@ -19,6 +19,7 @@ public class Event {
 
     private String name;
     private String description;
+    private Boolean isPrivate;
 
 
     public Event(List<User> users, Long id, String name, String description) {
@@ -51,6 +52,10 @@ public class Event {
         return description;
     }
 
+    public Boolean getPrivate() {
+        return isPrivate;
+    }
+
     public void setUser(List<User> user) {
         this.users = user;
     }
@@ -69,5 +74,9 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }
