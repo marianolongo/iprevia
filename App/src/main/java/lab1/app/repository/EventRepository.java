@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface EventRepository extends CrudRepository<Event, String> {
 
-    List<Event> findByUserId(Long userId);
+    List<Event> findByHostId(Long userId);
 
-    List<Event> findByUser_Name(String user_name);
+    List<Event> findByHost_Name(String user_name);
     Optional<Event> findByName(String name);
 }

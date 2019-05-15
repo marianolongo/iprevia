@@ -11,7 +11,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-
+    private Long score;
     public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -38,6 +38,10 @@ public class User {
         return password;
     }
 
+    public Long getScore() {
+        return score;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,5 +56,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setScore(Long score) {
+        this.score = score;
     }
 }

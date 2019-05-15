@@ -31,6 +31,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public void addUser(@RequestBody User user){
+        user.setScore(0L);
         userService.addUser(user);
     }
 
@@ -44,8 +45,8 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @RequestMapping("/validate")
-    public boolean validate(){
-        return true;
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}/incrementScore")
+    public void incrementScore(@PathVariable Long id){
+        userService.incrementScore(id);
     }
 }

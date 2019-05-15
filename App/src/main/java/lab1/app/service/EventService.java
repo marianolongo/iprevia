@@ -27,7 +27,7 @@ public class EventService {
     }
 
     public List<Event> getAllEventsFromUser(String name) {
-        return eventRepository.findByUser_Name(name);
+        return eventRepository.findByHost_Name(name);
     }
 
     public Optional<Event> getEvent(String name) {

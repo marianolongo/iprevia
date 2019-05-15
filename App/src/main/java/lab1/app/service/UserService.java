@@ -48,4 +48,11 @@ public class UserService {
     public User getUserByName(String name){
         return userRepository.getUsersByName(name);
     }
+
+    public void incrementScore(Long id) {
+        User user = getUserById(id);
+        Long score = user.getScore();
+        user.setScore(score + 1);
+        userRepository.save(user);
+    }
 }

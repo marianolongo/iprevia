@@ -2,6 +2,7 @@ package lab1.app.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -10,15 +11,18 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToMany
+    private List<User> users;
+
     @ManyToOne
-    private User user;
+    private User host;
 
     private String name;
     private String description;
 
 
-    public Event(User user, Long id, String name, String description) {
-        this.user = user;
+    public Event(List<User> users, Long id, String name, String description) {
+        this.users = users;
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,8 +31,12 @@ public class Event {
     public Event() {
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUser() {
+        return users;
+    }
+
+    public User getHost() {
+        return host;
     }
 
     public Long getId() {
@@ -43,8 +51,12 @@ public class Event {
         return description;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(List<User> user) {
+        this.users = user;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public void setId(Long id) {

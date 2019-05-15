@@ -1,4 +1,4 @@
-
+// import {HTTP} from "../../h";
 
 function getUsers(){
     const url = "http://localhost:8080/users";
@@ -50,6 +50,11 @@ function getEvents() {
 }
 
 function crearEvento(){
+    // const name = document.getElementById("nombre-evento").value;
+    // const description = document.getElementById("descripcion-evento").value;
+    // HTTP.put('events',{
+    //     name, description
+    // })
     const url = "http://localhost:8080/events";
     const name = document.getElementById("nombre-evento").value;
     const description = document.getElementById("descripcion-evento").value;
@@ -99,7 +104,16 @@ function buscarEvento() {
     request.send();
     request.onload = () => {
         const htmlList = document.getElementById("evento");
-        htmlList.innerHTML = request.responseText;
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(request.response);
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.innerText = eventList.name;
+        a.href = "event.html";
+        li.appendChild(a);
+        htmlList.appendChild(li);
     }
 }
 
