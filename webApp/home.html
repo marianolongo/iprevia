@@ -1,63 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8">
+    <title>IPrevia</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>iPrevia</title>
-
-    <!-- IMPORTING BOOTSTRAP -->
-    <!--  	Con el siguiente link se arregla toda la pagina, IMPORTANTE, no modificar -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <link rel="stylesheet" href="static/css/home.css">
-    <script src="static/js/home.js"></script>
-
-    <!--<script src="resources/bootstrap/js/bootstrap.min.js"></script>-->
-    <!--<script src="animation.js"></script>-->
 </head>
 <body>
-<h1>iPrevia</h1>
-<!--<div class="container">-->
-<!--    <button class="btn btn-warning"></button>-->
-<!--    <button class="btn btn-warning">2</button>-->
-<!--    <button class="btn btn-warning">2</button>-->
-<!--    <button class="btn btn-warning">3</button>-->
-<!--</div>-->
-<div class="container col-md-4" style="text-align: center">
-    <button class="btn btn-warning" onclick="getUsers()">Users</button>
-    <ul id="users"></ul>
-    <br>
-    <button class="btn btn-warning" onclick="getEvents()">Events</button>
-    <ul id="events"></ul>
-    <br>
-    <button onclick="showEventsFromUser()">Events from User</button>
-    <ul id="events-from-user"></ul>
-    <br>
-
-</div>
-<div class="container col-md-4" style="text-align: center">
-    <form onsubmit="crearEvento()">
-        <input id="nombre-evento" type="text" placeholder="Nombre evento">
-        <br>
-        <textarea id="descripcion-evento" placeholder="Descripcion evento"></textarea>
-        <br>
-        <input type="submit" value="Crear evento">
-    </form>
-</div>
-<div class="container col-md-4" style="text-align: center">
-    <input id="evento-buscado" type="text" placeholder="Buscar evento">
-    <button class="btn btn-warning" onclick="buscarEvento()">Buscar</button>
-    <ul id="evento"></ul>
-    <input id="usuario-buscado" type="text" placeholder="Buscar usuario">
-    <button class="btn btn-warning" onclick="buscarUsuario()">Buscar</button>
-    <ul id="usuario"></ul>
-</div>
-<button onclick="signOut()">Sign Out</button>
-
+    <div class="container-fluid bg-primary">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>IPrevia</h1>
+            </div>
+            <div class="col-md-8">
+                <div class="row pt-5 custom-header">
+                    <div class="col-md-3 text-center">
+                        <a href="home.html" class="header-element">Mis Eventos</a>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="home.html" class="header-element">Crear Evento</a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <form class="form-inline">
+                            <input class="form-control mr-sm-2"
+                                   type="search" placeholder="Buscar usuario o evento"
+                                   aria-label="Search"
+                            >
+                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row fill">
+            <div class="col-md-4 bg-success">
+                <div class="row mt-4 justify-content-center mt-3">
+                    <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
+                </div>
+                <div class="row justify-content-center">
+                    <ul>
+                        <li>Nombre Usuario</li>
+                        <li>Puntuacion</li>
+                    </ul>
+                </div>
+                <div class="row justify-content-center">
+                    <button>Sign Out</button>
+                </div>
+            </div>
+            <div class="col-md-8 bg-warning">
+                <h3>Hello World</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer">
+        <div class="row bg-danger">
+            <h3>Todo es mejor acompañado</h3>
+        </div>
+    </div>
 </body>
 </html>

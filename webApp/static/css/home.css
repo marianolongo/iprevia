@@ -1,28 +1,23 @@
-body{
-    /*background: url("grupo-amigos-diversion.jpg");*/
-}
 h1{
     font-family: "Helve";
     font-size: 100px;
 }
-button, a{
-    font-family: "Comic Sans MS";
-    margin-left: 50px;
-}
-#nombre-evento, #descripcion-evento{
-    margin: 10px;
-}
-h5{
-    color: darkred;
-}
-#userName, #password, #repeat_password{
-    margin: 30px;
-    align-items: center;
-}
-p{
-    margin: 5px;
+
+.footer{
+    bottom: 0;
+    position: absolute;
 }
 
-textarea{
-    resize: none;
+.fill {
+    min-height: 100vh;
+    height: 100%;
+}
+
+.custom-header{
+    font-size: 24px;
+}
+
+.header-element{
+    color: black;
+    text-decoration: none;
 }

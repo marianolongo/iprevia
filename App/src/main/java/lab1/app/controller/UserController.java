@@ -49,4 +49,9 @@ public class UserController {
     public void incrementScore(@PathVariable Long id){
         userService.incrementScore(id);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}/decreaseScore")
+    public void decreaseScore(@PathVariable Long id){
+        userService.decreaseScore(id);
+    }
 }

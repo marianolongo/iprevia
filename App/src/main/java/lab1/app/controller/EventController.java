@@ -55,7 +55,6 @@ public class EventController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}/events/{id}")
     public void updateEvent(@RequestBody Event event, @PathVariable Long userId){
-//        event.setHost(userService.getUserById(userId));
         eventService.updateEvent(event);
     }
 

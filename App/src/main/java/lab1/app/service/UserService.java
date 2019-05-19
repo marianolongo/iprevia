@@ -55,4 +55,11 @@ public class UserService {
         user.setScore(score + 1);
         userRepository.save(user);
     }
+
+    public void decreaseScore(Long id) {
+        User user = getUserById(id);
+        Long score = user.getScore();
+        user.setScore(score - 1);
+        userRepository.save(user);
+    }
 }
