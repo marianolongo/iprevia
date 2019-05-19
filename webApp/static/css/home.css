@@ -1,12 +1,17 @@
+body{
+    background: url("../images/back.jpg") ;
+}
+
 h1{
     font-family: "Helve";
     font-size: 100px;
+    color: white;
 }
 
-.footer{
-    bottom: 0;
-    position: absolute;
-}
+/*.footer{*/
+/*    bottom: 0;*/
+/*    position: absolute;*/
+/*}*/
 
 .fill {
     min-height: 100vh;
@@ -18,6 +23,17 @@ h1{
 }
 
 .header-element{
-    color: black;
+    color: white;
     text-decoration: none;
+}
+.user_elem{
+    margin: 15px;
+}
+
+.username{
+    color: white;
+}
+
+.checked{
+    color: white;
 }

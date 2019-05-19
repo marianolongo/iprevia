@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IPrevia</title>
+    <title>iPrevia</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="container-fluid bg-primary">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <h1>IPrevia</h1>
+                <h1 style="text-align: center">iPrevia</h1>
             </div>
             <div class="col-md-8">
                 <div class="row pt-5 custom-header">
                     <div class="col-md-3 text-center">
-                        <a href="home.html" class="header-element">Mis Eventos</a>
+                        <a href="home.html" class="btn header-element">Mis Eventos</a>
                     </div>
                     <div class="col-md-3 text-center">
-                        <a href="home.html" class="header-element">Crear Evento</a>
+                        <a href="home.html" class="btn header-element">Crear Evento</a>
                     </div>
                     <div class="col-md-6 text-center">
                         <form class="form-inline">
@@ -26,7 +27,7 @@
                                    type="search" placeholder="Buscar usuario o evento"
                                    aria-label="Search"
                             >
-                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-danger" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
@@ -35,29 +36,34 @@
     </div>
     <div class="container-fluid">
         <div class="row fill">
-            <div class="col-md-4 bg-success">
-                <div class="row mt-4 justify-content-center mt-3">
+            <div class="col-md-4">
+                <div class="row mt-4 justify-content-center mt-3 user_elem">
                     <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
                 </div>
                 <div class="row justify-content-center">
-                    <ul>
-                        <li>Nombre Usuario</li>
-                        <li>Puntuacion</li>
-                    </ul>
+                    <p class="user_elem username">Nombre de Usuario</p>
                 </div>
                 <div class="row justify-content-center">
-                    <button>Sign Out</button>
+                    <div class="user_elem">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-danger user_elem">Sign Out</button>
                 </div>
             </div>
-            <div class="col-md-8 bg-warning">
-                <h3>Hello World</h3>
+            <div class="col-md-8">
             </div>
         </div>
     </div>
-    <div class="container-fluid footer">
-        <div class="row bg-danger">
-            <h3>Todo es mejor acompañado</h3>
-        </div>
-    </div>
+<!--    <div class="container-fluid footer">-->
+<!--        <div class="row">-->
+<!--            <h3>Todo es mejor acompañado</h3>-->
+<!--        </div>-->
+<!--    </div>-->
 </body>
 </html>
