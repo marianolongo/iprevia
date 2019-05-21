@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="static/js/create_event.js"></script>
+    <script type="text/javascript" src="static/js/home.js"></script>
 </head>
-<body>
+<body onload="loadData()">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -41,7 +43,7 @@
                 <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
             </div>
             <div class="row justify-content-center">
-                <p class="user_elem username">Nombre de Usuario</p>
+                <p class="user_elem username" id="user_elem username"></p>
             </div>
             <div class="row justify-content-center">
                 <div class="user_elem">

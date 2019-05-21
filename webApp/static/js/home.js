@@ -1,4 +1,3 @@
-// import {HTTP} from "../../h";
 
 function getUsers(){
     const url = "http://localhost:8080/users";
@@ -48,25 +47,6 @@ function getEvents() {
         }
     }
 }
-
-function crearEvento(){
-    // const name = document.getElementById("nombre-evento").value;
-    // const description = document.getElementById("descripcion-evento").value;
-    // HTTP.put('events',{
-    //     name, description
-    // })
-    const url = "http://localhost:8080/events";
-    const name = document.getElementById("nombre-evento").value;
-    const description = document.getElementById("descripcion-evento").value;
-    const event = JSON.stringify({"name": name, "description": description});
-    const request = new XMLHttpRequest();
-    request.open("POST", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    request.setRequestHeader('Accept', 'application/json');
-    request.send(event);
-}
-
 
 function showEventsFromUser(){
     const url = "http://localhost:8080/events/fromUser";
@@ -144,7 +124,17 @@ function signOut() {
     }
 }
 
-function loadData(){
-    const url = "http://localhost:8080/users/" +
-    $("#user_elem username").load()
+function loadData() {
+    const url = "http://localhost:8080/getUser";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        let aux = JSON.parse(request.response);
+        document.getElementById("user_elem username").innerText = aux.name;
+    }
 }
