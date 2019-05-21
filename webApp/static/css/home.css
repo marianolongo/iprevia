@@ -25,6 +25,8 @@ h1{
 .header-element{
     color: white;
     text-decoration: none;
+    border-style: solid;
+    border-color: white;
 }
 .user_elem{
     margin: 15px;
@@ -36,4 +38,10 @@ h1{
 
 .checked{
     color: white;
+}
+label{
+    color: white;
+}
+.event-form{
+    margin: 5px;
 }

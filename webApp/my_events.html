@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body onload="showEventsFromUser()">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <div class="row pt-5 custom-header">
                 <div class="col-md-3 text-center">
-                    <a href="my_events.html" class="btn header-element">Mis Eventos</a>
+                    <a href="#" class="btn header-element">Mis Eventos</a>
                 </div>
                 <div class="col-md-3 text-center">
                     <a href="create_event.html" class="btn header-element">Crear Evento</a>
@@ -57,28 +57,9 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div style="text-align: center">
-                <div>
-                    <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
-                </div>
-                <div class="row">
-                    <div class="container">
-                        <br>
-                        <p >Nombre Evento</p>
-                        <br>
-                        <p>Descrpcion del evento</p>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Asistir</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Lista</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ul id="events-from-user">
+
+            </ul>
         </div>
     </div>
 </div>

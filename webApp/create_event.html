@@ -19,7 +19,7 @@
                     <a href="my_events.html" class="btn header-element">Mis Eventos</a>
                 </div>
                 <div class="col-md-3 text-center">
-                    <a href="create_event.html" class="btn header-element">Crear Evento</a>
+                    <a href="#" class="btn header-element">Crear Evento</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <form class="form-inline">
@@ -57,35 +57,24 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div style="text-align: center">
-                <div>
-                    <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
+            <form>
+                <div class="form-group">
+                    <label class="event-form" for="nombre-evento">Nombre del Evento</label>
+                    <input type="text" class="form-control event-form" id="nombre-evento" placeholder="Nombre del evento">
                 </div>
-                <div class="row">
-                    <div class="container">
-                        <br>
-                        <p >Nombre Evento</p>
-                        <br>
-                        <p>Descrpcion del evento</p>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Asistir</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Lista</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="event-form" for="descripcion-evento">Descripcion evento</label>
+                    <textarea class="form-control event-form" id="descripcion-evento" placeholder="Descripcion evento"></textarea>
                 </div>
-            </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="privateEvent">
+                    <label class="form-check-label" for="privateEvent">Privado</label>
+                </div>
+                <button type="submit" onclick="crearEvento()" class="btn btn-danger event-form">Crear</button>
+            </form>
         </div>
     </div>
 </div>
-<!--    <div class="container-fluid footer">-->
-<!--        <div class="row">-->
-<!--            <h3>Todo es mejor acompañado</h3>-->
-<!--        </div>-->
-<!--    </div>-->
+
 </body>
 </html>
