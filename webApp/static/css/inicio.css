@@ -1,21 +1,26 @@
 body{
-    background: url("grupo-amigos-diversion.jpg");
+    background: url("../images/back.jpg");
 }
 h1{
     font-family: "Helve";
     font-size: 100px;
+    color: white;
 }
 button, a{
-    font-family: "Comic Sans MS";
-    margin: 70px;
+    margin: 50px;
+    color: white;
 }
 h5{
-    color: darkred;
+    color: rgba(239, 184, 241, 0.53);
 }
 #userNameTag, #passwordTag, #repeat_password{
     margin: 30px;
     align-items: center;
+    color: white;
 }
 p{
     margin: 5px;
+}
+.form-group, .custom-control-label{
+    color: white;
 }
