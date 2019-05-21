@@ -3,6 +3,8 @@ package lab1.app.controller;
 import lab1.app.model.User;
 import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,10 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping("/users/{name}")
-    public User getUser(@PathVariable String name){
+    @RequestMapping("/getUser")
+    public User getUser(Authentication authentication){
+        OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
+        String name = (String) oAuth2Authentication.getUserAuthentication().getPrincipal();
         return userService.getUser(name);
     }
 

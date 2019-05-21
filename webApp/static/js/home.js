@@ -143,3 +143,8 @@ function signOut() {
         sessionStorage.removeItem("token");
     }
 }
+
+function loadData(){
+    const url = "http://localhost:8080/users/" +
+    $("#user_elem username").load()
+}
