@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,8 @@ public class EventController {
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
         event.setHost(userService.getUserByName((String) oAuth2Authentication.getUserAuthentication().getPrincipal()));
         event.setPrivate(false);
+        event.setDate(new Date());
+        event.setDateCreated(new Date());
         eventService.addEvent(event);
     }
 

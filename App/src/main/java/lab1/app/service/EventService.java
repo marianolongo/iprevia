@@ -5,14 +5,11 @@ import lab1.app.model.Event;
 import lab1.app.model.User;
 import lab1.app.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 
 @Service
 public class EventService {
@@ -56,7 +53,10 @@ public class EventService {
         Event event = eventRepository.findById(id);
         User user = userService.getUserById(guestId);
         if(event.getPrivate()){
-            sendEmail(id, guestId);
+            //sendEmail(id, guestId);
+            String[] to = {user.getEmail()};
+            //sendFromGMail("matias.miodosky@ing.austral.edu.ar", "marianesuncapo123", to, "Invitacion", "bla bla");
+            sendSimpleMessage(user.getEmail(), "hola", "hola");
         }
         else {
             List<User> users = event.getUser();
@@ -66,8 +66,19 @@ public class EventService {
         }
     }
 
-    private void sendEmail(Long id, Long userToId) {
-//        String from = "iprevia.no.reply";
+    @Autowired
+    public JavaMailSender emailSender;
+
+    public void sendSimpleMessage(String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
+    }
+
+//    private void sendEmail(Long id, Long userToId) {
+//        String from = "iprevia.no.reply@gmail.com";
 //        String password = "Qwerty12.";
 //        String mailto = userService.getUserById(userToId).getEmail();
 //        Properties props = System.getProperties();
@@ -76,7 +87,7 @@ public class EventService {
 //        props.put("mail.smtp.host", host);
 //        props.put("mail.smtp.user", from);
 //        props.put("mail.smtp.password", password);
-//        props.put("mail.smtp.port", "587");
+//        props.put("mail.smtp.port", "465");
 //        props.put("mail.smtp.auth", "true");
 //
 //        Session session = Session.getDefaultInstance(props);
@@ -109,5 +120,7 @@ public class EventService {
 //        catch (MessagingException me) {
 //            me.printStackTrace();
 //        }
-    }
+//    }
+
+
 }

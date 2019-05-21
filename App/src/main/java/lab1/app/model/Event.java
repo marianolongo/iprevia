@@ -2,6 +2,7 @@ package lab1.app.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +21,8 @@ public class Event {
     private String name;
     private String description;
     private Boolean isPrivate;
+    private Date dateCreated;
+    private Date date;
 
 
     public Event(List<User> users, Long id, String name, String description) {
@@ -56,6 +59,14 @@ public class Event {
         return isPrivate;
     }
 
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
     public void setUser(List<User> user) {
         this.users = user;
     }
@@ -78,5 +89,13 @@ public class Event {
 
     public void setPrivate(Boolean aPrivate) {
         isPrivate = aPrivate;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
