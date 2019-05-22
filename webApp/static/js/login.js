@@ -26,3 +26,8 @@ function login() {
         }
     }
 }
+
+
+function loginAsGuest(){
+    location.replace("guest.html");
+}

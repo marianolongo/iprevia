@@ -73,4 +73,9 @@ public class EventController {
     public List<Event> getAllEventsContaining(@PathVariable String inputText){
         return eventService.getAllEventsContaining(inputText);
     }
+
+    @RequestMapping("/events/getPublicEvents")
+    public List<Event> getAllPublicEvents(){
+        return eventService.getAllPublicEvents();
+    }
 }

@@ -81,6 +81,10 @@ public class EventService {
         return eventRepository.findAllByNameContaining(inputText);
     }
 
+    public List<Event> getAllPublicEvents() {
+        return eventRepository.findAllByIsPrivateFalse();
+    }
+
 //    private void sendEmail(Long id, Long userToId) {
 //        String from = "iprevia.no.reply@gmail.com";
 //        String password = "Qwerty12.";
