@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="static/js/home.js"></script>
 </head>
-<body>
+<body onload="loadData()">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -16,7 +17,7 @@
         <div class="col-md-8">
             <div class="row pt-5 custom-header">
                 <div class="col-md-3 text-center">
-                    <a href="my_events.html" class="btn header-element">Mis Eventos</a>
+                    <span href="my_events.html" class="btn header-element">Mis Eventos</span>
                 </div>
                 <div class="col-md-3 text-center">
                     <a href="create_event.html" class="btn header-element">Crear Evento</a>

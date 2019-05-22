@@ -62,4 +62,8 @@ public class UserService {
         user.setScore(score - 1);
         userRepository.save(user);
     }
+
+    public List<User> getAllUsersContaining(String inputText) {
+        return userRepository.findAllByNameContaining(inputText);
+    }
 }

@@ -58,4 +58,9 @@ public class UserController {
     public void decreaseScore(@PathVariable Long id){
         userService.decreaseScore(id);
     }
+
+    @RequestMapping("/users/containing/{inputText}")
+    public List<User> getAllUsersContaining(@PathVariable String inputText){
+        return userService.getAllUsersContaining(inputText);
+    }
 }

@@ -77,6 +77,10 @@ public class EventService {
         emailSender.send(message);
     }
 
+    public List<Event> getAllEventsContaining(String inputText) {
+        return eventRepository.findAllByNameContaining(inputText);
+    }
+
 //    private void sendEmail(Long id, Long userToId) {
 //        String from = "iprevia.no.reply@gmail.com";
 //        String password = "Qwerty12.";

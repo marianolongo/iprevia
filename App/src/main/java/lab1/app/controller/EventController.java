@@ -69,4 +69,9 @@ public class EventController {
     public void addGuest(@PathVariable Long id, @PathVariable Long guestId){
         eventService.addGuest(id, guestId);
     }
+
+    @RequestMapping("/events/containing/{inputText}")
+    public List<Event> getAllEventsContaining(@PathVariable String inputText){
+        return eventService.getAllEventsContaining(inputText);
+    }
 }
