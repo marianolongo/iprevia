@@ -59,9 +59,9 @@ public class EventService {
             sendSimpleMessage(user.getEmail(), "hola", "hola");
         }
         else {
-            List<User> users = event.getUser();
+            List<User> users = event.getUsers();
             users.add(user);
-            event.setUser(users);
+            event.setUsers(users);
             eventRepository.save(event);
         }
     }

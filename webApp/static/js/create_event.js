@@ -2,10 +2,8 @@ function crearEvento(){
     const url = "http://localhost:8080/events";
     const name = document.getElementById("nombre-evento").value;
     const description = document.getElementById("descripcion-evento").value;
-    // const isPrivate = document.querySelector('.privateEvent:checked').value;
     const isPrivate = document.getElementById("privateEvent").checked;
-    console.log(isPrivate);
-    const event = JSON.stringify({"name": name, "description": description, "isPrivate": isPrivate});
+    const event = JSON.stringify({"name": name, "description": description, "isPrivate": isPrivate === true});
     const request = new XMLHttpRequest();
     request.open("POST", url, true);
     request.setRequestHeader('Content-Type', 'application/json');

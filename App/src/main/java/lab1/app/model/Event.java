@@ -35,7 +35,7 @@ public class Event {
     public Event() {
     }
 
-    public List<User> getUser() {
+    public List<User> getUsers() {
         return users;
     }
 
@@ -67,7 +67,7 @@ public class Event {
         return date;
     }
 
-    public void setUser(List<User> user) {
+    public void setUsers(List<User> user) {
         this.users = user;
     }
 
@@ -91,6 +91,7 @@ public class Event {
         isPrivate = aPrivate;
     }
 
+    public void setIsPrivate(Boolean isPrivate){this.isPrivate = isPrivate;}
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }

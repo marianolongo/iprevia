@@ -48,31 +48,6 @@ function getEvents() {
     }
 }
 
-function showEventsFromUser(){
-    const url = "http://localhost:8080/events/fromUser";
-    const request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    request.setRequestHeader('Accept', 'application/json');
-    request.send();
-    request.onload = () => {
-        const htmlList = document.getElementById("events-from-user");
-        while(htmlList.firstChild){
-            htmlList.removeChild(htmlList.firstChild)
-        }
-        const eventList = JSON.parse(request.response);
-        for (let i = 0; i < eventList.length; i++) {
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.innerText = eventList[i].name;
-            a.href = "";
-            li.appendChild(a);
-            htmlList.appendChild(li);
-        }
-    }
-}
-
 function buscarEvento() {
     const name = document.getElementById("evento-buscado").value;
     const url = "http://localhost:8080/events/" + name;
@@ -128,7 +103,6 @@ function loadData() {
     const url = "http://localhost:8080/getUser";
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
-    request.open("GET", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
@@ -136,5 +110,5 @@ function loadData() {
     request.onload = () => {
         let aux = JSON.parse(request.response);
         document.getElementById("user_elem username").innerText = aux.name;
-    }
+    };
 }
