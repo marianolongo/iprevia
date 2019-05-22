@@ -73,6 +73,31 @@ function loadData() {
         let aux = JSON.parse(request.response);
         document.getElementById("user_elem username").innerText = aux.name;
     };
+
+    const urlEvents = "http://localhost:8080/events/afterNow";
+    const requestEvents = new XMLHttpRequest();
+    requestEvents.open("GET", urlEvents, true);
+    requestEvents.setRequestHeader('Content-Type', 'application/json');
+    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEvents.setRequestHeader('Accept', 'application/json');
+    requestEvents.send();
+    requestEvents.onload = () => {
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(requestEvents.response);
+        for (let i = 0; i < eventList.length; i++){
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const name = eventList[i].name;
+            a.innerText = name;
+            a.className = "btn";
+            a.onclick = () => sendToEventPage(name);
+            li.appendChild(a);
+            htmlList.appendChild(li);
+        }
+    };
 }
 
 function handleSearch(e){

@@ -85,6 +85,10 @@ public class EventService {
         return eventRepository.findAllByIsPrivateFalse();
     }
 
+    public List<Event> getAllEventsAfterNow() {
+        return eventRepository.findAllByDateAfter(new Date());
+    }
+
 //    private void sendEmail(Long id, Long userToId) {
 //        String from = "iprevia.no.reply@gmail.com";
 //        String password = "Qwerty12.";
