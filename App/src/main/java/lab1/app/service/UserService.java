@@ -46,7 +46,7 @@ public class UserService {
     }
 
     public User getUserByName(String name){
-        return userRepository.getUsersByName(name);
+        return userRepository.findByName(name);
     }
 
     public void incrementScore(Long id) {

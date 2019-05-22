@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="static/js/home.js"></script>
+    <script type="text/javascript" src="static/js/event.js"></script>
 </head>
-<body onload="loadData()">
+<body onload="loadDataAndEvent()">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -27,8 +28,9 @@
                         <input class="form-control mr-sm-2"
                                type="search" placeholder="Buscar usuario o evento"
                                aria-label="Search"
+                               id="searchBar"
                         >
-                        <button class="btn btn-danger" type="submit">Search</button>
+                        <button class="btn btn-danger" type="submit" onclick="handleSearch(event)">Search</button>
                     </form>
                 </div>
             </div>
@@ -57,7 +59,7 @@
                 <button class="btn btn-danger user_elem">Sign Out</button>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div style="text-align: center">
                 <div>
                     <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
@@ -66,8 +68,10 @@
                     <div class="container">
                         <br>
                         <p >Nombre Evento</p>
+                        <p id="nombre-evento"></p>
                         <br>
                         <p>Descrpcion del evento</p>
+                        <p id="descripcion-evento"></p>
                         <br>
                         <div class="row">
                             <div class="col-md-6">
@@ -80,6 +84,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <ul style="list-style: none" id="searchResults">
+
+            </ul>
         </div>
     </div>
 </div>

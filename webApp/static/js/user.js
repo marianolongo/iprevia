@@ -1,6 +1,5 @@
 
-function loadDataAndEvent(){
-
+function loadDataAndUser(){
     const url = "http://localhost:8080/getUser";
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
@@ -9,23 +8,25 @@ function loadDataAndEvent(){
     request.setRequestHeader('Accept', 'application/json');
     request.send();
     request.onload = () => {
-        let aux = JSON.parse(request.response);
+        const aux = JSON.parse(request.response);
         document.getElementById("user_elem username").innerText = aux.name;
     };
 
+
     const name = getQueryVariable(window.location.href);
 
-    const urlEvent = "http://localhost:8080/events/" + name;
-    const requestEvent = new XMLHttpRequest();
-    requestEvent.open("GET", urlEvent, true);
-    requestEvent.setRequestHeader('Content-Type', 'application/json');
-    requestEvent.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    requestEvent.setRequestHeader('Accept', 'application/json');
-    requestEvent.send();
-    requestEvent.onload = () => {
-        let aux = JSON.parse(requestEvent.response);
-        document.getElementById("nombre-evento").innerText = aux.name;
-        document.getElementById("descripcion-evento").innerText = aux.description;
+    const urlUser = "http://localhost:8080/users/userByName/" + name;
+    const requestUser = new XMLHttpRequest();
+    requestUser.open("GET", urlUser, true);
+    requestUser.setRequestHeader('Content-Type', 'application/json');
+    requestUser.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestUser.setRequestHeader('Accept', 'application/json');
+    requestUser.send();
+    requestUser.onload = () => {
+        const user = JSON.parse(requestUser.response);
+        console.log(request.response);
+        document.getElementById("user-name").innerText = user.name;
+        document.getElementById("user-email").innerText = user.email;
     };
 }
 
@@ -34,7 +35,7 @@ function getQueryVariable(variable) {
     const vars = query.split("&");
     for (let i = 0; i < vars.length; i++) {
         const pair = vars[i].split("=");
-        return pair[1];
+            return pair[1];
     }
     return (false);
 }

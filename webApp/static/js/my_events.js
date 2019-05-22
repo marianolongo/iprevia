@@ -26,7 +26,6 @@ function loadDataAndEvents(){
             htmlList.removeChild(htmlList.firstChild)
         }
         const eventList = JSON.parse(request.response);
-        console.log(request.response);
         for (let i = 0; i < eventList.length; i++) {
             const li = document.createElement("li");
             const a = document.createElement("a");

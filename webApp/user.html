@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="static/js/home.js"></script>
+    <script type="text/javascript" src="static/js/user.js"></script>
 </head>
-<body>
+<body onload="loadDataAndUser()">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -26,8 +28,9 @@
                         <input class="form-control mr-sm-2"
                                type="search" placeholder="Buscar usuario o evento"
                                aria-label="Search"
+                               id="searchBar"
                         >
-                        <button class="btn btn-danger" type="submit">Search</button>
+                        <button class="btn btn-danger" type="submit" onclick="handleSearch(event)">Search</button>
                     </form>
                 </div>
             </div>
@@ -41,7 +44,7 @@
                 <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
             </div>
             <div class="row justify-content-center">
-                <p class="user_elem username">Nombre de Usuario</p>
+                <p class="user_elem username" id="user_elem username"></p>
             </div>
             <div class="row justify-content-center">
                 <div class="user_elem">
@@ -56,7 +59,7 @@
                 <button class="btn btn-danger user_elem">Sign Out</button>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div style="text-align: center">
                 <div>
                     <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
@@ -67,16 +70,22 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Nombre de Usuario</p>
+                                <p id="user-name"></p>
                             </div>
                             <div class="col-md-6">
                                 <p>Mail</p>
+                                <p id="user-email"></p>
                             </div>
                         </div>
                         <br>
-                        <p>Descripcion</p>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <ul style="list-style: none" id="searchResults">
+
+            </ul>
         </div>
     </div>
 </div>

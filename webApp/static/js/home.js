@@ -96,9 +96,10 @@ function handleSearch(e){
         for (let i = 0; i < userList.length; i++){
             const li = document.createElement("li");
             const a = document.createElement("a");
-            a.innerText = userList[i].name;
-            a.href = "user.html";
+            const name = userList[i].name;
+            a.innerText = name;
             a.className = "btn";
+            a.onclick = () => sendToUserPage(name);
             li.appendChild(a);
             htmlList.appendChild(li);
         }
@@ -118,11 +119,20 @@ function handleSearch(e){
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.innerText = eventList[i].name;
-        a.href = "event.html";
         a.className = "btn";
+        a.onclick = () => sendToEventPage(eventList[i].name);
         li.appendChild(a);
         htmlList.appendChild(li);
 
         }
     };
+}
+
+
+function sendToUserPage(name){
+    location.replace("http://localhost:63342/iprevia/webApp/user.html?name=" + name);
+}
+
+function sendToEventPage(name){
+    location.replace("http://localhost:63342/iprevia/webApp/event.html?name=" + name);
 }

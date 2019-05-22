@@ -63,4 +63,9 @@ public class UserController {
     public List<User> getAllUsersContaining(@PathVariable String inputText){
         return userService.getAllUsersContaining(inputText);
     }
+
+    @RequestMapping("/users/userByName/{name}")
+    public User getUserByName(@PathVariable String name){
+        return userService.getUserByName(name);
+    }
 }

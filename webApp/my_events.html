@@ -28,8 +28,9 @@
                         <input class="form-control mr-sm-2"
                                type="search" placeholder="Buscar usuario o evento"
                                aria-label="Search"
+                               id="searchBar"
                         >
-                        <button class="btn btn-danger" type="submit">Search</button>
+                        <button class="btn btn-danger" type="submit" onclick="handleSearch(event)">Search</button>
                     </form>
                 </div>
             </div>
@@ -58,8 +59,13 @@
                 <button class="btn btn-danger user_elem" onclick="signOut()">Sign Out</button>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <ul style="text-align: center; list-style: none" id="events-from-user">
+
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <ul style="list-style: none" id="searchResults">
 
             </ul>
         </div>
