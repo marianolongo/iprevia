@@ -98,6 +98,7 @@ function handleSearch(e){
             const a = document.createElement("a");
             a.innerText = userList[i].name;
             a.href = "user.html";
+            a.className = "btn";
             li.appendChild(a);
             htmlList.appendChild(li);
         }
@@ -118,6 +119,7 @@ function handleSearch(e){
         const a = document.createElement("a");
         a.innerText = eventList[i].name;
         a.href = "event.html";
+        a.className = "btn";
         li.appendChild(a);
         htmlList.appendChild(li);
 
