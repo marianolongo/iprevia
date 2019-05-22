@@ -34,6 +34,7 @@ function loadDataAndEvents(){
             const a = document.createElement("a");
             a.innerText = eventList[i].name;
             a.href = "";
+            a.className = "btn";
             li.appendChild(a);
             htmlList.appendChild(li);
         }

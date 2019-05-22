@@ -3,7 +3,8 @@ function crearEvento(){
     const name = document.getElementById("nombre-evento").value;
     const description = document.getElementById("descripcion-evento").value;
     const isPrivate = document.getElementById("privateEvent").checked;
-    const event = JSON.stringify({"name": name, "description": description, "isPrivate": isPrivate === true});
+    const date = document.getElementById("date").value;
+    const event = JSON.stringify({"name": name, "description": description, "date": date, "isPrivate": isPrivate === true});
     const request = new XMLHttpRequest();
     request.open("POST", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
