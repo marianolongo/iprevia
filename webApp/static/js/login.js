@@ -16,7 +16,13 @@ function login() {
     request.setRequestHeader('Accept', 'application/json');
     request.send(data);
     request.onload = () => {
-        window.sessionStorage.token = JSON.parse(request.response).access_token;
-        location.replace("home.html");
+        let aux = JSON.parse(request.response).access_token;
+        if(aux !== undefined){
+            window.sessionStorage.token = aux;
+            location.replace("home.html");
+        }
+        else{
+            document.getElementById("message").innerText = "User or password was incorrect"
+        }
     }
 }
