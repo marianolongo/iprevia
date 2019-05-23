@@ -10,7 +10,7 @@ function loadDataAndEvents(){
     requestUser.send();
     requestUser.onload = () => {
         let aux = JSON.parse(requestUser.response);
-        document.getElementById("user_elem username").innerText = aux.name;
+        document.getElementById("username").innerText = aux.name;
     };
 
     const url = "http://localhost:8080/events/fromUser";
@@ -30,7 +30,6 @@ function loadDataAndEvents(){
             const li = document.createElement("li");
             const a = document.createElement("a");
             a.innerText = eventList[i].name;
-            a.href = "";
             a.className = "btn";
             li.appendChild(a);
             htmlList.appendChild(li);

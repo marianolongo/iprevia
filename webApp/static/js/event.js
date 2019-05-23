@@ -24,8 +24,8 @@ function loadDataAndEvent(){
     requestEvent.send();
     requestEvent.onload = () => {
         let aux = JSON.parse(requestEvent.response);
-        document.getElementById("nombre-evento").innerText = aux.name;
-        document.getElementById("descripcion-evento").innerText = aux.description;
+        document.getElementById("nombre-evento").innerText ="Nombre del evento: " + aux.name;
+        document.getElementById("descripcion-evento").innerText ="Descripcion: " + aux.description;
     };
 }
 

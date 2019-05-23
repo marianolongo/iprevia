@@ -153,7 +153,6 @@ function handleSearch(e){
     };
 }
 
-
 function sendToUserPage(name){
     location.replace("http://localhost:63342/iprevia/webApp/user.html?name=" + name);
 }
