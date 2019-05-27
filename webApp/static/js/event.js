@@ -36,12 +36,12 @@ function loadDataAndEvent() {
     requestEventFinished.setRequestHeader('Accept', 'application/json');
     requestEventFinished.send();
     requestEventFinished.onload = () => {
-        console.log(requestEventFinished.response);
         if(requestEventFinished.response === "true"){
             const buttonHolder = document.getElementById("button-holder");
             const button = document.createElement("button");
             button.className = "btn btn-danger";
             button.innerText = "Votar";
+            button.onclick = () => handleVote();
             buttonHolder.appendChild(button);
         }
     }
@@ -70,6 +70,27 @@ function handleAssist(){
     request.onload = () => {
         if(request.status === 200){
             alert("Agregado")
+        }
+    }
+}
+
+
+function handleVote(){
+
+    const id = getQueryVariable();
+    const url = "http://localhost:8080/events/" + id + "/addVote";
+    const request = new XMLHttpRequest();
+    request.open("PUT", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        console.log(request.response);
+        if(request.response === "true"){
+            alert("Votacion enviada")
+        }else{
+            document.getElementById("warning-add-vote").innerText = "Usuario ya voto o no fue invitado"
         }
     }
 }

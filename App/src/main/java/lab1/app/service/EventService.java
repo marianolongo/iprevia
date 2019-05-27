@@ -94,4 +94,25 @@ public class EventService {
     public boolean checkIfFinished(Long id) {
         return eventRepository.findById(id).didFinish();
     }
+
+    public boolean addVote(Long id, String voterName) {
+        Event event = eventRepository.findById(id);
+        User host = event.getHost();
+        User voter = userService.getUserByName(voterName);
+
+        if(event.getUsers().contains(voter) && !event.getUsersVoted().contains(voter)){
+            addVoter(voter, event);
+            userService.incrementScore(host.getId());
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void addVoter(User voter, Event event){
+        List<User> usersVoted = event.getUsersVoted();
+        usersVoted.add(voter);
+        event.setUsersVoted(usersVoted);
+        eventRepository.save(event);
+    }
 }

@@ -8,6 +8,7 @@ import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,5 +92,12 @@ public class EventController {
     @RequestMapping("/events/{id}/checkDidFinished")
     public boolean checkIfFinished(@PathVariable Long id){
         return eventService.checkIfFinished(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addVote")
+    public boolean addVote(Authentication authentication,@PathVariable Long id){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String voterName = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.addVote(id, voterName);
     }
 }

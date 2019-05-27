@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -51,15 +50,17 @@ public class UserService {
 
     public void incrementScore(Long id) {
         User user = getUserById(id);
-        Long score = user.getScore();
-        user.setScore(score + 1);
+        Long rating = user.getRating();
+        Long ratingAmount = user.getRatingAmount();
+        user.setRating(rating + 1);
+        user.setRatingAmount(ratingAmount + 1);
         userRepository.save(user);
     }
 
     public void decreaseScore(Long id) {
         User user = getUserById(id);
-        Long score = user.getScore();
-        user.setScore(score - 1);
+        Long score = user.getRating();
+        user.setRating(score - 1);
         userRepository.save(user);
     }
 

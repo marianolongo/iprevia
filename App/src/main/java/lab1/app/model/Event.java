@@ -15,6 +15,8 @@ public class Event {
     @ManyToMany
     private List<User> users;
 
+    @ManyToMany
+    private List<User> usersVoted;
     @ManyToOne
     private User host;
 
@@ -24,8 +26,9 @@ public class Event {
     private Date dateCreated;
     private Date date;
 
-    public Event(List<User> users, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date) {
+    public Event(List<User> users, List<User> usersVoted, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date) {
         this.users = users;
+        this.usersVoted = usersVoted;
         this.host = host;
         this.name = name;
         this.description = description;
@@ -39,6 +42,10 @@ public class Event {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public List<User> getUsersVoted() {
+        return usersVoted;
     }
 
     public User getHost() {
@@ -71,6 +78,10 @@ public class Event {
 
     public void setUsers(List<User> user) {
         this.users = user;
+    }
+
+    public void setUsersVoted(List<User> usersVoted) {
+        this.usersVoted = usersVoted;
     }
 
     public void setHost(User host) {

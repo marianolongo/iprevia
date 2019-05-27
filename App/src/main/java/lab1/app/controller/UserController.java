@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {
@@ -35,7 +34,8 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public void addUser(@RequestBody User user){
-        user.setScore(0L);
+        user.setRating(0L);
+        user.setRatingAmount(0L);
         userService.addUser(user);
     }
 

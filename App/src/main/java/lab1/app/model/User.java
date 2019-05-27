@@ -1,6 +1,7 @@
 package lab1.app.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -11,7 +12,10 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Long score;
+    private Long rating;
+    private Long ratingAmount;
+
+
     public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -38,8 +42,12 @@ public class User {
         return password;
     }
 
-    public Long getScore() {
-        return score;
+    public Long getRating() {
+        return rating;
+    }
+
+    public Long getRatingAmount() {
+        return ratingAmount;
     }
 
     public void setId(Long id) {
@@ -58,7 +66,11 @@ public class User {
         this.password = password;
     }
 
-    public void setScore(Long score) {
-        this.score = score;
+    public void setRating(Long rating) {
+        this.rating = rating;
+    }
+
+    public void setRatingAmount(Long ratingAmount) {
+        this.ratingAmount = ratingAmount;
     }
 }
