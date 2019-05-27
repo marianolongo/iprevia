@@ -13,9 +13,9 @@ function loadDataAndEvent(){
         document.getElementById("user_elem username").innerText = aux.name;
     };
 
-    const name = getQueryVariable(window.location.href);
+    const id = getQueryVariable(window.location.href);
 
-    const urlEvent = "http://localhost:8080/events/" + name;
+    const urlEvent = "http://localhost:8080/events/" + id;
     const requestEvent = new XMLHttpRequest();
     requestEvent.open("GET", urlEvent, true);
     requestEvent.setRequestHeader('Content-Type', 'application/json');
@@ -37,4 +37,22 @@ function getQueryVariable(variable) {
         return pair[1];
     }
     return (false);
+}
+
+
+function handleAssist(){
+
+    const id = getQueryVariable();
+    const url = "http://localhost:8080/events/" + id + "/addGuest";
+    const request = new XMLHttpRequest();
+    request.open("PUT", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        if(request.status === 200){
+            alert("Agregado")
+        }
+    }
 }

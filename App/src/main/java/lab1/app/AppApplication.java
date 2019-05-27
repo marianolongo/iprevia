@@ -1,5 +1,6 @@
 package lab1.app;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +23,8 @@ public class AppApplication {
 //        mailSender.setHost("smtp.gmail.com");
 //        mailSender.setPort(587);
 //
-//        mailSender.setUsername("iprevia.no.reply@gmail.com");
-//        mailSender.setPassword("Querty12.");
+//        mailSender.setUsername("mariano.longo@ing.austral.edu.ar");
+//        mailSender.setPassword("m40997043");
 //
 //        Properties props = mailSender.getJavaMailProperties();
 //        props.put("mail.transport.protocol", "smtp");

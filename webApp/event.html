@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <h1 style="text-align: center">iPrevia</h1>
+            <h1 class="pointer" onclick="sendToHomePage()" style="text-align: center">iPrevia</h1>
         </div>
         <div class="col-md-8">
             <div class="row pt-5 custom-header">
@@ -44,7 +44,7 @@
                 <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
             </div>
             <div class="row justify-content-center">
-                <p class="user_elem username" id="username">Nombre de Usuario</p>
+                <p class="user_elem username" id="user_elem username"></p>
             </div>
             <div class="row justify-content-center">
                 <div class="user_elem">
@@ -71,13 +71,8 @@
                         <br>
                         <p id="descripcion-evento"></p>
                         <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Asistir</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-danger">Lista</button>
-                            </div>
+                        <div class="row justify-content-center">
+                            <button class="btn btn-danger" onclick="handleAssist()">Asistir</button>
                         </div>
                     </div>
                 </div>

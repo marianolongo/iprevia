@@ -51,3 +51,30 @@ label{
 a{
     color: white;
 }
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+.table .header {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+}
+
+.table .content {
+    height: 50vh;
+    /*overflow-y: scroll;*/
+    overflow-y: auto;
+
+}
+
+.customHeight{
+    height: 30px;
+}
+
+.pointer{
+    cursor: pointer;
+}

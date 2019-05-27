@@ -83,20 +83,20 @@ function loadData() {
     requestEvents.send();
     requestEvents.onload = () => {
         const htmlList = document.getElementById("publicEvents");
-        while(htmlList.firstChild){
-            htmlList.removeChild(htmlList.firstChild)
-        }
         const eventList = JSON.parse(requestEvents.response);
+        const col = document.createElement("div");
+        col.className = "col-md-12"
         for (let i = 0; i < eventList.length; i++){
-            const li = document.createElement("li");
             const a = document.createElement("a");
-            const name = eventList[i].name;
-            a.innerText = name;
+            const div = document.createElement("div");
+            div.className = "row w-100 customHeight";
+            a.innerText = eventList[i].name;
             a.className = "btn";
-            a.onclick = () => sendToEventPage(name);
-            li.appendChild(a);
-            htmlList.appendChild(li);
+            a.onclick = () => sendToEventPage(eventList[i].id);
+            div.appendChild(a);
+            col.appendChild(div);
         }
+        htmlList.appendChild(col);
     };
 }
 
@@ -145,7 +145,7 @@ function handleSearch(e){
         const a = document.createElement("a");
         a.innerText = eventList[i].name;
         a.className = "btn";
-        a.onclick = () => sendToEventPage(eventList[i].name);
+        a.onclick = () => sendToEventPage(eventList[i].id);
         li.appendChild(a);
         htmlList.appendChild(li);
 
@@ -157,6 +157,11 @@ function sendToUserPage(name){
     location.replace("http://localhost:63342/iprevia/webApp/user.html?name=" + name);
 }
 
-function sendToEventPage(name){
-    location.replace("http://localhost:63342/iprevia/webApp/event.html?name=" + name);
+function sendToEventPage(id){
+    location.replace("http://localhost:63342/iprevia/webApp/event.html?id=" + id);
+}
+
+
+function sendToHomePage(){
+    location.replace("home.html")
 }

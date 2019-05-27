@@ -5,10 +5,13 @@ import lab1.app.model.Event;
 import lab1.app.model.User;
 import lab1.app.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.*;
+import javax.mail.internet.*;
 import java.util.*;
 
 @Service
@@ -33,8 +36,8 @@ public class EventService {
         return eventRepository.findByHost_Name(name);
     }
 
-    public Optional<Event> getEvent(String name) {
-        return eventRepository.findByName(name);
+    public Event getEvent(Long id) {
+        return eventRepository.findById(id);
     }
 
     public void addEvent(Event event) {
@@ -49,16 +52,15 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
-    public void addGuest(Long id, Long guestId) {
+    public void addGuest(Long id, String guestName) {
         Event event = eventRepository.findById(id);
-        User user = userService.getUserById(guestId);
-        if(event.getPrivate()){
-            //sendEmail(id, guestId);
-            String[] to = {user.getEmail()};
-            //sendFromGMail("matias.miodosky@ing.austral.edu.ar", "marianesuncapo123", to, "Invitacion", "bla bla");
-            sendSimpleMessage(user.getEmail(), "hola", "hola");
+        User user = userService.getUserByName(guestName);
+        if (event.getUsers().contains(user) || event.getHost().getId().equals(user.getId())) {
+            return; //TODO fijarse que hacer con usuario que ya esta o si es host
         }
-        else {
+        if (event.getPrivate()) {
+            sendSimpleMessage(event.getHost().getEmail(), "hola", "hola");
+        } else {
             List<User> users = event.getUsers();
             users.add(user);
             event.setUsers(users);
@@ -88,51 +90,4 @@ public class EventService {
     public List<Event> getAllEventsAfterNow() {
         return eventRepository.findAllByDateAfter(new Date());
     }
-
-//    private void sendEmail(Long id, Long userToId) {
-//        String from = "iprevia.no.reply@gmail.com";
-//        String password = "Qwerty12.";
-//        String mailto = userService.getUserById(userToId).getEmail();
-//        Properties props = System.getProperties();
-//        String host = "smtp.gmail.com";
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.smtp.host", host);
-//        props.put("mail.smtp.user", from);
-//        props.put("mail.smtp.password", password);
-//        props.put("mail.smtp.port", "465");
-//        props.put("mail.smtp.auth", "true");
-//
-//        Session session = Session.getDefaultInstance(props);
-//        MimeMessage message = new MimeMessage(session);
-//
-//        try {
-//            message.setFrom(new InternetAddress(from));
-//            InternetAddress toAddress = new InternetAddress(mailto);
-//            message.setSender(toAddress);
-//            message.setSubject("Test Subject");
-//
-//            String msg = "This is my first email using JavaMailer";
-//
-//            MimeBodyPart mimeBodyPart = new MimeBodyPart();
-//            mimeBodyPart.setContent(msg, "text/html");
-//
-//            Multipart multipart = new MimeMultipart();
-//            multipart.addBodyPart(mimeBodyPart);
-//
-//            message.setContent(multipart);
-//
-//            Transport transport = session.getTransport("smtp");
-//            transport.connect(host, from, password);
-//            transport.sendMessage(message, message.getAllRecipients());
-//            transport.close();
-//        }
-//        catch (AddressException ae) {
-//            ae.printStackTrace();
-//        }
-//        catch (MessagingException me) {
-//            me.printStackTrace();
-//        }
-//    }
-
-
 }

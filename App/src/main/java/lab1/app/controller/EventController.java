@@ -6,6 +6,7 @@ import lab1.app.model.Event;
 import lab1.app.service.EventService;
 import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +42,9 @@ public class EventController {
         return eventService.getAllEventsFromUser((String) oAuth2Authentication.getUserAuthentication().getPrincipal());
     }
 
-    @RequestMapping("/events/{name}")
-    public Optional<Event> getEvent(@PathVariable String name){
-        return eventService.getEvent(name);
+    @RequestMapping("/events/{id}")
+    public Event getEvent(@PathVariable Long id){
+        return eventService.getEvent(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/events")
@@ -54,19 +55,22 @@ public class EventController {
         eventService.addEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}/events/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{userId}/events/{id}")
     public void updateEvent(@RequestBody Event event, @PathVariable Long userId){
         eventService.updateEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}/events/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/events/{userId}/events/{id}")
     public void deleteEvent(@PathVariable String id){
         eventService.deleteEvent(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest/{guestId}")
-    public void addGuest(@PathVariable Long id, @PathVariable Long guestId){
-        eventService.addGuest(id, guestId);
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest")
+    public ResponseEntity addGuest(Authentication authentication, @PathVariable Long id){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String guest = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        eventService.addGuest(id, guest);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping("/events/containing/{inputText}")
