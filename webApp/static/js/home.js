@@ -85,13 +85,13 @@ function loadData() {
         const htmlList = document.getElementById("publicEvents");
         const eventList = JSON.parse(requestEvents.response);
         const col = document.createElement("div");
-        col.className = "col-md-12"
+        col.className = "col-md-12";
         for (let i = 0; i < eventList.length; i++){
             const a = document.createElement("a");
             const div = document.createElement("div");
-            div.className = "row w-100 customHeight";
+            div.className = "row w-100 customHeight customCenter";
             a.innerText = eventList[i].name;
-            a.className = "btn";
+            a.className = "btn w-100";
             a.onclick = () => sendToEventPage(eventList[i].id);
             div.appendChild(a);
             col.appendChild(div);

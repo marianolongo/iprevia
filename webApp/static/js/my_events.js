@@ -10,7 +10,7 @@ function loadDataAndEvents(){
     requestUser.send();
     requestUser.onload = () => {
         let aux = JSON.parse(requestUser.response);
-        document.getElementById("username").innerText = aux.name;
+        document.getElementById("user_elem username").innerText = aux.name;
     };
 
     const url = "http://localhost:8080/events/fromUser";
@@ -22,17 +22,19 @@ function loadDataAndEvents(){
     request.send();
     request.onload = () => {
         const htmlList = document.getElementById("events-from-user");
-        while(htmlList.firstChild){
-            htmlList.removeChild(htmlList.firstChild)
-        }
+
+        const col = document.createElement("div");
+        col.className = "col-md-12";
         const eventList = JSON.parse(request.response);
         for (let i = 0; i < eventList.length; i++) {
-            const li = document.createElement("li");
             const a = document.createElement("a");
+            const div = document.createElement("div");
+            div.className = "row w-100 customHeight customCenter";
             a.innerText = eventList[i].name;
-            a.className = "btn";
-            li.appendChild(a);
-            htmlList.appendChild(li);
+            a.className = "btn w-100";
+            div.appendChild(a);
+            col.appendChild(div);
         }
+        htmlList.appendChild(col);
     }
 }

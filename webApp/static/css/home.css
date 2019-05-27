@@ -62,12 +62,14 @@ a{
     border-bottom: 1px solid white;
     display: flex;
     align-items: center;
+    font-size: 24px;
+    justify-content: center;
 }
 
 .table .content {
     height: 50vh;
-    /*overflow-y: scroll;*/
-    overflow-y: auto;
+    overflow-y: scroll;
+    /*overflow-y: auto;*/
 
 }
 
@@ -77,4 +79,23 @@ a{
 
 .pointer{
     cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.searchResults{
+    height: 50vh;
+}
+
+.half-sized{
+    min-height: 50px;
+}
+
+.customCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
