@@ -87,4 +87,9 @@ public class EventController {
     public List<Event> getAllEventsAfterNow(){
         return eventService.getAllEventsAfterNow();
     }
+
+    @RequestMapping("/events/{id}/checkDidFinished")
+    public boolean checkIfFinished(@PathVariable Long id){
+        return eventService.checkIfFinished(id);
+    }
 }

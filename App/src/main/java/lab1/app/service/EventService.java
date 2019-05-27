@@ -90,4 +90,8 @@ public class EventService {
     public List<Event> getAllEventsAfterNow() {
         return eventRepository.findAllByDateAfter(new Date());
     }
+
+    public boolean checkIfFinished(Long id) {
+        return eventRepository.findById(id).didFinish();
+    }
 }

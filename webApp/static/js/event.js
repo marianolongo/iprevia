@@ -1,6 +1,6 @@
 
-function loadDataAndEvent(){
-
+function loadDataAndEvent() {
+    const today = new Date();
     const url = "http://localhost:8080/getUser";
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
@@ -24,11 +24,28 @@ function loadDataAndEvent(){
     requestEvent.send();
     requestEvent.onload = () => {
         let aux = JSON.parse(requestEvent.response);
-        document.getElementById("nombre-evento").innerText ="Nombre del evento: " + aux.name;
-        document.getElementById("descripcion-evento").innerText ="Descripcion: " + aux.description;
+        document.getElementById("nombre-evento").innerText = "Nombre del evento: " + aux.name;
+        document.getElementById("descripcion-evento").innerText = "Descripcion: " + aux.description;
     };
-}
 
+    const urlEventFinished = "http://localhost:8080/events/" + id + "/checkDidFinished";
+    const requestEventFinished = new XMLHttpRequest();
+    requestEventFinished.open("GET", urlEventFinished, true);
+    requestEventFinished.setRequestHeader('Content-Type', 'application/json');
+    requestEventFinished.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEventFinished.setRequestHeader('Accept', 'application/json');
+    requestEventFinished.send();
+    requestEventFinished.onload = () => {
+        console.log(requestEventFinished.response);
+        if(requestEventFinished.response === "true"){
+            const buttonHolder = document.getElementById("button-holder");
+            const button = document.createElement("button");
+            button.className = "btn btn-danger";
+            button.innerText = "Votar";
+            buttonHolder.appendChild(button);
+        }
+    }
+}
 function getQueryVariable(variable) {
     const query = window.location.search.substring(1);
     const vars = query.split("&");

@@ -24,12 +24,14 @@ public class Event {
     private Date dateCreated;
     private Date date;
 
-
-    public Event(List<User> users, Long id, String name, String description) {
+    public Event(List<User> users, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date) {
         this.users = users;
-        this.id = id;
+        this.host = host;
         this.name = name;
         this.description = description;
+        this.isPrivate = isPrivate;
+        this.dateCreated = dateCreated;
+        this.date = date;
     }
 
     public Event() {
@@ -98,5 +100,9 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Boolean didFinish(){
+        return date.compareTo(new Date()) < 0;
     }
 }
