@@ -23,8 +23,8 @@ public class AppApplication {
 //        mailSender.setHost("smtp.gmail.com");
 //        mailSender.setPort(587);
 //
-//        mailSender.setUsername("mariano.longo@ing.austral.edu.ar");
-//        mailSender.setPassword("m40997043");
+//        mailSender.setUsername("matias.miodosky@ing.austral.edu.ar");
+//        mailSender.setPassword("marianesuncapo123");
 //
 //        Properties props = mailSender.getJavaMailProperties();
 //        props.put("mail.transport.protocol", "smtp");

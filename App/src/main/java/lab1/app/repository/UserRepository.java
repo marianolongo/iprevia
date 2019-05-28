@@ -1,5 +1,6 @@
 package lab1.app.repository;
 
+import lab1.app.model.Event;
 import lab1.app.model.User;
 import org.springframework.data.repository.CrudRepository;
 
@@ -17,4 +18,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByName(String name);
 
     List<User> findAllByNameContaining(String name);
+
+    List<User> findAllByEvents(List<Event> events);
 }

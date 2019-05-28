@@ -67,4 +67,8 @@ public class UserService {
     public List<User> getAllUsersContaining(String inputText) {
         return userRepository.findAllByNameContaining(inputText);
     }
+
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
 }

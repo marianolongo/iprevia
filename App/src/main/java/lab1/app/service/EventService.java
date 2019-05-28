@@ -4,14 +4,19 @@ package lab1.app.service;
 import lab1.app.model.Event;
 import lab1.app.model.User;
 import lab1.app.repository.EventRepository;
+import lab1.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import sun.security.krb5.internal.ccache.FileCredentialsCache;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.File;
 import java.util.*;
 
 @Service
@@ -52,19 +57,24 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
-    public void addGuest(Long id, String guestName) {
+    public void addGuest(Long id, String guestName) throws MessagingException {
         Event event = eventRepository.findById(id);
         User user = userService.getUserByName(guestName);
         if (event.getUsers().contains(user) || event.getHost().getId().equals(user.getId())) {
             return; //TODO fijarse que hacer con usuario que ya esta o si es host
         }
         if (event.getPrivate()) {
-            sendSimpleMessage(event.getHost().getEmail(), "hola", "hola");
+            sendSimpleMessage(event.getHost().getEmail(), "Test", "Enviado desde front");
         } else {
             List<User> users = event.getUsers();
             users.add(user);
             event.setUsers(users);
             eventRepository.save(event);
+
+            List<Event> events = user.getEvents();
+            events.add(event);
+            user.setEvents(events);
+            userService.saveUser(user);
         }
     }
 

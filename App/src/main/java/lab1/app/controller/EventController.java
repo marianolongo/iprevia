@@ -12,6 +12,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +71,11 @@ public class EventController {
     public ResponseEntity addGuest(Authentication authentication, @PathVariable Long id){
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String guest = (String) auth2Authentication.getUserAuthentication().getPrincipal();
-        eventService.addGuest(id, guest);
+        try {
+            eventService.addGuest(id, guest);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -99,5 +104,10 @@ public class EventController {
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String voterName = (String) auth2Authentication.getUserAuthentication().getPrincipal();
         return eventService.addVote(id, voterName);
+    }
+
+    @RequestMapping("/events/sendMail")
+    public void sendMail() throws MessagingException {
+        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Test", "Test");
     }
 }
