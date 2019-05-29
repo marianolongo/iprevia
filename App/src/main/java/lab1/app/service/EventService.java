@@ -16,7 +16,7 @@ import sun.security.krb5.internal.ccache.FileCredentialsCache;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -24,6 +24,9 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final UserService userService;
+
+    @Autowired
+    public JavaMailSender emailSender;
 
     @Autowired
     public EventService(EventRepository eventRepository, UserService userService) {
@@ -42,7 +45,7 @@ public class EventService {
     }
 
     public Event getEvent(Long id) {
-        return eventRepository.findById(id);
+        return eventRepository.findById(id).get();
     }
 
     public void addEvent(Event event) {
@@ -53,40 +56,38 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public void deleteEvent(String id) {
-        eventRepository.deleteById(id);
-    }
-
     public void addGuest(Long id, String guestName) throws MessagingException {
-        Event event = eventRepository.findById(id);
+        Event event = eventRepository.findById(id).get();
         User user = userService.getUserByName(guestName);
         if (event.getUsers().contains(user) || event.getHost().getId().equals(user.getId())) {
             return; //TODO fijarse que hacer con usuario que ya esta o si es host
         }
         if (event.getPrivate()) {
-            sendSimpleMessage(event.getHost().getEmail(), "Test", "Enviado desde front");
+            sendSimpleMessage(event.getHost().getEmail(),
+                    "Inscripcion evento " + event.getName() + " de " + guestName
+                    , guestName, id);
         } else {
             List<User> users = event.getUsers();
             users.add(user);
             event.setUsers(users);
             eventRepository.save(event);
-
-            List<Event> events = user.getEvents();
-            events.add(event);
-            user.setEvents(events);
-            userService.saveUser(user);
         }
     }
 
-    @Autowired
-    public JavaMailSender emailSender;
+    public void sendSimpleMessage(String to, String subject, String guestName, Long id) throws MessagingException {
 
-    public void sendSimpleMessage(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        emailSender.send(message);
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+        String htmlMsg = "";
+        try {
+            htmlMsg = fileToString("webApp/inscription.html", id, guestName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mimeMessage.setContent(htmlMsg, "text/html");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        emailSender.send(mimeMessage);
     }
 
     public List<Event> getAllEventsContaining(String inputText) {
@@ -102,11 +103,11 @@ public class EventService {
     }
 
     public boolean checkIfFinished(Long id) {
-        return eventRepository.findById(id).didFinish();
+        return eventRepository.findById(id).get().didFinish();
     }
 
     public boolean addVote(Long id, String voterName) {
-        Event event = eventRepository.findById(id);
+        Event event = eventRepository.findById(id).get();
         User host = event.getHost();
         User voter = userService.getUserByName(voterName);
 
@@ -124,5 +125,32 @@ public class EventService {
         usersVoted.add(voter);
         event.setUsersVoted(usersVoted);
         eventRepository.save(event);
+    }
+
+    private String fileToString(String path, Long id, String guestName) throws IOException {
+        InputStream is = new FileInputStream(path);
+        BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+
+        String line = buf.readLine();
+        StringBuilder sb = new StringBuilder();
+
+        while(line != null){
+            if(line.startsWith("<body>")){
+                line = "<body onload=getEventAndGuest(" + id + ", " + guestName + ")>";
+            }
+            sb.append(line).append("\n");
+            line = buf.readLine();
+        }
+
+        return sb.toString();
+    }
+
+    public void addUserWithMail(Long id, String guestName) {
+        Event event = getEvent(id);
+        List<User> users = event.getUsers();
+        users.add(userService.getUserByName(guestName));
+        event.setUsers(users);
+        eventRepository.save(event);
+
     }
 }

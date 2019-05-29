@@ -15,8 +15,6 @@ public class User {
     private Long rating;
     private Long ratingAmount;
 
-    @ManyToMany
-    private List<Event> events;
     public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -51,10 +49,6 @@ public class User {
         return ratingAmount;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -79,7 +73,4 @@ public class User {
         this.ratingAmount = ratingAmount;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
 }

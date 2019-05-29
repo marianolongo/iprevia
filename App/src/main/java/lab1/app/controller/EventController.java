@@ -3,6 +3,7 @@ package lab1.app.controller;
 
 
 import lab1.app.model.Event;
+import lab1.app.model.User;
 import lab1.app.service.EventService;
 import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,20 +63,11 @@ public class EventController {
         eventService.updateEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/events/{userId}/events/{id}")
-    public void deleteEvent(@PathVariable String id){
-        eventService.deleteEvent(id);
-    }
-
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest")
-    public ResponseEntity addGuest(Authentication authentication, @PathVariable Long id){
+    public ResponseEntity addGuest(Authentication authentication, @PathVariable Long id) throws MessagingException {
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String guest = (String) auth2Authentication.getUserAuthentication().getPrincipal();
-        try {
-            eventService.addGuest(id, guest);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        eventService.addGuest(id, guest);
         return ResponseEntity.ok().build();
     }
 
@@ -108,6 +100,11 @@ public class EventController {
 
     @RequestMapping("/events/sendMail")
     public void sendMail() throws MessagingException {
-        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Test", "Test");
+        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Test", "test", (long) 3);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/add/{id}/{guestName}")
+    public void addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
+        eventService.addUserWithMail(id, guestName);
     }
 }

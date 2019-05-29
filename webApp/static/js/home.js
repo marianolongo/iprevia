@@ -62,42 +62,49 @@ function signOut() {
 }
 
 function loadData() {
-    const url = "http://localhost:8080/getUser";
-    const request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    request.setRequestHeader('Accept', 'application/json');
-    request.send();
-    request.onload = () => {
-        let aux = JSON.parse(request.response);
-        document.getElementById("user_elem username").innerText = aux.name;
-    };
+    debugger;
+    if(window.sessionStorage.token !== undefined){
+        const url = "http://localhost:8080/getUser";
+        const request = new XMLHttpRequest();
+        request.open("GET", url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request.setRequestHeader('Accept', 'application/json');
+        request.send();
+        request.onload = () => {
+            let aux = JSON.parse(request.response);
+            document.getElementById("user_elem username").innerText = aux.name;
+        };
 
-    const urlEvents = "http://localhost:8080/events/afterNow";
-    const requestEvents = new XMLHttpRequest();
-    requestEvents.open("GET", urlEvents, true);
-    requestEvents.setRequestHeader('Content-Type', 'application/json');
-    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    requestEvents.setRequestHeader('Accept', 'application/json');
-    requestEvents.send();
-    requestEvents.onload = () => {
-        const htmlList = document.getElementById("publicEvents");
-        const eventList = JSON.parse(requestEvents.response);
-        const col = document.createElement("div");
-        col.className = "col-md-12";
-        for (let i = 0; i < eventList.length; i++){
-            const a = document.createElement("a");
-            const div = document.createElement("div");
-            div.className = "row w-100 customHeight customCenter";
-            a.innerText = eventList[i].name;
-            a.className = "btn w-100";
-            a.onclick = () => sendToEventPage(eventList[i].id);
-            div.appendChild(a);
-            col.appendChild(div);
-        }
-        htmlList.appendChild(col);
-    };
+        const urlEvents = "http://localhost:8080/events/afterNow";
+        const requestEvents = new XMLHttpRequest();
+        requestEvents.open("GET", urlEvents, true);
+        requestEvents.setRequestHeader('Content-Type', 'application/json');
+        requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        requestEvents.setRequestHeader('Accept', 'application/json');
+        requestEvents.send();
+        requestEvents.onload = () => {
+            const htmlList = document.getElementById("publicEvents");
+            const eventList = JSON.parse(requestEvents.response);
+            const col = document.createElement("div");
+            col.className = "col-md-12";
+            for (let i = 0; i < eventList.length; i++){
+                const a = document.createElement("a");
+                const div = document.createElement("div");
+                div.className = "row w-100 customHeight customCenter";
+                a.innerText = eventList[i].name;
+                a.className = "btn w-100";
+                a.onclick = () => sendToEventPage(eventList[i].id);
+                div.appendChild(a);
+                col.appendChild(div);
+            }
+            htmlList.appendChild(col);
+        };
+    }else{
+        debugger;
+        location.replace("login.html");
+        document.getElementById("message").innerText = "Se necesita hacer login para ver esa pagina";
+    }
 }
 
 function handleSearch(e){

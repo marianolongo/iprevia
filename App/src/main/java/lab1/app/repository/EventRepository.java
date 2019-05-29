@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface EventRepository extends CrudRepository<Event, String> {
+public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findByHostId(Long userId);
 
@@ -16,7 +16,7 @@ public interface EventRepository extends CrudRepository<Event, String> {
 
     Optional<Event> findByName(String name);
 
-    Event findById(Long id);
+    Optional<Event> findById(Long id);
 
     List<Event> findAllByNameContaining(String name);
 
