@@ -19,7 +19,7 @@ function login() {
         let aux = JSON.parse(request.response).access_token;
         if(aux !== undefined){
             window.sessionStorage.token = aux;
-            location.replace("home.html");
+            location.replace("template.html");
         }
         else{
             document.getElementById("message").innerText = "Nombre usuario o contraseña incorrecta"
