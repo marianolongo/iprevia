@@ -62,7 +62,6 @@ function signOut() {
 }
 
 function loadData() {
-    debugger;
     if(window.sessionStorage.token !== undefined){
         const url = "http://localhost:8080/getUser";
         const request = new XMLHttpRequest();
@@ -101,7 +100,6 @@ function loadData() {
             htmlList.appendChild(col);
         };
     }else{
-        debugger;
         location.replace("login.html");
         document.getElementById("message").innerText = "Se necesita hacer login para ver esa pagina";
     }

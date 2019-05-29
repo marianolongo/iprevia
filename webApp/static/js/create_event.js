@@ -11,4 +11,6 @@ function crearEvento(){
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
     request.send(event);
+    alert("Evento Creado");
+    location.replace("home.html")
 }

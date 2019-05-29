@@ -22,12 +22,7 @@ function login() {
             location.replace("home.html");
         }
         else{
-            document.getElementById("message").innerText = "User or password was incorrect"
+            document.getElementById("message").innerText = "Nombre usuario o contraseña incorrecta"
         }
     }
-}
-
-
-function loginAsGuest(){
-    location.replace("guest.html");
 }
