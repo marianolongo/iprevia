@@ -72,7 +72,7 @@ function loadData() {
         request.send();
         request.onload = () => {
             let aux = JSON.parse(request.response);
-            document.getElementById("user_elem username").innerText = aux.name;
+            document.getElementById("username").innerText = aux.name;
         };
 
         const urlEvents = "http://localhost:8080/events/afterNow";
@@ -85,19 +85,41 @@ function loadData() {
         requestEvents.onload = () => {
             const htmlList = document.getElementById("publicEvents");
             const eventList = JSON.parse(requestEvents.response);
-            const col = document.createElement("div");
-            col.className = "col-md-12";
-            for (let i = 0; i < eventList.length; i++){
-                const a = document.createElement("a");
-                const div = document.createElement("div");
-                div.className = "row w-100 customHeight customCenter";
-                a.innerText = eventList[i].name;
-                a.className = "btn w-100";
-                a.onclick = () => sendToEventPage(eventList[i].id);
-                div.appendChild(a);
-                col.appendChild(div);
+            let k = 0;
+            while (k < eventList.length) {
+                const row = document.createElement("div");
+                row.className = "row";
+                let i = k;
+                while (i < k+4 && i < eventList.length){
+                    const col = document.createElement("div");
+                    col.className = "col-md-3";
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    const img = document.createElement("img");
+                    img.className = "card-img-top";
+                    img.src = "static/images/profile-img.jpg";
+                    img.alt = "Card image cap";
+                    card.appendChild(img);
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+                    const title = document.createElement("h6");
+                    title.className = "card-title";
+                    title.innerText = eventList[i].name;
+                    const desc = document.createElement("p");
+                    desc.innerText = eventList[i].description;
+                    desc.className = "card-text";
+                    cardBody.appendChild(title);
+                    cardBody.appendChild(desc);
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    row.appendChild(col);
+                    i = i + 1;
+                }
+                htmlList.appendChild(row);
+                const br = document.createElement("br");
+                htmlList.appendChild(br);
+                k = k+4;
             }
-            htmlList.appendChild(col);
         };
     }else{
         location.replace("login.html");
@@ -118,7 +140,7 @@ function handleSearch(e){
     request.setRequestHeader('Accept', 'application/json');
     request.send();
     request.onload = () => {
-        const htmlList = document.getElementById("searchResults");
+        const htmlList = document.getElementById("publicEvents");
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
         }
@@ -143,7 +165,7 @@ function handleSearch(e){
     requestEvent.setRequestHeader('Accept', 'application/json');
     requestEvent.send();
     requestEvent.onload = () => {
-        const htmlList = document.getElementById("searchResults");
+        const htmlList = document.getElementById("publicEvents");
         eventList = JSON.parse(requestEvent.response);
         for (let i = 0; i < eventList.length; i++){
         const li = document.createElement("li");
@@ -153,7 +175,6 @@ function handleSearch(e){
         a.onclick = () => sendToEventPage(eventList[i].id);
         li.appendChild(a);
         htmlList.appendChild(li);
-
         }
     };
 }
@@ -169,4 +190,53 @@ function sendToEventPage(id){
 
 function sendToHomePage(){
     location.replace("home.html")
+}
+
+function getAllPrivateEvents() {
+    const urlEvents = "http://localhost:8080/events/getPtivateEvents";
+    const requestEvents = new XMLHttpRequest();
+    requestEvents.open("GET", urlEvents, true);
+    requestEvents.setRequestHeader('Content-Type', 'application/json');
+    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEvents.setRequestHeader('Accept', 'application/json');
+    requestEvents.send();
+    requestEvents.onload = () => {
+        const htmlList = document.getElementById("publicEvents");
+        const eventList = JSON.parse(requestEvents.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
 }

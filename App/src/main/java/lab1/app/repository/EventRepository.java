@@ -22,5 +22,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findAllByIsPrivateFalse();
 
+    List<Event> findAllByIsPrivateTrue();
+
     List<Event> findAllByDateAfter(Date date);
 }

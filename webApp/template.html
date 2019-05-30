@@ -24,8 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="#">Mis eventos<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Crear Evento</a>
-                    <a class="nav-item nav-link" href="#">idk</a>
+                    <a class="nav-item nav-link" href="create_event.html">Crear Evento</a>
                     <form class="form-inline">
                         <input class="form-control mr-sm-2"
                                type="search" placeholder="Buscar usuario o evento"
@@ -36,13 +35,13 @@
                     </form>
                     <div class="btn-group" style="position: absolute; right: 100px">
                         <img src="static/images/profile-img.jpg" width="40" height="40" alt="">
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            User-data
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username">
+
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Editar Perfil</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" onclick="signOut()">Sign Out</a>
+                            <button class="dropdown-item" onclick="signOut()">Cerrar Sesion</button>
                         </div>
                     </div>
                 </div>
@@ -88,7 +87,7 @@
         <div class="col-md-2 customBorderRight">
             <nav class="nav flex-column navbar-light">
                 <a class="nav-link text-center" href="#">Eventos mas proximos</a>
-                <a class="nav-link text-center" href="#">Eventos Privados</a>
+                <a class="nav-link text-center" href="#" onclick="getAllPrivateEvents()">Eventos Privados</a>
                 <a class="nav-link text-center" href="#">Eventos Publicos</a>
                 <a class="nav-link text-center" href="#">Eventos Pasados</a>
                 <a class="nav-link text-center" href="#">Eventos Asistidos</a>
@@ -122,8 +121,93 @@
                 <!--<div class="row content" id="publicEvents"></div>-->
             <!--</div>-->
             <div class="table">
-                <div class="row header text-align-center customBorderTop">Eventos</div>
+                <div class="row header text-align-center customBorderTop" style="color: white">Eventos</div>
                 <div class="row content" id="publicEvents">
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <br>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="card">-->
+<!--                                <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Card title</h5>-->
+<!--                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
             </div>
