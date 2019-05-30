@@ -104,5 +104,8 @@ a{
 
 .customBorderRight{
     border-right: 1px solid white;
+}
 
+.customBorderTop{
+    border-top: 1px solid white;
 }
