@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -70,5 +71,11 @@ public class UserService {
 
     public void saveUser(User user){
         userRepository.save(user);
+    }
+
+    public List<User> findAllUsersOrderedByRating(){
+        List<User> users = getAllUsers();
+        users.sort((o1, o2) -> (int) (o2.getRating() - o1.getRating()));
+        return users;
     }
 }
