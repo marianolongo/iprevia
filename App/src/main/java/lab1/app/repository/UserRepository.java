@@ -2,6 +2,7 @@ package lab1.app.repository;
 
 import lab1.app.model.Event;
 import lab1.app.model.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAllByNameContaining(String name);
 
+    List<User> findAll();
 }

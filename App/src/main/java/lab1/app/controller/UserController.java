@@ -68,4 +68,9 @@ public class UserController {
     public User getUserByName(@PathVariable String name){
         return userService.getUserByName(name);
     }
+
+    @RequestMapping("/users/getAllOrderedByRating")
+    public List<User> getAllOrderedByRating(){
+        return userService.findAllUsersOrderedByRating();
+    }
 }

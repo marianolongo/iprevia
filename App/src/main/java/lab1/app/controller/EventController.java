@@ -107,4 +107,14 @@ public class EventController {
     public void addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
         eventService.addUserWithMail(id, guestName);
     }
+
+    @RequestMapping("/events/getPrivateEvents")
+    public List<Event> getAllPrivateEvents(){
+        return eventService.getAllPrivateEvents();
+    }
+
+    @RequestMapping("/events/getPastEvents")
+    public List<Event> getAllPastEvents(){
+        return eventService.getAllPastEvents();
+    }
 }

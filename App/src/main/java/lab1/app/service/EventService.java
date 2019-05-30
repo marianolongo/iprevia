@@ -153,4 +153,12 @@ public class EventService {
         eventRepository.save(event);
 
     }
+
+    public List<Event> getAllPrivateEvents() {
+        return eventRepository.findAllByIsPrivateTrue();
+    }
+
+    public List<Event> getAllPastEvents() {
+        return eventRepository.findAllByDateBefore(new Date());
+    }
 }
