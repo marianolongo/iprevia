@@ -17,22 +17,4 @@ public class AppApplication {
         SpringApplication.run(AppApplication.class, args);
     }
 
-//    @Bean
-//    public JavaMailSender getJavaMailSender() {
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//        mailSender.setHost("smtp.gmail.com");
-//        mailSender.setPort(587);
-//
-//        mailSender.setUsername("matias.miodosky@ing.austral.edu.ar");
-//        mailSender.setPassword("marianesuncapo123");
-//
-//        Properties props = mailSender.getJavaMailProperties();
-//        props.put("mail.transport.protocol", "smtp");
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.debug", "true");
-//
-//        return mailSender;
-//    }
-
 }
