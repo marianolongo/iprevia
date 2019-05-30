@@ -23,7 +23,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="my_events.html">Mis eventos<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Mis eventos<span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="create_event.html">Crear Evento</a>
                     <form class="form-inline">
                         <input class="form-control mr-sm-2"
@@ -35,13 +35,13 @@
                     </form>
                     <div class="btn-group" style="position: absolute; right: 100px">
                         <img src="static/images/profile-img.jpg" width="40" height="40" alt="">
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            User-data
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username">
+
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Editar Perfil</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" onclick="signOut()">Sign Out</a>
+                            <button class="dropdown-item" onclick="signOut()">Cerrar Sesion</button>
                         </div>
                     </div>
                 </div>
