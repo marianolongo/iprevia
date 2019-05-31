@@ -14,3 +14,22 @@ function crearEvento(){
     alert("Evento Creado");
     location.replace("home.html")
 }
+
+function loadData() {
+    if(window.sessionStorage.token !== undefined){
+        const url = "http://localhost:8080/getUser";
+        const request = new XMLHttpRequest();
+        request.open("GET", url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request.setRequestHeader('Accept', 'application/json');
+        request.send();
+        request.onload = () => {
+            let aux = JSON.parse(request.response);
+            document.getElementById("username").innerText = aux.name;
+        };
+    }else{
+        location.replace("login.html");
+        document.getElementById("message").innerText = "Se necesita hacer login para ver esa pagina";
+    }
+}

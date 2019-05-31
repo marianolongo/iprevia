@@ -21,9 +21,9 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findAllByNameContaining(String name);
 
-    List<Event> findAllByIsPrivateFalse();
+    List<Event> findAllByIsPrivateFalseOrderByDate();
 
-    List<Event> findAllByIsPrivateTrue();
+    List<Event> findAllByIsPrivateTrueOrderByDate();
 
     List<Event> findAllByDateAfter(Date date);
 

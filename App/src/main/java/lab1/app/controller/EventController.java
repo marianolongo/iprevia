@@ -79,6 +79,11 @@ public class EventController {
         return eventService.getAllPublicEvents();
     }
 
+    @RequestMapping("/events/getPrivateEvents")
+    public List<Event> getAllPrivateEvents(){
+        return eventService.getAllPrivateEvents();
+    }
+
     @RequestMapping("/events/afterNow")
     public List<Event> getAllEventsAfterNow(){
         return eventService.getAllEventsAfterNow();

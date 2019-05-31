@@ -91,7 +91,7 @@ public class EventService {
     }
 
     public List<Event> getAllPublicEvents() {
-        return eventRepository.findAllByIsPrivateFalse();
+        return eventRepository.findAllByIsPrivateFalseOrderByDate();
     }
 
     public List<Event> getAllEventsAfterNow() {
@@ -156,5 +156,9 @@ public class EventService {
 
     public User getHost(Long id) {
         return eventRepository.findById(id).get().getHost();
+    }
+
+    public List<Event> getAllPrivateEvents() {
+        return eventRepository.findAllByIsPrivateTrueOrderByDate();
     }
 }

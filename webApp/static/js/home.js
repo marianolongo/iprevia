@@ -8,19 +8,49 @@ function getUsers(){
     request.setRequestHeader('Accept', 'application/json');
     request.send();
     request.onload = () => {
-        const htmlList = document.getElementById("users");
+        const header = document.getElementById("header");
+        header.innerText = "Usuarios";
+        const htmlList = document.getElementById("publicEvents");
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
         }
-        const userList = JSON.parse(request.response);
-        for (let i = 0; i < userList.length; i++) {
-            const li = document.createElement("li");
-            const p = document.createElement("p");
-            p.innerText = userList[i].name;
-            li.appendChild(p);
-            htmlList.appendChild(li);
+        const eventList = JSON.parse(request.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const mail = document.createElement("p");
+                mail.innerText = eventList[i].email;
+                mail.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(mail);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
         }
-    }
+    };
 }
 
 
@@ -32,22 +62,50 @@ function getEvents() {
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
     request.send();
-    let eventList;
     request.onload = () => {
-        const htmlList = document.getElementById("events");
+        const header = document.getElementById("header");
+        header.innerText = "Eventos";
+        const htmlList = document.getElementById("publicEvents");
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
         }
-        eventList = JSON.parse(request.response);
-        for (let i = 0; i < eventList.length; i++) {
-            const li = document.createElement("li");
-            const p = document.createElement("p");
-            p.innerText = eventList[i].name;
-            li.appendChild(p);
-            htmlList.appendChild(li);
+        const eventList = JSON.parse(request.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
         }
     };
-    return eventList;
 }
 
 function signOut() {
@@ -202,6 +260,8 @@ function getAllPrivateEvents() {
     requestEvents.setRequestHeader('Accept', 'application/json');
     requestEvents.send();
     requestEvents.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Eventos Privados";
         const htmlList = document.getElementById("publicEvents");
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
@@ -245,19 +305,164 @@ function getAllPrivateEvents() {
     };
 }
 
-function crearEvento(){
-    const url = "http://localhost:8080/events";
-    const name = document.getElementById("nombre-evento").value;
-    const description = document.getElementById("descripcion-evento").value;
-    const isPrivate = document.getElementById("privateEvent").checked;
-    const date = document.getElementById("date").value;
-    const event = JSON.stringify({"name": name, "description": description, "date": date, "isPrivate": isPrivate === true});
+function getAllPublicEvents() {
+    const urlEvents = "http://localhost:8080/events/getPublicEvents";
+    const requestEvents = new XMLHttpRequest();
+    requestEvents.open("GET", urlEvents, true);
+    requestEvents.setRequestHeader('Content-Type', 'application/json');
+    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEvents.setRequestHeader('Accept', 'application/json');
+    requestEvents.send();
+    requestEvents.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Eventos Publicos";
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(requestEvents.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
+}
+
+function getAllPastEvents() {
+    const urlEvents = "http://localhost:8080/events/getPastEvents";
+    const requestEvents = new XMLHttpRequest();
+    requestEvents.open("GET", urlEvents, true);
+    requestEvents.setRequestHeader('Content-Type', 'application/json');
+    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEvents.setRequestHeader('Accept', 'application/json');
+    requestEvents.send();
+    requestEvents.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Eventos Pasados";
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(requestEvents.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
+}
+
+function getMyEvents(){
+    const url = "http://localhost:8080/events/fromUser";
     const request = new XMLHttpRequest();
-    request.open("POST", url, true);
+    request.open("GET", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
-    request.send(event);
-    alert("Evento Creado");
-    location.replace("template.html")
+    request.send();
+    request.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Mis Eventos";
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(request.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
 }
