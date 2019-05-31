@@ -94,7 +94,8 @@ function loadData() {
                     const col = document.createElement("div");
                     col.className = "col-md-3";
                     const card = document.createElement("div");
-                    card.className = "card";
+                    card.className = "card pointer";
+                    card.onclick = () => sendToEventPage(eventList[i].id);
                     const img = document.createElement("img");
                     img.className = "card-img-top";
                     img.src = "static/images/profile-img.jpg";
