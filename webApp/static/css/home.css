@@ -69,7 +69,7 @@ a{
 }
 
 .table .content {
-    height: 53vh;
+    height: 63vh;
     overflow-y: scroll;
     /*overflow-y: auto;*/
 
@@ -89,7 +89,7 @@ a{
 }
 
 .searchResults{
-    height: 53vh;
+    height: 85vh;
 }
 
 .half-sized{
