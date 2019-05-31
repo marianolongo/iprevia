@@ -95,7 +95,8 @@ function loadData() {
                     col.className = "col-md-3";
                     const card = document.createElement("div");
                     card.className = "card pointer";
-                    card.onclick = () => sendToEventPage(eventList[i].id);
+                    card.eventId = eventList[i].id;
+                    card.onclick = () => sendToEventPage(card.eventId);
                     const img = document.createElement("img");
                     img.className = "card-img-top";
                     img.src = "static/images/profile-img.jpg";
