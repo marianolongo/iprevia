@@ -29,6 +29,8 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findAllByDateBefore(Date date);
 
+    List<Event> findAllByDateAfterOrderByDate(Date date);
+
 //    @Query("select users_id from event_users where event_id = id")
 //    List<Long> getAllUsersIdFromEvent(Long id);
 }

@@ -4,15 +4,10 @@ package lab1.app.service;
 import lab1.app.model.Event;
 import lab1.app.model.User;
 import lab1.app.repository.EventRepository;
-import lab1.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.internal.ccache.FileCredentialsCache;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -65,7 +60,7 @@ public class EventService {
         if (event.getPrivate()) {
             sendSimpleMessage(event.getHost().getEmail(),
                     "Inscripcion evento " + event.getName() + " de " + guestName
-                    , guestName, id);
+                    , guestName, id, event.getHost().getName());
         } else {
             List<User> users = event.getUsers();
             users.add(user);
@@ -74,16 +69,17 @@ public class EventService {
         }
     }
 
-    public void sendSimpleMessage(String to, String subject, String guestName, Long id) throws MessagingException {
+    public void sendSimpleMessage(String to, String subject, String guestName, Long id, String host) throws MessagingException {
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         String htmlMsg = "";
-        try {
-            htmlMsg = fileToString("webApp/inscription.html", id, guestName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        htmlMsg = "El usuario " + guestName + " desea participar del evento " + id + " , has click " +
+                "<a href=\"http://localhost:63342/iprevia/webApp/login.html?"
+                + "username=" + guestName
+                + "&id=" + id
+                + "\">aqui</a>"
+                + " para aceptar o rechazar su solicitud";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(to);
         helper.setSubject(subject);
@@ -103,7 +99,7 @@ public class EventService {
     }
 
     public List<Event> getAllEventsAfterNow() {
-        return eventRepository.findAllByDateAfter(new Date());
+        return eventRepository.findAllByDateAfterOrderByDate(new Date());
     }
 
     public boolean checkIfFinished(Long id) {
@@ -158,11 +154,11 @@ public class EventService {
 
     }
 
-    public List<Event> getAllPrivateEvents() {
-        return eventRepository.findAllByIsPrivateTrue();
-    }
-
     public List<Event> getAllPastEvents() {
         return eventRepository.findAllByDateBefore(new Date());
+    }
+
+    public User getHost(Long id) {
+        return eventRepository.findById(id).get().getHost();
     }
 }

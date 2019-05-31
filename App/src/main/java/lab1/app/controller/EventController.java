@@ -9,14 +9,12 @@ import lab1.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {
@@ -103,21 +101,21 @@ public class EventController {
 
     @RequestMapping("/events/sendMail")
     public void sendMail() throws MessagingException {
-        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Test", "test", (long) 3);
+        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Inscripcion", "test", (long) 3, "Mariano");
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add/{id}/{guestName}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/addUserViaConfirmation/{id}/{guestName}")
     public void addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
         eventService.addUserWithMail(id, guestName);
-    }
-
-    @RequestMapping("/events/getPrivateEvents")
-    public List<Event> getAllPrivateEvents(){
-        return eventService.getAllPrivateEvents();
     }
 
     @RequestMapping("/events/getPastEvents")
     public List<Event> getAllPastEvents(){
         return eventService.getAllPastEvents();
+    }
+
+    @RequestMapping("/events/{id}/getHost")
+    public User getHost(@PathVariable Long id){
+        return eventService.getHost(id);
     }
 }
