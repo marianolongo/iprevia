@@ -27,11 +27,11 @@
                     <div style="margin-left: 300px">
                         <form class="form-inline">
                             <input class="form-control mr-sm-2"
-                                   type="search" placeholder="Buscar usuario o evento"
+                                   type="search" placeholder="Buscar Usuario"
                                    aria-label="Search"
-                                   id="searchBar"
+                                   id="searchBarUser"
                             >
-                            <button class="btn btn-danger" type="submit" onclick="handleSearch(event)">Search</button>
+                            <button class="btn btn-danger" type="submit" onclick="searchUsers(event)">Search</button>
                         </form>
                     </div>
                     <div class="btn-group" style="position: absolute; right: 100px">
@@ -122,6 +122,16 @@
                 <!--<div class="row content" id="publicEvents"></div>-->
             <!--</div>-->
             <div class="table">
+                <div style="margin-left: 268px">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2"
+                               type="search" placeholder="Buscar Evento"
+                               aria-label="Search"
+                               id="searchBarEvents"
+                        >
+                        <button class="btn btn-danger" type="submit" onclick="searchEvents(event)">Search</button>
+                    </form>
+                </div>
                 <div class="row header text-align-center customBorderTop" style="color: white" id="header">Eventos</div>
                 <div class="row content" id="publicEvents">
 

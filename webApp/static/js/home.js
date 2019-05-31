@@ -187,11 +187,9 @@ function loadData() {
     }
 }
 
-function handleSearch(e){
+function searchUsers(e){
     e.preventDefault();
-    let userList;
-    let eventList;
-    const inputText = document.getElementById("searchBar").value;
+    const inputText = document.getElementById("searchBarUser").value;
     const url = "http://localhost:8080/users/containing/" + inputText;
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
@@ -204,19 +202,49 @@ function handleSearch(e){
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
         }
-        userList = JSON.parse(request.response);
-        for (let i = 0; i < userList.length; i++){
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            const name = userList[i].name;
-            a.innerText = name;
-            a.className = "btn";
-            a.onclick = () => sendToUserPage(name);
-            li.appendChild(a);
-            htmlList.appendChild(li);
+        const userList = JSON.parse(request.response);
+        let k = 0;
+        while (k < userList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < userList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = userList[i].name;
+                const mail = document.createElement("p");
+                mail.innerText = userList[i].email;
+                mail.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(mail);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
         }
     };
+}
 
+function searchEvents(e){
+    e.preventDefault();
+    let eventList;
+    const inputText = document.getElementById("searchBarEvents").value;
     const urlEvent = "http://localhost:8080/events/containing/" + inputText;
     const requestEvent = new XMLHttpRequest();
     requestEvent.open("GET", urlEvent, true);
@@ -227,17 +255,98 @@ function handleSearch(e){
     requestEvent.onload = () => {
         const htmlList = document.getElementById("publicEvents");
         eventList = JSON.parse(requestEvent.response);
-        for (let i = 0; i < eventList.length; i++){
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.innerText = eventList[i].name;
-        a.className = "btn";
-        a.onclick = () => sendToEventPage(eventList[i].id);
-        li.appendChild(a);
-        htmlList.appendChild(li);
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card";
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
         }
     };
 }
+
+// function handleSearch(e){
+//     e.preventDefault();
+//     let userList;
+//     let eventList;
+//     const inputText = document.getElementById("searchBar").value;
+//     const url = "http://localhost:8080/users/containing/" + inputText;
+//     const request = new XMLHttpRequest();
+//     request.open("GET", url, true);
+//     request.setRequestHeader('Content-Type', 'application/json');
+//     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+//     request.setRequestHeader('Accept', 'application/json');
+//     request.send();
+//     request.onload = () => {
+//         const htmlList = document.getElementById("publicEvents");
+//         while(htmlList.firstChild){
+//             htmlList.removeChild(htmlList.firstChild)
+//         }
+//         userList = JSON.parse(request.response);
+//         for (let i = 0; i < userList.length; i++){
+//             const li = document.createElement("li");
+//             const a = document.createElement("a");
+//             const name = userList[i].name;
+//             a.innerText = name;
+//             a.className = "btn";
+//             a.onclick = () => sendToUserPage(name);
+//             li.appendChild(a);
+//             htmlList.appendChild(li);
+//         }
+//     };
+//
+//     const urlEvent = "http://localhost:8080/events/containing/" + inputText;
+//     const requestEvent = new XMLHttpRequest();
+//     requestEvent.open("GET", urlEvent, true);
+//     requestEvent.setRequestHeader('Content-Type', 'application/json');
+//     requestEvent.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+//     requestEvent.setRequestHeader('Accept', 'application/json');
+//     requestEvent.send();
+//     requestEvent.onload = () => {
+//         const htmlList = document.getElementById("publicEvents");
+//         eventList = JSON.parse(requestEvent.response);
+//         for (let i = 0; i < eventList.length; i++){
+//         const li = document.createElement("li");
+//         const a = document.createElement("a");
+//         a.innerText = eventList[i].name;
+//         a.className = "btn";
+//         a.onclick = () => sendToEventPage(eventList[i].id);
+//         li.appendChild(a);
+//         htmlList.appendChild(li);
+//         }
+//     };
+// }
 
 function sendToUserPage(name){
     location.replace("http://localhost:63342/iprevia/webApp/user.html?name=" + name);
