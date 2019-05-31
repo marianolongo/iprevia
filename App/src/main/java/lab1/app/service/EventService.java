@@ -98,10 +98,6 @@ public class EventService {
         return eventRepository.findAllByIsPrivateFalse();
     }
 
-    public List<Event> getAllPrivateEvents(){
-        return eventRepository.findAllByIsPrivateTrue();
-    }
-
     public List<Event> getAllEventsAfterNow() {
         return eventRepository.findAllByDateAfter(new Date());
     }
