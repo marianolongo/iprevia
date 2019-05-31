@@ -2,6 +2,7 @@ package lab1.app.repository;
 
 import lab1.app.model.Event;
 import lab1.app.model.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
@@ -27,4 +28,9 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     List<Event> findAllByDateAfter(Date date);
 
     List<Event> findAllByDateBefore(Date date);
+
+    List<Event> findAllByDateAfterOrderByDate(Date date);
+
+//    @Query("select users_id from event_users where event_id = id")
+//    List<Long> getAllUsersIdFromEvent(Long id);
 }

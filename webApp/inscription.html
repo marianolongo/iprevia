@@ -6,33 +6,9 @@
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript">
-
-        let id;
-        let guestName;
-
-        function handleClickViaMail() {
-            const url = "http://localhost:8080/add/" + id + "/" + guestName;
-            const request = new XMLHttpRequest();
-            request.open("PUT", url, true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-            request.setRequestHeader('Accept', 'application/json');
-            request.send();
-            request.onload = () => {
-                if(request.status === 200){
-                    console.log("Se agrego")
-                }
-            };
-        }
-
-        function getEventAndGuest(idMail, name) {
-            id = idMail;
-            guestName = name;
-        }
-    </script>
+    <script type="text/javascript" src="static/js/inscription.js"></script>
 </head>
-<body>
+<body onload="getEventAndGuest()">
     <button class="btn btn-danger" onclick="handleClickViaMail(id, guestName)">Aceptar</button>
     <button class="btn btn-danger">Rechazar</button>
 
