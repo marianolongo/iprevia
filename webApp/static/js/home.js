@@ -24,7 +24,9 @@ function getUsers(){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                const userName = eventList[i].name;
+                card.onclick = () => sendToUserPage(userName);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -79,7 +81,9 @@ function getEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -108,6 +112,61 @@ function getEvents() {
     };
 }
 
+function getAllEventsAfterNow() {
+    const urlEvents = "http://localhost:8080/events/afterNow";
+    const requestEvents = new XMLHttpRequest();
+    requestEvents.open("GET", urlEvents, true);
+    requestEvents.setRequestHeader('Content-Type', 'application/json');
+    requestEvents.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    requestEvents.setRequestHeader('Accept', 'application/json');
+    requestEvents.send();
+    requestEvents.onload = () => {
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(requestEvents.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k+4 && i < eventList.length){
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k+4;
+        }
+    };
+}
 function signOut() {
     const url = "http://localhost:8081/oauth/remove-token";
     const request = new XMLHttpRequest();
@@ -399,7 +458,9 @@ function getAllPrivateEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -453,7 +514,9 @@ function getAllPublicEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -507,7 +570,9 @@ function getAllPastEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -561,7 +626,9 @@ function getMyEvents(){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -591,15 +658,69 @@ function getMyEvents(){
 }
 
 function toggleUserFilter() {
-    // const user = document.getElementById("user-filter");
     const event = document.getElementById("event-filter");
-    // user.checked = !user.checked;
     event.checked = false;
+    document.getElementById("search-dropdown").innerText = "Usuario"
 }
 
 function toggleEventFilter() {
     const user = document.getElementById("user-filter");
-    // const event = document.getElementById("event-filter");
-    // event.checked = !event.checked;
     user.checked = false;
+    document.getElementById("search-dropdown").innerText = "Evento"
+}
+
+function getMostVotedUsers() {
+    const url = "http://localhost:8080/users/getAllOrderedByRating";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Usuarios mas votados";
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(request.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card pointer";
+                const userName = eventList[i].name;
+                card.onclick = () => sendToUserPage(userName);
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const mail = document.createElement("p");
+                mail.innerText = eventList[i].email;
+                mail.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(mail);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
 }
