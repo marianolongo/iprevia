@@ -62,10 +62,7 @@ public class EventService {
                     "Inscripcion evento " + event.getName() + " de " + guestName
                     , guestName, id, event.getHost().getName());
         } else {
-            List<User> users = event.getUsers();
-            users.add(user);
-            event.setUsers(users);
-            eventRepository.save(event);
+            addUserAndEvent(event, user);
         }
     }
 
@@ -143,11 +140,20 @@ public class EventService {
 
     public void addUserWithMail(Long id, String guestName) {
         Event event = getEvent(id);
+        User user = userService.getUserByName(guestName);
+        addUserAndEvent(event, user);
+    }
+
+    private void addUserAndEvent(Event event, User user) {
         List<User> users = event.getUsers();
-        users.add(userService.getUserByName(guestName));
+        users.add(user);
         event.setUsers(users);
         eventRepository.save(event);
 
+        List<Event> events = user.getEventsAssisted();
+        events.add(event);
+        user.setEventsAssisted(events);
+        userService.saveUser(user);
     }
 
     public List<Event> getAllPastEvents() {
@@ -160,5 +166,9 @@ public class EventService {
 
     public List<Event> getAllPrivateEvents() {
         return eventRepository.findAllByIsPrivateTrueOrderByDate();
+    }
+
+    public List<Event> getAllEventsIfUserIsGuest(String name) {
+        return eventRepository.findAllByUsersContaining(userService.getUserByName(name));
     }
 }

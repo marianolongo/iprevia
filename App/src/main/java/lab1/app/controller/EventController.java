@@ -120,4 +120,11 @@ public class EventController {
     public User getHost(@PathVariable Long id){
         return eventService.getHost(id);
     }
+
+    @RequestMapping("/events/getAllEventsIfUserIsGuest")
+    public List<Event> getAllEventsIfUserIsGuest(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String name = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllEventsIfUserIsGuest(name);
+    }
 }

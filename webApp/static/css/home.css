@@ -102,6 +102,12 @@ a{
     align-items: center;
 }
 
+.customRight{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 .customBorderRight{
     border-right: 1px solid white;
 }

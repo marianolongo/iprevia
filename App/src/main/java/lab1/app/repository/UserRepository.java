@@ -21,4 +21,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findAllByNameContaining(String name);
 
     List<User> findAll();
+
+    List<User> findAllByEventsAssistedContaining(Event event);
 }

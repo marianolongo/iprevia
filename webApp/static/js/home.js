@@ -121,6 +121,8 @@ function getAllEventsAfterNow() {
     requestEvents.setRequestHeader('Accept', 'application/json');
     requestEvents.send();
     requestEvents.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Eventos mas proximos";
         const htmlList = document.getElementById("publicEvents");
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
@@ -201,6 +203,8 @@ function loadData() {
         requestEvents.send();
         requestEvents.onload = () => {
             const htmlList = document.getElementById("publicEvents");
+            const header = document.getElementById("header");
+            header.innerText = "Eventos mas proximos";
             const eventList = JSON.parse(requestEvents.response);
             let k = 0;
             while (k < eventList.length) {
@@ -712,6 +716,62 @@ function getMostVotedUsers() {
                 mail.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(mail);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                row.appendChild(col);
+                i = i + 1;
+            }
+            htmlList.appendChild(row);
+            const br = document.createElement("br");
+            htmlList.appendChild(br);
+            k = k + 4;
+        }
+    };
+}
+
+function getAllEventsAssisted() {
+    const url = "http://localhost:8080/events/getAllEventsIfUserIsGuest";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        const header = document.getElementById("header");
+        header.innerText = "Eventos asistidos";
+        const htmlList = document.getElementById("publicEvents");
+        while(htmlList.firstChild){
+            htmlList.removeChild(htmlList.firstChild)
+        }
+        const eventList = JSON.parse(request.response);
+        let k = 0;
+        while (k < eventList.length) {
+            const row = document.createElement("div");
+            row.className = "row";
+            let i = k;
+            while (i < k + 4 && i < eventList.length) {
+                const col = document.createElement("div");
+                col.className = "col-md-3";
+                const card = document.createElement("div");
+                card.className = "card pointer";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = "static/images/profile-img.jpg";
+                img.alt = "Card image cap";
+                card.appendChild(img);
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                const title = document.createElement("h6");
+                title.className = "card-title";
+                title.innerText = eventList[i].name;
+                const desc = document.createElement("p");
+                desc.innerText = eventList[i].description;
+                desc.className = "card-text";
+                cardBody.appendChild(title);
+                cardBody.appendChild(desc);
                 card.appendChild(cardBody);
                 col.appendChild(card);
                 row.appendChild(col);

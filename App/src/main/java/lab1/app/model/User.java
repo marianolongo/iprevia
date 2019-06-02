@@ -1,5 +1,8 @@
 package lab1.app.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +17,10 @@ public class User {
     private String password;
     private Long rating;
     private Long ratingAmount;
+
+    @ManyToMany
+    @JsonIgnore
+    private List<Event> eventsAssisted;
 
     public User(Long id, String name, String email, String password) {
         this.id = id;
@@ -49,6 +56,10 @@ public class User {
         return ratingAmount;
     }
 
+    public List<Event> getEventsAssisted() {
+        return eventsAssisted;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -73,4 +84,7 @@ public class User {
         this.ratingAmount = ratingAmount;
     }
 
+    public void setEventsAssisted(List<Event> eventsAssisted) {
+        this.eventsAssisted = eventsAssisted;
+    }
 }

@@ -73,4 +73,9 @@ public class UserController {
     public List<User> getAllOrderedByRating(){
         return userService.findAllUsersOrderedByRating();
     }
+
+    @RequestMapping("/users/getAllUsersFrom/{id}")
+    public List<User> getAllUsersFromEvent(@PathVariable Long id){
+        return userService.getAllUsersFromEvent(id);
+    }
 }

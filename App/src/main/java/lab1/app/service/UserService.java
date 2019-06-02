@@ -1,22 +1,24 @@
 package lab1.app.service;
 
+import lab1.app.model.Event;
 import lab1.app.model.User;
+import lab1.app.repository.EventRepository;
 import lab1.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final EventRepository eventRepository;
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, EventRepository eventRepository) {
         this.userRepository = userRepository;
+        this.eventRepository = eventRepository;
     }
 
     public List<User> getAllUsers() {
@@ -77,5 +79,10 @@ public class UserService {
         List<User> users = getAllUsers();
         users.sort((o1, o2) -> (int) (o2.getRating() - o1.getRating()));
         return users;
+    }
+
+    public List<User> getAllUsersFromEvent(Long id) {
+        Event event = eventRepository.findById(id).get();
+        return userRepository.findAllByEventsAssistedContaining(event);
     }
 }
