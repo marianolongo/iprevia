@@ -8,58 +8,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="static/js/home.js"></script>
     <script type="text/javascript" src="static/js/event.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
 </head>
 <body onload="loadDataAndEvent()">
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-            <h1 class="pointer" onclick="sendToHomePage()" style="text-align: center">iPrevia</h1>
-        </div>
-        <div class="col-md-8">
-            <div class="row pt-5 custom-header">
-                <div class="col-md-3 text-center">
-                    <a href="my_events.html" class="btn header-element">Mis Eventos</a>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="create_event.html" class="btn header-element">Crear Evento</a>
-                </div>
-                <div class="col-md-6 text-center">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2"
-                               type="search" placeholder="Buscar usuario o evento"
-                               aria-label="Search"
-                               id="searchBar"
-                        >
-                        <button class="btn btn-danger" type="submit" onclick="handleSearch(event)">Search</button>
-                    </form>
+    <div class="row bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <a class="navbar-brand" href="home.html">iPrevia</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="create_event.html">Crear Evento</a>
+                    <div class="btn-group" style="position: absolute; right: 100px">
+                        <img src="static/images/profile-img.jpg" width="40" height="40" alt="">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username"></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Editar Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="signOut()">Cerrar Sesion</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </nav>
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row fill">
-        <div class="col-md-4">
-            <div class="row mt-4 justify-content-center mt-3 user_elem">
-                <img src="static/images/profile-img.jpg" height="200" width="200" alt="">
-            </div>
-            <div class="row justify-content-center">
-                <p class="user_elem username" id="user_elem username"></p>
-            </div>
-            <div class="row justify-content-center">
-                <div class="user_elem">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <button class="btn btn-danger user_elem" onclick="signOut()">Sign Out</button>
-            </div>
-        </div>
-        <div class="col-md-4 mt-4">
+    <div class="row">
+        <div class="col-md-6 mt-4">
             <div style="text-align: center">
                 <div>
                     <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
@@ -67,9 +49,9 @@
                 <div class="row">
                     <div class="container">
                         <br>
-                        <p id="nombre-evento"></p>
+                        <p id="nombre-evento" class="color-white"></p>
                         <br>
-                        <p id="descripcion-evento"></p>
+                        <p id="descripcion-evento" class="color-white"></p>
                         <br>
                         <div class="row justify-content-center">
                             <button class="btn btn-danger" onclick="handleAssist()">Asistir</button>
@@ -82,10 +64,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <ul style="list-style: none" id="searchResults">
+        <div class="col-md-6 mt-4">
+            <div class="table">
+                <div class="row header text-align-center customBorderTop" style="color: white" id="header"></div>
+                <div class="row content mt-3 ml-3 mr-3" id="publicEvents">
 
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

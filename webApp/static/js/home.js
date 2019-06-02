@@ -24,7 +24,7 @@ function getUsers(){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 const userName = eventList[i].name;
                 card.onclick = () => sendToUserPage(userName);
                 const img = document.createElement("img");
@@ -81,7 +81,7 @@ function getEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
@@ -137,7 +137,7 @@ function getAllEventsAfterNow() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 card.eventId = eventList[i].id;
@@ -215,7 +215,7 @@ function loadData() {
                     const col = document.createElement("div");
                     col.className = "col-md-3";
                     const card = document.createElement("div");
-                    card.className = "card pointer";
+                    card.className = "card pointer text-center";
                     card.eventId = eventList[i].id;
                     card.onclick = () => sendToEventPage(card.eventId);
                     const img = document.createElement("img");
@@ -288,7 +288,9 @@ function searchUsers(e){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer text-center";
+                card.userName = userList[i].name;
+                card.onclick = () => sendToUserPage(card.userName);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -343,7 +345,9 @@ function searchEvents(e){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card pointer text-center";
+                card.eventId = eventList[i].id;
+                card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";
@@ -462,7 +466,7 @@ function getAllPrivateEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
@@ -518,7 +522,7 @@ function getAllPublicEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
@@ -574,7 +578,7 @@ function getAllPastEvents() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
@@ -630,7 +634,7 @@ function getMyEvents(){
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
@@ -698,7 +702,7 @@ function getMostVotedUsers() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 const userName = eventList[i].name;
                 card.onclick = () => sendToUserPage(userName);
                 const img = document.createElement("img");
@@ -754,7 +758,7 @@ function getAllEventsAssisted() {
                 const col = document.createElement("div");
                 col.className = "col-md-3";
                 const card = document.createElement("div");
-                card.className = "card pointer";
+                card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
                 card.onclick = () => sendToEventPage(card.eventId);
                 const img = document.createElement("img");
