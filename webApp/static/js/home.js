@@ -187,9 +187,22 @@ function loadData() {
     }
 }
 
+function searchUsersOrEvents(e) {
+    const userFilter = document.getElementById("user-filter").checked;
+    const eventFilter = document.getElementById("event-filter").checked;
+    if(userFilter){
+        return searchUsers(e);
+    }
+    else if(eventFilter){
+        return searchEvents(e)
+    }else {
+        e.preventDefault();
+        console.log("No se selecciono una opcion");
+    }
+}
 function searchUsers(e){
     e.preventDefault();
-    const inputText = document.getElementById("searchBarUser").value;
+    const inputText = document.getElementById("searchBar").value;
     const url = "http://localhost:8080/users/containing/" + inputText;
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
@@ -244,7 +257,7 @@ function searchUsers(e){
 function searchEvents(e){
     e.preventDefault();
     let eventList;
-    const inputText = document.getElementById("searchBarEvents").value;
+    const inputText = document.getElementById("searchBar").value;
     const urlEvent = "http://localhost:8080/events/containing/" + inputText;
     const requestEvent = new XMLHttpRequest();
     requestEvent.open("GET", urlEvent, true);
@@ -575,4 +588,18 @@ function getMyEvents(){
             k = k + 4;
         }
     };
+}
+
+function toggleUserFilter() {
+    // const user = document.getElementById("user-filter");
+    const event = document.getElementById("event-filter");
+    // user.checked = !user.checked;
+    event.checked = false;
+}
+
+function toggleEventFilter() {
+    const user = document.getElementById("user-filter");
+    // const event = document.getElementById("event-filter");
+    // event.checked = !event.checked;
+    user.checked = false;
 }

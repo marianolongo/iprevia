@@ -26,19 +26,29 @@
                     <a class="nav-item nav-link" href="create_event.html">Crear Evento</a>
                     <div style="margin-left: 300px">
                         <form class="form-inline">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search-dropdown">Filtrar</button>
+                            <div class="dropdown-menu">
+                                <label>
+                                    <span class="search-filter">Usuario</span>
+                                    <input id="user-filter" type="checkbox" onchange="toggleUserFilter()"/>
+                                </label>
+                                <div class="dropdown-divider"></div>
+                                <label>
+                                    <span class="search-filter">Evento</span>
+                                    <input id="event-filter" type="checkbox" onclick="toggleEventFilter()"/>
+                                </label>
+                            </div>
                             <input class="form-control mr-sm-2"
                                    type="search" placeholder="Buscar Usuario"
                                    aria-label="Search"
-                                   id="searchBarUser"
+                                   id="searchBar"
                             >
-                            <button class="btn btn-danger" type="submit" onclick="searchUsers(event)">Search</button>
+                            <button class="btn btn-danger" type="submit" onclick="searchUsersOrEvents(event)">Search</button>
                         </form>
                     </div>
                     <div class="btn-group" style="position: absolute; right: 100px">
                         <img src="static/images/profile-img.jpg" width="40" height="40" alt="">
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username">
-
-                        </button>
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username"></button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Editar Perfil</a>
                             <div class="dropdown-divider"></div>
@@ -122,16 +132,6 @@
                 <!--<div class="row content" id="publicEvents"></div>-->
             <!--</div>-->
             <div class="table">
-                <div style="margin-left: 268px">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2"
-                               type="search" placeholder="Buscar Evento"
-                               aria-label="Search"
-                               id="searchBarEvents"
-                        >
-                        <button class="btn btn-danger" type="submit" onclick="searchEvents(event)">Search</button>
-                    </form>
-                </div>
                 <div class="row header text-align-center customBorderTop" style="color: white" id="header">Eventos</div>
                 <div class="row content" id="publicEvents">
 

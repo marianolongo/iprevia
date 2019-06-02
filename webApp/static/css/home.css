@@ -109,3 +109,8 @@ a{
 .customBorderTop{
     border-top: 1px solid white;
 }
+
+.search-filter{
+    margin-right: 10px;
+    color: black !important;
+}
