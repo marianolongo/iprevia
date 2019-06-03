@@ -57,8 +57,13 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{userId}/events/{id}")
-    public void updateEvent(@RequestBody Event event, @PathVariable Long userId){
-        eventService.updateEvent(event);
+    public void updateEvent(@RequestBody Event event, @PathVariable Long id){
+        Event oldEvent = getEvent(id);
+        oldEvent.setDate(event.getDate());
+        oldEvent.setName(event.getName());
+        oldEvent.setDescription(event.getDescription());
+        oldEvent.setIsPrivate(event.getPrivate());
+        eventService.updateEvent(oldEvent);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest")
