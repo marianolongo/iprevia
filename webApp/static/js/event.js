@@ -1,8 +1,8 @@
 
 function loadDataAndEvent() {
     if(window.sessionStorage.token !== undefined){
-        let url = "http://localhost:8080/getUser";
-        let request = new XMLHttpRequest();
+        const url = "http://localhost:8080/getUser";
+        const request = new XMLHttpRequest();
         request.open("GET", url, true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
@@ -15,26 +15,29 @@ function loadDataAndEvent() {
 
         const id = getQueryVariable(window.location.href);
 
-        url = "http://localhost:8080/events/" + id;
-        request.open("GET", url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-        request.setRequestHeader('Accept', 'application/json');
-        request.send();
-        request.onload = () => {
-            let aux = JSON.parse(request.response);
+        const url2 = "http://localhost:8080/events/" + id;
+        const request2 = new XMLHttpRequest();
+        request2.open("GET", url2, true);
+        request2.setRequestHeader('Content-Type', 'application/json');
+        request2.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request2.setRequestHeader('Accept', 'application/json');
+        request2.send();
+        request2.onload = () => {
+            let aux = JSON.parse(request2.response);
             document.getElementById("nombre-evento").innerText = "Nombre del evento: " + aux.name;
             document.getElementById("descripcion-evento").innerText = "Descripcion: " + aux.description;
         };
 
-        url = "http://localhost:8080/events/" + id + "/checkDidFinished";
-        request.open("GET", url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-        request.setRequestHeader('Accept', 'application/json');
-        request.send();
-        request.onload = () => {
-            if(request.response === "true"){
+
+        const url3 = "http://localhost:8080/events/" + id + "/checkDidFinished";
+        const request3 = new XMLHttpRequest();
+        request3.open("GET", url3, true);
+        request3.setRequestHeader('Content-Type', 'application/json');
+        request3.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request3.setRequestHeader('Accept', 'application/json');
+        request3.send();
+        request3.onload = () => {
+            if(request3.response === "true"){
                 const buttonHolder = document.getElementById("button-holder");
                 const button = document.createElement("button");
                 button.className = "btn btn-danger";
@@ -44,20 +47,21 @@ function loadDataAndEvent() {
             }
         };
 
-        url = "http://localhost:8080/users/getAllUsersFrom/" + id;
-        request.open("GET", url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-        request.setRequestHeader('Accept', 'application/json');
-        request.send();
-        request.onload = () => {
+        const url4 = "http://localhost:8080/users/getAllUsersFrom/" + id;
+        const request4 = new XMLHttpRequest();
+        request4.open("GET", url4, true);
+        request4.setRequestHeader('Content-Type', 'application/json');
+        request4.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request4.setRequestHeader('Accept', 'application/json');
+        request4.send();
+        request4.onload = () => {
             const header = document.getElementById("header");
             header.innerText = "Usuarios";
             const htmlList = document.getElementById("publicEvents");
             while(htmlList.firstChild){
                 htmlList.removeChild(htmlList.firstChild)
             }
-            const eventList = JSON.parse(request.response);
+            const eventList = JSON.parse(request4.response);
             let k = 0;
             while (k < eventList.length) {
                 const row = document.createElement("div");
