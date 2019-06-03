@@ -32,6 +32,11 @@ public class UserController {
         return userService.getUser(name);
     }
 
+    @RequestMapping("/users/{id}")
+    public void getUserById(@PathVariable long id){
+        userService.getUserById(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public void addUser(@RequestBody User user){
         user.setRating(0L);

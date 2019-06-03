@@ -436,6 +436,9 @@ function sendToEventPage(id){
     location.replace("http://localhost:63342/iprevia/webApp/event.html?id=" + id);
 }
 
+function sendToMyEventPage(id){
+    location.replace("http://localhost:63342/iprevia/webApp/my_event.html?id=" + id);
+}
 
 function sendToHomePage(){
     location.replace("home.html")
@@ -636,7 +639,7 @@ function getMyEvents(){
                 const card = document.createElement("div");
                 card.className = "card pointer text-center";
                 card.eventId = eventList[i].id;
-                card.onclick = () => sendToEventPage(card.eventId);
+                card.onclick = () => sendToMyEventPage(card.eventId);
                 const img = document.createElement("img");
                 img.className = "card-img-top";
                 img.src = "static/images/profile-img.jpg";

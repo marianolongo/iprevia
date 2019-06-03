@@ -26,6 +26,7 @@ function loadDataAndEvent() {
             let aux = JSON.parse(request2.response);
             document.getElementById("nombre-evento").innerText = "Nombre del evento: " + aux.name;
             document.getElementById("descripcion-evento").innerText = "Descripcion: " + aux.description;
+            // document.getElementById("creador-evento").innerText = "Creador evento: " + getHostUserById(aux.host_id).name;
         };
 
 
@@ -110,6 +111,17 @@ function getQueryVariable(variable) {
     return (false);
 }
 
+// function getHostUserById(id){
+//     const url = "http://localhost:8080/users/" + id;
+//     const request = new XMLHttpRequest();
+//     request.open("GET", url, true);
+//     request.setRequestHeader('Content-Type', 'application/json');
+//     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+//     request.setRequestHeader('Accept', 'application/json');
+//     request.send();
+//     return request.response;
+// }
+
 
 function handleAssist(){
 
@@ -147,4 +159,36 @@ function handleVote(){
             document.getElementById("warning-add-vote").innerText = "Usuario ya voto o no fue invitado"
         }
     }
+}
+
+function editEvent(){
+    const url = "http://localhost:8080/getUser";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        let aux = JSON.parse(request.response);
+        const userId = aux.id;
+        const id = getQueryVariable(window.location.href);
+
+        const name = document.getElementById("nuevo-nombre-evento").value;
+        const description = document.getElementById("nueva-descripcion-evento").value;
+        const isPrivate = document.getElementById("new-privateEvent").checked;
+        const date = document.getElementById("new-date").value;
+        const time =  document.getElementById("new-timeInput").value;
+        const dateAndTime = date + "T" + time + ":00.000Z";
+        const event = JSON.stringify({"name": name, "description": description, "date": dateAndTime, "isPrivate": isPrivate === true});
+
+        const url2 = "http://localhost:8080/events/" + userId + "/events/" + id;
+        const request2 = new XMLHttpRequest();
+        request2.open("PUT", url2, true);
+        request2.setRequestHeader('Content-Type', 'application/json');
+        request2.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request2.setRequestHeader('Accept', 'application/json');
+        request2.send(event);
+        location.reload();
+    };
 }
