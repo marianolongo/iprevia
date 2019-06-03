@@ -60,18 +60,18 @@ public class EventService {
         if (event.getPrivate()) {
             sendSimpleMessage(event.getHost().getEmail(),
                     "Inscripcion evento " + event.getName() + " de " + guestName
-                    , guestName, id, event.getHost().getName());
+                    , guestName,id, event.getName(), event.getHost().getName());
         } else {
             addUserAndEvent(event, user);
         }
     }
 
-    public void sendSimpleMessage(String to, String subject, String guestName, Long id, String host) throws MessagingException {
+    public void sendSimpleMessage(String to, String subject, String guestName,Long id, String name, String host) throws MessagingException {
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         String htmlMsg = "";
-        htmlMsg = "El usuario " + guestName + " desea participar del evento " + id + " , has click " +
+        htmlMsg = "El usuario " + guestName + " desea participar del evento " + name + " , has click " +
                 "<a href=\"http://localhost:63342/iprevia/webApp/login.html?"
                 + "username=" + guestName
                 + "&id=" + id
