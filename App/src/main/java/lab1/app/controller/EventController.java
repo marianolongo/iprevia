@@ -75,23 +75,31 @@ public class EventController {
     }
 
     @RequestMapping("/events/containing/{inputText}")
-    public List<Event> getAllEventsContaining(@PathVariable String inputText){
-        return eventService.getAllEventsContaining(inputText);
+    public List<Event> getAllEventsContaining(@PathVariable String inputText, Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllEventsContaining(inputText, host);
     }
 
     @RequestMapping("/events/getPublicEvents")
-    public List<Event> getAllPublicEvents(){
-        return eventService.getAllPublicEvents();
+    public List<Event> getAllPublicEvents(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllPublicEvents(host);
     }
 
     @RequestMapping("/events/getPrivateEvents")
-    public List<Event> getAllPrivateEvents(){
-        return eventService.getAllPrivateEvents();
+    public List<Event> getAllPrivateEvents(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllPrivateEvents(host);
     }
 
     @RequestMapping("/events/afterNow")
-    public List<Event> getAllEventsAfterNow(){
-        return eventService.getAllEventsAfterNow();
+    public List<Event> getAllEventsAfterNow(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllEventsAfterNow(host);
     }
 
     @RequestMapping("/events/{id}/checkDidFinished")
@@ -117,8 +125,10 @@ public class EventController {
     }
 
     @RequestMapping("/events/getPastEvents")
-    public List<Event> getAllPastEvents(){
-        return eventService.getAllPastEvents();
+    public List<Event> getAllPastEvents(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllPastEvents(host);
     }
 
     @RequestMapping("/events/{id}/getHost")

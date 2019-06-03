@@ -19,19 +19,17 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     Optional<Event> findById(Long id);
 
-    List<Event> findAllByNameContaining(String name);
+    List<Event> findAllByNameContainingAndHostNot(String name, User host);
 
-    List<Event> findAllByIsPrivateFalseOrderByDate();
+    List<Event> findAllByIsPrivateFalseAndHostNotOrderByDate(User host);
 
-    List<Event> findAllByIsPrivateTrueOrderByDate();
+    List<Event> findAllByIsPrivateTrueAndHostNotOrderByDate(User host);
 
     List<Event> findAllByDateAfter(Date date);
 
-    List<Event> findAllByDateBefore(Date date);
+    List<Event> findAllByDateBeforeAndHostNot(Date date, User host);
 
-    List<Event> findAllByDateAfterOrderByDate(Date date);
+    List<Event> findAllByDateAfterAndHostNotOrderByDate(Date date, User host);
 
     List<Event> findAllByUsersContaining(User user);
-//    @Query("select users_id from event_users where event_id = id")
-//    List<Long> getAllUsersIdFromEvent(Long id);
 }
