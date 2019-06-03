@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iPrevia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="static/js/home.js"></script>
+    <script type="text/javascript" src="static/js/event.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body onload="loadDataAndEvent()">
+<div class="container-fluid">
+    <div class="row bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <a class="navbar-brand" href="home.html">iPrevia</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="create_event.html">Crear Evento</a>
+                    <div class="btn-group" style="position: absolute; right: 100px">
+                        <img src="static/images/profile-img.jpg" width="40" height="40" alt="">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="username"></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Editar Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="signOut()">Cerrar Sesion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mt-4">
+            <div style="text-align: center">
+                <div>
+                    <img height="200" width="200" alt="" src="static/images/profile-img.jpg">
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <br>
+                        <p id="nombre-evento" class="color-white"></p>
+                        <br>
+                        <p id="descripcion-evento" class="color-white"></p>
+                        <br>
+                        <!--                        <p id="creador-evento" class="color-white"></p>-->
+                        <!--                        <br>-->
+                        <div>
+                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Editar Evento
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                                <form>
+                                    <br>
+                                    <div class="form-group">
+                                        <label class="event-form" for="nuevo-nombre-evento">Nuevo Nombre del Evento</label>
+                                        <input type="text" class="form-control event-form" id="nuevo-nombre-evento" placeholder="Nombre del evento">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="event-form" for="nueva-descripcion-evento">Nueva Descripcion evento</label>
+                                        <textarea class="form-control event-form" id="nueva-descripcion-evento" placeholder="Descripcion evento"></textarea>
+                                    </div>
+                                    <div>
+                                        <form>
+                                            <label class="event-form">Nueva Fecha:</label>
+                                            <input class="event-form" type="date" name="date" id="new-date">
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form>
+                                            <br>
+                                            <label class="event-form">Nueva Hora</label>
+                                            <input type="time" id="new-timeInput" class="event-form col-md-3">
+                                        </form>
+                                    </div>
+                                    <div class="form-check event-form">
+                                        <input type="checkbox" class="form-check-input" id="new-privateEvent">
+                                        <label class="form-check-label" for="new-privateEvent">Privado</label>
+                                    </div>
+                                    <button type="submit" onclick="editEvent()" class="btn btn-danger event-form">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div id="button-holder" class=""></div>
+                        </div>
+                        <p style="color: red" id="warning-add-vote"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-4">
+            <div class="table">
+                <div class="row header text-align-center customBorderTop" style="color: white" id="header"></div>
+                <div class="row content mt-3 ml-3 mr-3" id="publicEvents">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
