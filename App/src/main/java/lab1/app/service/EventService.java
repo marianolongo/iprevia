@@ -83,16 +83,19 @@ public class EventService {
         emailSender.send(mimeMessage);
     }
 
-    public List<Event> getAllEventsContaining(String inputText) {
-        return eventRepository.findAllByNameContaining(inputText);
+    public List<Event> getAllEventsContaining(String inputText, String host) {
+        User user = userService.getUserByName(host);
+        return eventRepository.findAllByNameContainingAndHostNot(inputText, user);
     }
 
-    public List<Event> getAllPublicEvents() {
-        return eventRepository.findAllByIsPrivateFalseOrderByDate();
+    public List<Event> getAllPublicEvents(String host) {
+        User user = userService.getUserByName(host);
+        return eventRepository.findAllByIsPrivateFalseAndHostNotOrderByDate(user);
     }
 
-    public List<Event> getAllEventsAfterNow() {
-        return eventRepository.findAllByDateAfterOrderByDate(new Date());
+    public List<Event> getAllEventsAfterNow(String host) {
+        User user = userService.getUserByName(host);
+        return eventRepository.findAllByDateAfterAndHostNotOrderByDate(new Date(), user);
     }
 
     public boolean checkIfFinished(Long id) {
@@ -156,16 +159,18 @@ public class EventService {
         userService.saveUser(user);
     }
 
-    public List<Event> getAllPastEvents() {
-        return eventRepository.findAllByDateBefore(new Date());
+    public List<Event> getAllPastEvents(String host) {
+        User user = userService.getUserByName(host);
+        return eventRepository.findAllByDateBeforeAndHostNot(new Date(), user);
     }
 
     public User getHost(Long id) {
         return eventRepository.findById(id).get().getHost();
     }
 
-    public List<Event> getAllPrivateEvents() {
-        return eventRepository.findAllByIsPrivateTrueOrderByDate();
+    public List<Event> getAllPrivateEvents(String host) {
+        User user = userService.getUserByName(host);
+        return eventRepository.findAllByIsPrivateTrueAndHostNotOrderByDate(user);
     }
 
     public List<Event> getAllEventsIfUserIsGuest(String name) {
