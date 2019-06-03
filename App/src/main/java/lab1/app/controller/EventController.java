@@ -101,10 +101,10 @@ public class EventController {
         return eventService.addVote(id, voterName);
     }
 
-    @RequestMapping("/events/sendMail")
-    public void sendMail() throws MessagingException {
-        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Inscripcion", "test", (long) 3, "Mariano");
-    }
+//    @RequestMapping("/events/sendMail")
+//    public void sendMail() throws MessagingException {
+//        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Inscripcion", "test", (long) 3, "Mariano");
+//    }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/events/addUserViaConfirmation/{id}/{guestName}")
     public void addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
