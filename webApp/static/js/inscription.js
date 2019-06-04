@@ -12,7 +12,7 @@ function handleClickViaMail() {
     request.send();
     request.onload = () => {
         if(request.status === 200){
-            console.log("Se agrego")
+            sendToHomePage();
         }
     };
 }
@@ -20,6 +20,18 @@ function handleClickViaMail() {
 function getEventAndGuest() {
     id = getQueryVariable("id");
     guestName = getQueryVariable("username");
+    document.getElementById("guestName").innerText = guestName;
+
+    const url = "http://localhost:8080/events/" + id;
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        document.getElementById("event").innerText = request.response.name;
+    }
 }
 
 function getQueryVariable(variable) {
@@ -32,4 +44,8 @@ function getQueryVariable(variable) {
         }
     }
     return (false);
+}
+
+function handleInscriptionClick() {
+    sendToUserPage(guestName);
 }
