@@ -108,10 +108,10 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addVote")
-    public boolean addVote(Authentication authentication,@PathVariable Long id){
+    public boolean addVote(Authentication authentication,@PathVariable Long id, Long rating){
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String voterName = (String) auth2Authentication.getUserAuthentication().getPrincipal();
-        return eventService.addVote(id, voterName);
+        return eventService.addVote(id, voterName, rating);
     }
 
 //    @RequestMapping("/events/sendMail")
@@ -140,6 +140,11 @@ public class EventController {
     public List<Event> getAllEventsIfUserIsGuest(Authentication authentication){
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String name = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllEventsIfUserIsGuest(name);
+    }
+
+    @RequestMapping("/events/getAllEventsIfUserIsGuest/{name}")
+    public List<Event> getAllEventsIfUserIsGuest(@PathVariable String name){
         return eventService.getAllEventsIfUserIsGuest(name);
     }
 }

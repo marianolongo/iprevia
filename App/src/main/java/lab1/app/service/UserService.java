@@ -51,11 +51,13 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
-    public void incrementScore(Long id) {
+    public void incrementScore(Long id, Long input) {
         User user = getUserById(id);
         Long rating = user.getRating();
+        if (rating == null) rating = 0L;
         Long ratingAmount = user.getRatingAmount();
-        user.setRating(rating + 1);
+        if (ratingAmount == null) ratingAmount = 0L;
+        user.setRating(rating + input);
         user.setRatingAmount(ratingAmount + 1);
         userRepository.save(user);
     }

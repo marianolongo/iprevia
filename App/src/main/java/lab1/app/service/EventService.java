@@ -102,14 +102,14 @@ public class EventService {
         return eventRepository.findById(id).get().didFinish();
     }
 
-    public boolean addVote(Long id, String voterName) {
+    public boolean addVote(Long id, String voterName, Long rating) {
         Event event = eventRepository.findById(id).get();
         User host = event.getHost();
         User voter = userService.getUserByName(voterName);
 
         if(event.getUsers().contains(voter) && !event.getUsersVoted().contains(voter)){
             addVoter(voter, event);
-            userService.incrementScore(host.getId());
+            userService.incrementScore(host.getId(), rating);
             return true;
         }else{
             return false;

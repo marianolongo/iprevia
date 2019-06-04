@@ -40,11 +40,31 @@ function loadDataAndEvent() {
         request3.onload = () => {
             if(request3.response === "true"){
                 const buttonHolder = document.getElementById("button-holder");
+                const form = document.createElement("form");
+                const br = document.createElement("br");
+                buttonHolder.appendChild(br);
+                const text = document.createElement("div");
+                const form2 = document.createElement("form");
+                const label1 = document.createElement("label");
+                label1.class = "event-form";
+                label1.innerText = "Calificar del 1 al 10: ";
+                const input = document.createElement("input");
+                input.class = "event-form";
+                input.type = "text";
+                input.name = "text";
+                input.id = "rating";
+                form2.appendChild(label1);
+                form2.appendChild(input);
+                text.appendChild(form2);
+                form.appendChild(br);
+                form.appendChild(text);
                 const button = document.createElement("button");
-                button.className = "btn btn-danger";
-                button.innerText = "Votar";
+                button.type = "submit";
+                button.class = "btn";
+                button.innerText = "Guardar";
                 button.onclick = () => handleVote();
-                buttonHolder.appendChild(button);
+                form.appendChild(button);
+                buttonHolder.appendChild(form);
             }
         };
 
@@ -144,13 +164,14 @@ function handleAssist(){
 function handleVote(){
 
     const id = getQueryVariable();
+    const input = document.getElementById("rating").value;
     const url = "http://localhost:8080/events/" + id + "/addVote";
     const request = new XMLHttpRequest();
     request.open("PUT", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
-    request.send();
+    request.send(input);
     request.onload = () => {
         console.log(request.response);
         if(request.response === "true"){
@@ -158,7 +179,7 @@ function handleVote(){
         }else{
             document.getElementById("warning-add-vote").innerText = "Usuario ya voto o no fue invitado"
         }
-    }
+    };
 }
 
 function editEvent(){
