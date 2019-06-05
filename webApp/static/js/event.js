@@ -62,7 +62,7 @@ function loadDataAndEvent() {
                 button.type = "submit";
                 button.class = "btn";
                 button.innerText = "Guardar";
-                button.onclick = () => handleVote();
+                button.onclick = () => handleVote(event);
                 form.appendChild(button);
                 buttonHolder.appendChild(form);
             }
@@ -161,13 +161,13 @@ function handleAssist(){
 }
 
 
-function handleVote(){
-
+function handleVote(e){
+    e.preventDefault();
     const id = getQueryVariable();
     const input = document.getElementById("rating").value;
     const url = "http://localhost:8080/events/" + id + "/addVote/" + input;
     const request = new XMLHttpRequest();
-    request.open("PUT", url, true);
+    request.open("POST", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
