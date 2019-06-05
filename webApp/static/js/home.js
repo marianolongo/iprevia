@@ -275,6 +275,8 @@ function searchUsers(e){
     request.send();
     request.onload = () => {
         const htmlList = document.getElementById("publicEvents");
+        const header = document.getElementById("header");
+        header.innerText = "Usuarios encontrados";
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
         }
@@ -332,6 +334,8 @@ function searchEvents(e){
     requestEvent.send();
     requestEvent.onload = () => {
         const htmlList = document.getElementById("publicEvents");
+        const header = document.getElementById("header");
+        header.innerText = "Eventos encontrados";
         eventList = JSON.parse(requestEvent.response);
         while(htmlList.firstChild){
             htmlList.removeChild(htmlList.firstChild)
