@@ -38,34 +38,11 @@ function loadDataAndEvent() {
         request3.setRequestHeader('Accept', 'application/json');
         request3.send();
         request3.onload = () => {
-            if(request3.response === "true"){
-                const buttonHolder = document.getElementById("button-holder");
-                const form = document.createElement("form");
-                const br = document.createElement("br");
-                buttonHolder.appendChild(br);
-                const text = document.createElement("div");
-                const form2 = document.createElement("form");
-                const label1 = document.createElement("label");
-                label1.class = "event-form";
-                label1.innerText = "Calificar del 1 al 5 :";
-                const input = document.createElement("input");
-                input.class = "event-form";
-                input.type = "text";
-                input.name = "text";
-                input.id = "rating";
-                form2.appendChild(label1);
-                form2.appendChild(input);
-                text.appendChild(form2);
-                form.appendChild(br);
-                form.appendChild(text);
-                const button = document.createElement("button");
-                button.type = "submit";
-                button.class += "btn";
-                button.class += " btn-danger";
-                button.innerText = "Guardar";
-                button.onclick = () => handleVote(event);
-                form.appendChild(button);
-                buttonHolder.appendChild(form);
+            if(request3.response === "false"){
+                const dropdown = document.getElementById("dropdown");
+                while (dropdown.firstChild){
+                    dropdown.removeChild(dropdown.firstChild);
+                }
             }
         };
 
@@ -165,7 +142,7 @@ function handleAssist(){
 function handleVote(e){
     e.preventDefault();
     const id = getQueryVariable();
-    const input = document.getElementById("rating").value;
+    const input = document.getElementById("choice-dropdown").innerText;
     const url = "http://localhost:8080/events/" + id + "/addVote/" + input;
     const request = new XMLHttpRequest();
     request.open("POST", url, true);
@@ -176,6 +153,8 @@ function handleVote(e){
     request.onload = () => {
         console.log(request.response);
         if(request.response === "true"){
+            const  choice = document.getElementById("choice-dropdown");
+            choice.innerText = "Elegir Opcion";
             alert("Votacion enviada")
         }else{
             document.getElementById("warning-add-vote").innerText = "Usuario ya voto o no fue invitado"
@@ -213,4 +192,68 @@ function editEvent(){
         request2.send(event);
         location.reload();
     };
+}
+
+function toggleFirstChoice() {
+    const choice2 = document.getElementById("choice-2");
+    choice2.checked = false;
+    const choice3 = document.getElementById("choice-3");
+    choice3.checked = false;
+    const choice4 = document.getElementById("choice-4");
+    choice4.checked = false;
+    const choice5 = document.getElementById("choice-5");
+    choice5.checked = false;
+
+    document.getElementById("choice-dropdown").innerText = "1"
+}
+
+function toggleSecondChoice() {
+    const choice1 = document.getElementById("choice-1");
+    choice1.checked = false;
+    const choice3 = document.getElementById("choice-3");
+    choice3.checked = false;
+    const choice4 = document.getElementById("choice-4");
+    choice4.checked = false;
+    const choice5 = document.getElementById("choice-5");
+    choice5.checked = false;
+
+    document.getElementById("choice-dropdown").innerText = "2"
+}
+
+function toggleThirdChoice() {
+    const choice2 = document.getElementById("choice-2");
+    choice2.checked = false;
+    const choice1 = document.getElementById("choice-1");
+    choice1.checked = false;
+    const choice4 = document.getElementById("choice-4");
+    choice4.checked = false;
+    const choice5 = document.getElementById("choice-5");
+    choice5.checked = false;
+
+    document.getElementById("choice-dropdown").innerText = "3"
+}
+function toggleFourthChoice() {
+    const choice2 = document.getElementById("choice-2");
+    choice2.checked = false;
+    const choice1 = document.getElementById("choice-1");
+    choice1.checked = false;
+    const choice3 = document.getElementById("choice-3");
+    choice3.checked = false;
+    const choice5 = document.getElementById("choice-5");
+    choice5.checked = false;
+
+    document.getElementById("choice-dropdown").innerText = "4"
+}
+
+function toggleFifthChoice() {
+    const choice2 = document.getElementById("choice-2");
+    choice2.checked = false;
+    const choice1 = document.getElementById("choice-1");
+    choice1.checked = false;
+    const choice3 = document.getElementById("choice-3");
+    choice3.checked = false;
+    const choice4 = document.getElementById("choice-4");
+    choice4.checked = false;
+
+    document.getElementById("choice-dropdown").innerText = "5"
 }
