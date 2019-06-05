@@ -58,27 +58,41 @@
                         <div class="row justify-content-center">
                             <button class="btn btn-danger" onclick="handleAssist()">Asistir</button>
                         </div>
-<!--                        <div>-->
-<!--                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
-<!--                                Calificar-->
-<!--                            </button>-->
-<!--                            <div class="collapse" id="collapseExample">-->
-<!--                                <form>-->
-<!--                                    <br>-->
-<!--                                    <div>-->
-<!--                                        <form>-->
-<!--                                            <label class="event-form">Calificar del 1 al 10: </label>-->
-<!--                                            <input class="event-form" type="text" name="text" id="rating">-->
-<!--                                        </form>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <button type="submit" class="btn btn-danger event-form">Guardar</button>-->
-<!--                                </form>-->
-<!--                                <br>-->
-<!--                            </div>-->
-<!--                        </div>-->
                         <div class="row justify-content-center mt-2">
                             <div id="button-holder" class=""></div>
+                        </div>
+                        <div id="dropdown" class="dropdown" style="margin-left: 200px">
+                            <br>
+                            <form class="form-inline">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false" id="choice-dropdown" style="color: white">Elegir Opcion</button>
+                                <div class="dropdown-menu">
+                                    <label>
+                                        <span class="search-filter">1</span>
+                                        <input id="choice-1" type="checkbox" onchange="toggleFirstChoice()"/>
+                                    </label>
+                                    <div class="dropdown-divider"></div>
+                                    <label>
+                                        <span class="search-filter">2</span>
+                                        <input id="choice-2" type="checkbox" onchange="toggleSecondChoice()"/>
+                                    </label>
+                                    <div class="dropdown-divider"></div>
+                                    <label>
+                                        <span class="search-filter">3</span>
+                                        <input id="choice-3" type="checkbox" onchange="toggleThirdChoice()"/>
+                                    </label>
+                                    <div class="dropdown-divider"></div>
+                                    <label>
+                                        <span class="search-filter">4</span>
+                                        <input id="choice-4" type="checkbox" onchange="toggleFourthChoice()"/>
+                                    </label>
+                                    <div class="dropdown-divider"></div>
+                                    <label>
+                                        <span class="search-filter">5</span>
+                                        <input id="choice-5" type="checkbox" onchange="toggleFifthChoice()"/>
+                                    </label>
+                                </div>
+                                <button class="btn btn-danger" type="submit" onclick="handleVote(event)">Calificar</button>
+                            </form>
                         </div>
                         <p style="color: red" id="warning-add-vote"></p>
                     </div>

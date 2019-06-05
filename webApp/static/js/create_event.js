@@ -30,7 +30,7 @@ function loadData() {
             document.getElementById("username").innerText = aux.name;
         };
     }else{
-        location.replace("login.html");
+        location.replace("index.html");
         document.getElementById("message").innerText = "Se necesita hacer login para ver esa pagina";
     }
 }

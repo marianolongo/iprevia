@@ -245,7 +245,7 @@ function loadData() {
             }
         };
     }else{
-        location.replace("login.html");
+        location.replace("index.html");
         document.getElementById("message").innerText = "Se necesita hacer login para ver esa pagina";
     }
 }

@@ -26,7 +26,7 @@ function loadDataForGuest(){
             }
         };
     }else{
-        location.replace("login.html")
+        location.replace("index.html")
     }
 }
 
