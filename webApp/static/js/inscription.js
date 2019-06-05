@@ -30,7 +30,8 @@ function getEventAndGuest() {
     request.setRequestHeader('Accept', 'application/json');
     request.send();
     request.onload = () => {
-        document.getElementById("event").innerText = request.response.name;
+        const aux = JSON.parse(request.response);
+        document.getElementById("event").innerText = aux.name;
     }
 }
 

@@ -67,11 +67,10 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addGuest")
-    public ResponseEntity addGuest(Authentication authentication, @PathVariable Long id) throws MessagingException {
+    public String addGuest(Authentication authentication, @PathVariable Long id) throws MessagingException {
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String guest = (String) auth2Authentication.getUserAuthentication().getPrincipal();
-        eventService.addGuest(id, guest);
-        return ResponseEntity.ok().build();
+        return eventService.addGuest(id, guest);
     }
 
     @RequestMapping("/events/containing/{inputText}")

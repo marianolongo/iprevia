@@ -26,7 +26,7 @@ function loadDataAndEvent() {
             let aux = JSON.parse(request2.response);
             document.getElementById("nombre-evento").innerText = "Nombre del evento: " + aux.name;
             document.getElementById("descripcion-evento").innerText = "Descripcion: " + aux.description;
-            // document.getElementById("creador-evento").innerText = "Creador evento: " + getHostUserById(aux.host_id).name;
+            document.getElementById("creador-evento").innerText = "Creador evento: " + aux.host.name
         };
 
 
@@ -155,7 +155,7 @@ function handleAssist(){
     request.send();
     request.onload = () => {
         if(request.status === 200){
-            alert("Agregado")
+            alert(request.response)
         }
     }
 }

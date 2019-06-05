@@ -51,18 +51,20 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public void addGuest(Long id, String guestName) throws MessagingException {
+    public String addGuest(Long id, String guestName) throws MessagingException {
         Event event = eventRepository.findById(id).get();
         User user = userService.getUserByName(guestName);
         if (event.getUsers().contains(user) || event.getHost().getId().equals(user.getId())) {
-            return; //TODO fijarse que hacer con usuario que ya esta o si es host
+            return "Usuario ya esta inscripto"; //TODO fijarse que hacer con usuario que ya esta o si es host
         }
         if (event.getPrivate()) {
             sendSimpleMessage(event.getHost().getEmail(),
                     "Inscripcion evento " + event.getName() + " de " + guestName
                     , guestName,id, event.getName(), event.getHost().getName());
+            return "Mail enviado";
         } else {
             addUserAndEvent(event, user);
+            return "Usuario agregado";
         }
     }
 
