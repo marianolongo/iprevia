@@ -85,6 +85,6 @@ public class UserService {
 
     public List<User> getAllUsersFromEvent(Long id) {
         Event event = eventRepository.findById(id).get();
-        return userRepository.findAllByEventsAssistedContaining(event);
+        return event.getUsers();
     }
 }
