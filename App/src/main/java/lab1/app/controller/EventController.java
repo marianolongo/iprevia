@@ -107,8 +107,8 @@ public class EventController {
         return eventService.checkIfFinished(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addVote")
-    public boolean addVote(Authentication authentication,@PathVariable Long id, Long rating){
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/addVote/{rating}")
+    public boolean addVote(Authentication authentication,@PathVariable Long id, @PathVariable Long rating){
         OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
         String voterName = (String) auth2Authentication.getUserAuthentication().getPrincipal();
         return eventService.addVote(id, voterName, rating);

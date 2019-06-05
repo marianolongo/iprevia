@@ -165,13 +165,13 @@ function handleVote(){
 
     const id = getQueryVariable();
     const input = document.getElementById("rating").value;
-    const url = "http://localhost:8080/events/" + id + "/addVote";
+    const url = "http://localhost:8080/events/" + id + "/addVote/" + input;
     const request = new XMLHttpRequest();
     request.open("PUT", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
-    request.send(input);
+    request.send();
     request.onload = () => {
         console.log(request.response);
         if(request.response === "true"){
