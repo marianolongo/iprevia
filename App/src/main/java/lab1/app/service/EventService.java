@@ -90,7 +90,7 @@ public class EventService {
 
     public List<Event> getAllPublicEvents(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByIsPrivateFalseAndHostNotOrderByDate(user);
+        return eventRepository.findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(new Date(), user);
     }
 
     public List<Event> getAllEventsAfterNow(String host) {
@@ -170,10 +170,14 @@ public class EventService {
 
     public List<Event> getAllPrivateEvents(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByIsPrivateTrueAndHostNotOrderByDate(user);
+        return eventRepository.findAllByIsPrivateTrueAndDateAfterAndHostNotOrderByDate(new Date(), user);
     }
 
     public List<Event> getAllEventsIfUserIsGuest(String name) {
         return eventRepository.findAllByUsersContaining(userService.getUserByName(name));
+    }
+
+    public List<Event> getAllEventsFromUser(Long id) {
+        return eventRepository.findByHostId(id);
     }
 }

@@ -43,6 +43,11 @@ public class EventController {
         return eventService.getAllEventsFromUser((String) oAuth2Authentication.getUserAuthentication().getPrincipal());
     }
 
+    @RequestMapping("/events/fromUser/{name}")
+    public List<Event> getAllEventsFromUser(@PathVariable String name){
+        return eventService.getAllEventsFromUser(name);
+    }
+
     @RequestMapping("/events/{id}")
     public Event getEvent(@PathVariable Long id){
         return eventService.getEvent(id);

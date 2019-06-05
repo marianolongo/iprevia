@@ -47,7 +47,7 @@ function loadDataAndEvent() {
                 const form2 = document.createElement("form");
                 const label1 = document.createElement("label");
                 label1.class = "event-form";
-                label1.innerText = "Calificar del 1 al 10: ";
+                label1.innerText = "Calificar del 1 al 5 :";
                 const input = document.createElement("input");
                 input.class = "event-form";
                 input.type = "text";
@@ -60,7 +60,8 @@ function loadDataAndEvent() {
                 form.appendChild(text);
                 const button = document.createElement("button");
                 button.type = "submit";
-                button.class = "btn";
+                button.class += "btn";
+                button.class += " btn-danger";
                 button.innerText = "Guardar";
                 button.onclick = () => handleVote(event);
                 form.appendChild(button);
@@ -118,7 +119,7 @@ function loadDataAndEvent() {
             }
         }
     }else{
-        location.replace("login.html");
+        location.replace("index.html");
     }
 }
 function getQueryVariable(variable) {

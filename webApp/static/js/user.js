@@ -30,7 +30,7 @@ function loadDataAndUser(){
             document.getElementById("user-email").innerText = "Mail: "+user.email;
         };
 
-        const url2 = "http://localhost:8080/events/getAllEventsIfUserIsGuest/" + name;
+        const url2 = "http://localhost:8080/events/fromUser/" + name;
         const request2 = new XMLHttpRequest();
         request2.open("GET", url2, true);
         request2.setRequestHeader('Content-Type', 'application/json');
@@ -39,7 +39,7 @@ function loadDataAndUser(){
         request2.send();
         request2.onload = () => {
             const header = document.getElementById("header");
-            header.innerText = "Eventos Asistidos";
+            header.innerText = "Eventos Creados";
             const htmlList = document.getElementById("publicEvents");
             while(htmlList.firstChild){
                 htmlList.removeChild(htmlList.firstChild)
@@ -80,7 +80,7 @@ function loadDataAndUser(){
             }
         };
     }else{
-        location.replace("login.html")
+        location.replace("index.html")
     }
 }
 
