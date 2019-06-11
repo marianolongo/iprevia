@@ -27,7 +27,11 @@ function loadDataAndEvent() {
             document.getElementById("nombre-evento").innerText = "" + aux.name;
             document.getElementById("descripcion-evento").innerText =aux.description;
             document.getElementById("creador-evento").innerText = "Host: " + aux.host.name;
-            document.getElementById("fecha-hora").innerText = aux.date.substr(0,10) +" a las " + aux.date.substr(11,8);
+            if (aux.private === true){
+                document.getElementById("ifPrivate").innerText = "Evento privado";
+            }
+            else { document.getElementById("ifPrivate").innerText = "Evento publico";}
+            document.getElementById("fecha-hora").innerText = aux.date.substr(0,10) +" a las " + aux.date.substr(11,5);
             document.getElementById("nuevo-nombre-evento").value = aux.name;
             document.getElementById("nueva-descripcion-evento").value = aux.description;
             document.getElementById("new-date").value = aux.date.substr(0, 10);
@@ -60,7 +64,7 @@ function loadDataAndEvent() {
         request4.send();
         request4.onload = () => {
             const header = document.getElementById("header");
-            header.innerText = "Usuarios";
+            header.innerText = "Lista de Invitados";
             const htmlList = document.getElementById("publicEvents");
             while(htmlList.firstChild){
                 htmlList.removeChild(htmlList.firstChild)
