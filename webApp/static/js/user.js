@@ -26,8 +26,13 @@ function loadDataAndUser(){
         requestUser.onload = () => {
             const user = JSON.parse(requestUser.response);
             console.log(request.response);
-            document.getElementById("user-name").innerText = "Nombre de Usuario: "+user.name;
-            document.getElementById("user-email").innerText = "Mail: "+user.email;
+            document.getElementById("user-name").innerText = "Nombre de Usuario: " + user.name;
+            document.getElementById("user-email").innerText = "Mail: " + user.email;
+            if(user.ratingAmount === 0){
+                document.getElementById("rating").innerText = "Calificacion: " + 0;
+            }else{
+                document.getElementById("rating").innerText = "Calificacion: " + user.rating / user.ratingAmount;
+            }
         };
 
         const url2 = "http://localhost:8080/events/fromUser/" + name;
