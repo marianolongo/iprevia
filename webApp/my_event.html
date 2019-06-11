@@ -49,12 +49,10 @@
                 <div class="row">
                     <div class="container">
                         <br>
-                        <p id="nombre-evento" class="color-white"></p>
+                        <h2 id="nombre-evento" class="color-white"></h2>
+                        <i id="descripcion-evento" class="color-white"></i>
+                        <p id="creador-evento" class="color-white"></p>
                         <br>
-                        <p id="descripcion-evento" class="color-white"></p>
-                        <br>
-                        <!--                        <p id="creador-evento" class="color-white"></p>-->
-                        <!--                        <br>-->
                         <div>
                             <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                 Editar Evento
@@ -63,11 +61,11 @@
                                 <form>
                                     <br>
                                     <div class="form-group">
-                                        <label class="event-form" for="nuevo-nombre-evento">Nuevo Nombre del Evento</label>
+                                        <label class="event-form" for="nuevo-nombre-evento" id="new-name">Nuevo Nombre del evento</label>
                                         <input type="text" class="form-control event-form" id="nuevo-nombre-evento" placeholder="Nombre del evento">
                                     </div>
                                     <div class="form-group">
-                                        <label class="event-form" for="nueva-descripcion-evento">Nueva Descripcion evento</label>
+                                        <label class="event-form" for="nueva-descripcion-evento">Nueva Descripcion del evento</label>
                                         <textarea class="form-control event-form" id="nueva-descripcion-evento" placeholder="Descripcion evento"></textarea>
                                     </div>
                                     <div>
@@ -84,7 +82,7 @@
                                         </form>
                                     </div>
                                     <div class="form-check event-form">
-                                        <input type="checkbox" class="form-check-input" id="new-privateEvent">
+                                        <input type="checkbox" class="form-check-input" id="new-privateEvent" value="true">
                                         <label class="form-check-label" for="new-privateEvent">Privado</label>
                                     </div>
                                     <button type="submit" onclick="editEvent()" class="btn btn-danger event-form">Guardar</button>

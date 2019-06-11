@@ -24,9 +24,14 @@ function loadDataAndEvent() {
         request2.send();
         request2.onload = () => {
             let aux = JSON.parse(request2.response);
-            document.getElementById("nombre-evento").innerText = aux.name;
-            document.getElementById("descripcion-evento").innerText = aux.description;
-            document.getElementById("creador-evento").innerText = "Host: " + aux.host.name
+            document.getElementById("nombre-evento").innerText = "" + aux.name;
+            document.getElementById("descripcion-evento").innerText =aux.description;
+            document.getElementById("creador-evento").innerText = "Host: " + aux.host.name;
+            document.getElementById("fecha-hora").innerText = aux.date.substr(0,10) +" a las " + aux.date.substr(11,8);
+            document.getElementById("nuevo-nombre-evento").value = aux.name;
+            document.getElementById("nueva-descripcion-evento").value = aux.description;
+            document.getElementById("new-date").value = aux.date.substr(0, 10);
+            document.getElementById("new-timeInput").value = aux.date.substr(11, 8);
         };
 
 
