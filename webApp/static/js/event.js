@@ -27,7 +27,7 @@ function loadDataAndEvent() {
             document.getElementById("nombre-evento").innerText = "" + aux.name;
             document.getElementById("descripcion-evento").innerText =aux.description;
             document.getElementById("creador-evento").innerText = "Host: " + aux.host.name;
-            if (aux.isPrivate === true){
+            if (aux.private === true){
                 document.getElementById("ifPrivate").innerText = "Evento privado";
             }
             else { document.getElementById("ifPrivate").innerText = "Evento publico";}
@@ -64,7 +64,7 @@ function loadDataAndEvent() {
         request4.send();
         request4.onload = () => {
             const header = document.getElementById("header");
-            header.innerText = "Usuarios";
+            header.innerText = "Lista de Invitados";
             const htmlList = document.getElementById("publicEvents");
             while(htmlList.firstChild){
                 htmlList.removeChild(htmlList.firstChild)
