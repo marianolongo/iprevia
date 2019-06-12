@@ -61,7 +61,7 @@ public class EventController {
         eventService.addEvent(event);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/events/{userId}/events/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}")
     public void updateEvent(@RequestBody Event event, @PathVariable Long id){
         Event oldEvent = getEvent(id);
         oldEvent.setDate(event.getDate());
