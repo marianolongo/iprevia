@@ -433,15 +433,15 @@ function searchEvents(e){
 // }
 
 function sendToUserPage(name){
-    location.replace("http://localhost:63342/iprevia/webApp/user.html?name=" + name);
+    location.replace("user.html?name=" + name);
 }
 
 function sendToEventPage(id){
-    location.replace("http://localhost:63342/iprevia/webApp/event.html?id=" + id);
+    location.replace("event.html?id=" + id);
 }
 
 function sendToMyEventPage(id){
-    location.replace("http://localhost:63342/iprevia/webApp/my_event.html?id=" + id);
+    location.replace("my_event.html?id=" + id);
 }
 
 function sendToHomePage(){

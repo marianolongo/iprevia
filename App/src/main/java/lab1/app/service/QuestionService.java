@@ -5,6 +5,8 @@ import lab1.app.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionService {
 
@@ -16,7 +18,13 @@ public class QuestionService {
     }
 
 
-    public void addQuestion(Question question) {
+    public void addQuestion(Question question, Long id, String author) {
+        question.setEventId(id);
+        question.setAuthor(author);
         questionRepository.save(question);
+    }
+
+    public List<Question> getAllQuestionsFromEvent(Long id) {
+        return questionRepository.findAllByEventId(id);
     }
 }

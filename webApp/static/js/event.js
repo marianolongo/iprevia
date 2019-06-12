@@ -103,6 +103,38 @@ function loadDataAndEvent() {
                 htmlList.appendChild(br);
                 k = k + 4;
             }
+
+            const url5 = "http://localhost:8080/questions/" + id + "/getAllQuestionsFromEvent";
+            const request5 = new XMLHttpRequest();
+            request5.open("GET", url5, true);
+            request5.setRequestHeader('Content-Type', 'application/json');
+            request5.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+            request5.setRequestHeader('Accept', 'application/json');
+            request5.send();
+            request5.onload = () => {
+                const questionList = JSON.parse(request5.response);
+                const forum = document.getElementById("forum");
+                for (let i = 0; i < questionList.length; i++){
+                    const question = questionList[i];
+                    const aux = document.createElement("li");
+                    aux.className = "commentList customBorderBottom mt-2";
+
+                    const commentText = document.createElement("div");
+                    commentText.className = "commentText color-white";
+                    const author = document.createElement("a");
+                    author.className = "sub-text";
+                    author.innerText = question.author;
+                    author.onclick = () => sendToUserPage(question.author);
+                    const p = document.createElement("p");
+                    p.innerText = question.description;
+
+                    commentText.appendChild(p);
+                    commentText.appendChild(author);
+
+                    aux.appendChild(commentText);
+                    forum.appendChild(aux);
+                }
+            }
         }
     }else{
         location.replace("index.html");
@@ -265,4 +297,55 @@ function toggleFifthChoice() {
     choice4.checked = false;
 
     document.getElementById("choice-dropdown").innerText = "5"
+}
+
+
+function _getAllComments() {
+
+    const url5 = "http://localhost:8080/questions/" + id + "/getAllQuestionsFromEvent";
+    const request5 = new XMLHttpRequest();
+    request5.open("GET", url5, true);
+    request5.setRequestHeader('Content-Type', 'application/json');
+    request5.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request5.setRequestHeader('Accept', 'application/json');
+    request5.send();
+    request5.onload = () => {
+        const questionList = JSON.parse(request5.response);
+        const forum = document.getElementById("forum");
+        for (let i = 0; i < questionList.length; i++){
+            const question = questionList[i];
+            const aux = document.createElement("li");
+            aux.className = "commentList";
+
+            const commentText = document.createElement("div");
+            commentText.className = "commentText color-white";
+            const author = document.createElement("a");
+            author.className = "sub-text";
+            author.innerText = question.author;
+            author.onclick = () => sendToUserPage(question.author);
+            const p = document.createElement("p");
+            p.innerText = question.description;
+
+            commentText.appendChild(p);
+            commentText.appendChild(author);
+
+            aux.appendChild(commentText);
+            forum.appendChild(aux);
+        }
+    }
+}
+function addComment(e) {
+    e.preventDefault();
+    const id = getQueryVariable();
+    const url = "http://localhost:8080/questions/" + id + "/addQuestion";
+    const input = document.getElementById("commentInput").value
+    const comment = JSON.stringify({description: input});
+    const request = new XMLHttpRequest();
+    request.open("POST", url, false);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send(comment);
+
+    location.reload();
 }
