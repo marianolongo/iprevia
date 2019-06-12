@@ -9,8 +9,8 @@ function loadDataAndEvent() {
         request.setRequestHeader('Accept', 'application/json');
         request.send();
         request.onload = () => {
-            let aux = JSON.parse(request.response);
-            document.getElementById("username").innerText = aux.name;
+            let userAux = JSON.parse(request.response);
+            document.getElementById("username").innerText = userAux.name;
         };
 
         const id = getQueryVariable(window.location.href);
@@ -23,21 +23,23 @@ function loadDataAndEvent() {
         request2.setRequestHeader('Accept', 'application/json');
         request2.send();
         request2.onload = () => {
-            let aux = JSON.parse(request2.response);
-            document.getElementById("nombre-evento").innerText = "" + aux.name;
-            document.getElementById("descripcion-evento").innerText =aux.description;
-            document.getElementById("creador-evento").innerText = "Host: " + aux.host.name;
-            if (aux.private === true){
+            let eventAux = JSON.parse(request2.response);
+            document.getElementById("nombre-evento").innerText = "" + eventAux.name;
+            document.getElementById("descripcion-evento").innerText =eventAux.description;
+            document.getElementById("creador-evento").innerText = "Host: " + eventAux.host.name;
+            if (eventAux.private === true){
                 document.getElementById("ifPrivate").innerText = "Evento privado";
             }
             else { document.getElementById("ifPrivate").innerText = "Evento publico";}
-            document.getElementById("fecha-hora").innerText = aux.date.substr(0,10) +" a las " + aux.date.substr(11,5);
-            document.getElementById("nuevo-nombre-evento").value = aux.name;
-            document.getElementById("nueva-descripcion-evento").value = aux.description;
-            document.getElementById("new-date").value = aux.date.substr(0, 10);
-            document.getElementById("new-timeInput").value = aux.date.substr(11, 8);
+            document.getElementById("fecha-hora").innerText = eventAux.date.substr(0,10) +" a las " + eventAux.date.substr(11,5);
+            document.getElementById("nuevo-nombre-evento").value = eventAux.name;
+            document.getElementById("nueva-descripcion-evento").value = eventAux.description;
+            document.getElementById("new-date").value = eventAux.date.substr(0, 10);
+            document.getElementById("new-timeInput").value = eventAux.date.substr(11, 8);
+            if (eventAux.private === true){
+                document.getElementById("new-privateEvent").checked = true;
+            }
         };
-
 
         const url3 = "http://localhost:8080/events/" + id + "/checkDidFinished";
         const request3 = new XMLHttpRequest();
@@ -47,7 +49,7 @@ function loadDataAndEvent() {
         request3.setRequestHeader('Accept', 'application/json');
         request3.send();
         request3.onload = () => {
-            if(request3.response === "false"){
+            if(request3.response === "false" && document.getElementById("dropdown") !== null){
                 const dropdown = document.getElementById("dropdown");
                 while (dropdown.firstChild){
                     dropdown.removeChild(dropdown.firstChild);
@@ -204,35 +206,24 @@ function handleVote(e){
 }
 
 function editEvent(){
-    const url = "http://localhost:8080/getUser";
-    const request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    request.setRequestHeader('Accept', 'application/json');
-    request.send();
-    request.onload = () => {
-        let aux = JSON.parse(request.response);
-        const userId = aux.id;
-        const id = getQueryVariable(window.location.href);
+    const id = getQueryVariable(window.location.href);
 
-        const name = document.getElementById("nuevo-nombre-evento").value;
-        const description = document.getElementById("nueva-descripcion-evento").value;
-        const isPrivate = document.getElementById("new-privateEvent").checked;
-        const date = document.getElementById("new-date").value;
-        const time =  document.getElementById("new-timeInput").value;
-        const dateAndTime = date + "T" + time + ":00.000Z";
-        const event = JSON.stringify({"name": name, "description": description, "date": dateAndTime, "isPrivate": isPrivate === true});
+    const name = document.getElementById("nuevo-nombre-evento").value;
+    const description = document.getElementById("nueva-descripcion-evento").value;
+    const isPrivate = document.getElementById("new-privateEvent").checked;
+    const date = document.getElementById("new-date").value;
+    const time =  document.getElementById("new-timeInput").value;
+    const dateAndTime = date + "T" + time + ".000Z";
+    const event = JSON.stringify({"name": name, "description": description, "date": dateAndTime, "isPrivate": isPrivate === true});
 
-        const url2 = "http://localhost:8080/events/" + userId + "/events/" + id;
-        const request2 = new XMLHttpRequest();
-        request2.open("PUT", url2, true);
-        request2.setRequestHeader('Content-Type', 'application/json');
-        request2.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-        request2.setRequestHeader('Accept', 'application/json');
-        request2.send(event);
-        location.reload();
-    };
+    const url2 = "http://localhost:8080/events/" + id;
+    const request2 = new XMLHttpRequest();
+    request2.open('PUT', url2, true);
+    request2.setRequestHeader('Content-Type', 'application/json');
+    request2.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request2.setRequestHeader('Accept', 'application/json');
+    request2.send(event);
+    location.reload();
 }
 
 function toggleFirstChoice() {

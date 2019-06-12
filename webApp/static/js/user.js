@@ -26,12 +26,13 @@ function loadDataAndUser(){
         requestUser.onload = () => {
             const user = JSON.parse(requestUser.response);
             console.log(request.response);
-            document.getElementById("user-name").innerText = "Nombre de Usuario: " + user.name;
-            document.getElementById("user-email").innerText = "Mail: " + user.email;
+            document.getElementById("user-name").innerText = user.name;
+            document.getElementById("user-email").innerText = user.email;
+            const aux = document.getElementById("rating").innerText;
             if(user.ratingAmount === 0){
-                document.getElementById("rating").innerText = "Calificacion: " + 0;
+                document.getElementById("rating").innerText = "Calificacion: " + 0 +aux;
             }else{
-                document.getElementById("rating").innerText = "Calificacion: " + user.rating / user.ratingAmount;
+                document.getElementById("rating").innerText = "Calificacion: " + user.rating / user.ratingAmount + aux;
             }
         };
 
