@@ -32,7 +32,7 @@ function loadDataAndUser(){
             if(user.ratingAmount === 0){
                 document.getElementById("rating").innerText = "Calificacion: " + 0 +aux;
             }else{
-                document.getElementById("rating").innerText = "Calificacion: " + user.rating / user.ratingAmount + aux;
+                document.getElementById("rating").innerText = "Calificacion: " + (user.rating / user.ratingAmount).toString().substr(0,3) + aux;
             }
         };
 

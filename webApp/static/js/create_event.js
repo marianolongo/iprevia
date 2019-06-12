@@ -13,7 +13,10 @@ function crearEvento(){
     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
     request.setRequestHeader('Accept', 'application/json');
     request.send(event);
-    location.replace("home.html")
+    request.onload = () => {
+        let aux = JSON.parse(request.response);
+        location.replace("my_event.html?id=" + aux.id);
+    }
 }
 
 function loadData() {
