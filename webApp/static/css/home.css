@@ -119,6 +119,10 @@ a{
     border-bottom: 1px solid white;
 }
 
+.customBorderBottomBlack{
+    border-bottom: 1px solid black;
+}
+
 .customBorderLeft{
     border-left: 1px solid white;
 }

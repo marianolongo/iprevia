@@ -119,10 +119,10 @@ function loadDataAndEvent() {
                 for (let i = 0; i < questionList.length; i++){
                     const question = questionList[i];
                     const aux = document.createElement("li");
-                    aux.className = "commentList customBorderBottom mt-2";
+                    aux.className = "commentList customBorderBottomBlack mt-2";
 
                     const commentText = document.createElement("div");
-                    commentText.className = "commentText color-white";
+                    commentText.className = "commentText";
                     const author = document.createElement("a");
                     author.className = "sub-text";
                     author.innerText = question.author;

@@ -45,7 +45,7 @@ function loadDataAndUser(){
         request2.send();
         request2.onload = () => {
             const header = document.getElementById("header");
-            header.innerText = "Eventos Creados";
+            header.innerText = "Sus eventos";
             const htmlList = document.getElementById("publicEvents");
             while(htmlList.firstChild){
                 htmlList.removeChild(htmlList.firstChild)
