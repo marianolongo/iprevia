@@ -32,10 +32,12 @@ function loadDataAndEvent() {
             }
             else { document.getElementById("ifPrivate").innerText = "Evento publico";}
             document.getElementById("fecha-hora").innerText = eventAux.date.substr(0,10) +" a las " + eventAux.date.substr(11,5);
-            document.getElementById("nuevo-nombre-evento").value = eventAux.name;
-            document.getElementById("nueva-descripcion-evento").value = eventAux.description;
-            document.getElementById("new-date").value = eventAux.date.substr(0, 10);
-            document.getElementById("new-timeInput").value = eventAux.date.substr(11, 8);
+            if (document.getElementById("nuevo-nombre-evento") !== null) {
+                document.getElementById("nuevo-nombre-evento").value = eventAux.name;
+                document.getElementById("nueva-descripcion-evento").value = eventAux.description;
+                document.getElementById("new-date").value = eventAux.date.substr(0, 10);
+                document.getElementById("new-timeInput").value = eventAux.date.substr(11, 8);
+            }
             if (eventAux.private === true){
                 document.getElementById("new-privateEvent").checked = true;
             }
@@ -50,19 +52,22 @@ function loadDataAndEvent() {
         request3.send();
         request3.onload = () => {
             if(request3.response === "false"){
-                const editButtonHolder = document.getElementById("edit-button-holder");
+                if (document.getElementById("edit-button-holder") !== null) {
+                    const editButtonHolder = document.getElementById("edit-button-holder");
 
-                const editButton = document.createElement("button");
-                editButton.innerText = "Editar Evento";
-                editButton.className = "btn btn-danger";
-                editButton.dataset.toggle = "collapse";
-                editButton.dataset.target = "#collapseExample";
+                    const editButton = document.createElement("button");
+                    editButton.innerText = "Editar Evento";
+                    editButton.className = "btn btn-danger";
+                    editButton.dataset.toggle = "collapse";
+                    editButton.dataset.target = "#collapseExample";
 
-                editButtonHolder.appendChild(editButton);
-
+                    editButtonHolder.appendChild(editButton);
+                }
                 const dropdown = document.getElementById("dropdown");
-                while (dropdown.firstChild){
-                    dropdown.removeChild(dropdown.firstChild);
+                if (dropdown !== null) {
+                    while (dropdown.firstChild) {
+                        dropdown.removeChild(dropdown.firstChild);
+                    }
                 }
             }else {
 
