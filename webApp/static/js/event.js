@@ -49,11 +49,23 @@ function loadDataAndEvent() {
         request3.setRequestHeader('Accept', 'application/json');
         request3.send();
         request3.onload = () => {
-            if(request3.response === "false" && document.getElementById("dropdown") !== null){
+            if(request3.response === "false"){
+                const editButtonHolder = document.getElementById("edit-button-holder");
+
+                const editButton = document.createElement("button");
+                editButton.innerText = "Editar Evento";
+                editButton.className = "btn btn-danger";
+                editButton.dataset.toggle = "collapse";
+                editButton.dataset.target = "#collapseExample";
+
+                editButtonHolder.appendChild(editButton);
+
                 const dropdown = document.getElementById("dropdown");
                 while (dropdown.firstChild){
                     dropdown.removeChild(dropdown.firstChild);
                 }
+            }else {
+
             }
         };
 
@@ -176,7 +188,7 @@ function handleAssist(){
     request.send();
     request.onload = () => {
         if(request.status === 200){
-            alert(request.response)
+            document.getElementById("assistMessage").innerText = request.response;
         }
     }
 }

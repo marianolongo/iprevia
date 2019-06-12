@@ -54,8 +54,11 @@ public class EventService {
     public String addGuest(Long id, String guestName) throws MessagingException {
         Event event = eventRepository.findById(id).get();
         User user = userService.getUserByName(guestName);
+        if(event.getDate().compareTo(new Date()) < 0){
+            return "Evento ya finalizo, no es posible realizar la asistencia";
+        }
         if (event.getUsers().contains(user) || event.getHost().getId().equals(user.getId())) {
-            return "Usuario ya esta inscripto"; //TODO fijarse que hacer con usuario que ya esta o si es host
+            return "Usuario ya esta inscripto";
         }
         if (event.getPrivate()) {
             sendSimpleMessage(event.getHost().getEmail(),
