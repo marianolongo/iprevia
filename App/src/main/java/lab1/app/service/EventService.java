@@ -77,7 +77,7 @@ public class EventService {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         String htmlMsg = "";
         htmlMsg = "El usuario " + guestName + " desea participar del evento " + name + " , has click " +
-                "<a href=\"http://localhost:63342/iprevia/webApp/login.html?"
+                "<a href=\"http://localhost:63343/iprevia/webApp/login.html?"
                 + "username=" + guestName
                 + "&id=" + id
                 + "\">aqui</a>"
