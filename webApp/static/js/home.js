@@ -37,11 +37,7 @@ function getUsers(){
                 const title = document.createElement("h6");
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
-                const mail = document.createElement("p");
-                mail.innerText = eventList[i].email;
-                mail.className = "card-text";
                 cardBody.appendChild(title);
-                cardBody.appendChild(mail);
                 card.appendChild(cardBody);
                 col.appendChild(card);
                 row.appendChild(col);
@@ -303,11 +299,7 @@ function searchUsers(e){
                 const title = document.createElement("h6");
                 title.className = "card-title";
                 title.innerText = userList[i].name;
-                const mail = document.createElement("p");
-                mail.innerText = userList[i].email;
-                mail.className = "card-text";
                 cardBody.appendChild(title);
-                cardBody.appendChild(mail);
                 card.appendChild(cardBody);
                 col.appendChild(card);
                 row.appendChild(col);
@@ -722,11 +714,7 @@ function getMostVotedUsers() {
                 const title = document.createElement("h6");
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
-                const mail = document.createElement("p");
-                mail.innerText = eventList[i].email;
-                mail.className = "card-text";
                 cardBody.appendChild(title);
-                cardBody.appendChild(mail);
                 card.appendChild(cardBody);
                 col.appendChild(card);
                 row.appendChild(col);
