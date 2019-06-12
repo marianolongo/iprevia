@@ -95,7 +95,7 @@ function getEvents() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -153,7 +153,7 @@ function getAllEventsAfterNow() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -229,7 +229,7 @@ function loadData() {
                     title.className = "card-title";
                     title.innerText = eventList[i].name;
                     const desc = document.createElement("p");
-                    desc.innerText = eventList[i].description;
+                    desc.innerText = eventList[i].host.name;
                     desc.className = "card-text";
                     cardBody.appendChild(title);
                     cardBody.appendChild(desc);
@@ -363,7 +363,7 @@ function searchEvents(e){
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -487,7 +487,7 @@ function getAllPrivateEvents() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -543,7 +543,7 @@ function getAllPublicEvents() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -599,7 +599,7 @@ function getAllPastEvents() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -655,7 +655,7 @@ function getMyEvents(){
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
@@ -779,7 +779,7 @@ function getAllEventsAssisted() {
                 title.className = "card-title";
                 title.innerText = eventList[i].name;
                 const desc = document.createElement("p");
-                desc.innerText = eventList[i].description;
+                desc.innerText = eventList[i].host.name;
                 desc.className = "card-text";
                 cardBody.appendChild(title);
                 cardBody.appendChild(desc);
