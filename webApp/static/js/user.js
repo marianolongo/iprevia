@@ -52,10 +52,11 @@ function loadDataAndUser(){
             }
             const eventList = JSON.parse(request2.response);
             let k = 0;
+            let i = 0;
             while (k < eventList.length) {
                 const row = document.createElement("div");
                 row.className = "row";
-                let i = k;
+                i = k;
                 while (i < k + 4 && i < eventList.length) {
                     const col = document.createElement("div");
                     col.className = "col-md-3";
@@ -84,6 +85,8 @@ function loadDataAndUser(){
                 htmlList.appendChild(br);
                 k = k + 4;
             }
+            let txt = document.getElementById("creados").innerText;
+            document.getElementById("creados").innerText = i + " " + txt;
         };
     }else{
         location.replace("index.html")
