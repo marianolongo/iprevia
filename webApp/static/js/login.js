@@ -32,7 +32,7 @@ function loginForInscription() {
         request.onload = () => {
             if(request.status === 200){
                 if(JSON.parse(request.response).name === document.getElementById("username").value){
-                    location.replace("http://localhost:63342/iprevia/webApp/inscription.html?" +
+                    location.replace("inscription.html?" +
                         "username=" + getQueryVariable("username")
                         + "&id=" + id);
                 }else {
