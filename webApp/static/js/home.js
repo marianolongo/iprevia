@@ -1,3 +1,5 @@
+let lat = 0;
+let lng = 0;
 
 function getUsers(){
     const url = "http://localhost:8080/users";
@@ -178,6 +180,7 @@ function signOut() {
 
 function loadData() {
     if(window.sessionStorage.token !== undefined){
+        getCoordinates();
         const url = "http://localhost:8080/getUser";
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
@@ -782,4 +785,78 @@ function getAllEventsAssisted() {
             k = k + 4;
         }
     };
+}
+
+function showMap() {
+    const header = document.getElementById("header");
+    header.innerText = "Mapa";
+    const mapHolder = document.getElementById("publicEvents");
+    while(mapHolder.firstChild){
+        mapHolder.removeChild(mapHolder.firstChild)
+    }
+    const map = document.createElement("div");
+    map.setAttribute("id", "event-map");
+    map.style.height = "100%";
+    map.style.width = "100%";
+    mapHolder.appendChild(map);
+
+    const mymap = L.map('event-map').setView([lat, lng], 11);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiaXByZXZpYSIsImEiOiJjanh3Yjc2YzUwN29lM2xuejNkNDF5dGY2In0.a8Vz_n910YlMtq7xx7G3nA'
+    }).addTo(mymap);
+
+    let searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
+
+    let results = L.layerGroup().addTo(mymap);
+
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (let i = data.results.length - 1; i >= 0; i--) {}
+    });
+
+    const eventsLayer = L.layerGroup().addTo(mymap);
+    const url = "http://localhost:8080/events";
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.send();
+    request.onload = () => {
+        const events = JSON.parse(request.response);
+
+        events.forEach((event) => {
+            if (event.latitude || event.latitude === null) {
+                const icon = L.AwesomeMarkers.icon({
+                    markerColor: event.private ? '#D22020' : "green"
+                });
+                L.marker([event.latitude, event.longitude], {icon: icon}).addTo(eventsLayer).bindTooltip(
+                    "<div>" +
+                    "<div>" +
+                    "<p>" + "Evento: " + event.name + "</p>" +
+                    "<p>" + "Host: " + event.host.name + "</p>" +
+                    "</div>" +
+                    "</div>",
+                    {permanent: false, direction: "top", offset: [0, -30]}
+                ).on("click", () => {
+                    sendToEventPage(event.id)
+                });
+            }
+        })
+    }
+
+}
+
+function getCoordinates(){
+    navigator.geolocation.getCurrentPosition((position) => {
+        const coordinates = position.coords;
+        lat = coordinates.latitude;
+        lng = coordinates.longitude;
+    }, () => {
+        lat = -20;
+        lng = -20;
+    });
 }

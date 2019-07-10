@@ -2,6 +2,7 @@ package lab1.app.model;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,10 @@ public class Event {
     private Boolean isPrivate;
     private Date dateCreated;
     private Date date;
+    private Double latitude;
+    private Double longitude;
 
-    public Event(List<User> users, List<User> usersVoted, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date) {
+    public Event(List<User> users, List<User> usersVoted, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date, Double latitude, Double longitude) {
         this.users = users;
         this.usersVoted = usersVoted;
         this.host = host;
@@ -35,6 +38,8 @@ public class Event {
         this.isPrivate = isPrivate;
         this.dateCreated = dateCreated;
         this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Event() {
@@ -76,6 +81,14 @@ public class Event {
         return date;
     }
 
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
     public void setUsers(List<User> user) {
         this.users = user;
     }
@@ -111,6 +124,14 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Boolean didFinish(){
