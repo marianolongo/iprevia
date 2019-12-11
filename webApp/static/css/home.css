@@ -1,6 +1,7 @@
 
-body{
-    background: url("../images/background.jpg") ;
+body {
+    /*background: url("../images/background.jpg") ;*/
+    background: #444444;
 }
 
 h1{
@@ -191,14 +192,20 @@ a{
 .commenterImage img {
     width:100%;
     border-radius:50%;
+    border: 1px grey
 }
 .commentText p {
     margin:0;
+}
+
+.commentText .commentDate{
+    font-size: 9px;
 }
 .sub-text {
     color:#aaa;
     font-family:verdana;
     font-size:11px;
+    font-weight: bold;
 }
 .actionBox {
     border-top:1px dotted #bbb;

@@ -818,7 +818,7 @@ function showMap() {
     });
 
     const eventsLayer = L.layerGroup().addTo(mymap);
-    const url = "http://localhost:8080/events";
+    const url = "http://localhost:8080/events/afterNow";
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.setRequestHeader('Content-Type', 'application/json');

@@ -136,7 +136,7 @@ function loadDataAndEvent() {
                 for (let i = 0; i < questionList.length; i++){
                     const question = questionList[i];
                     const aux = document.createElement("li");
-                    aux.className = "commentList customBorderBottomBlack mt-2";
+                    aux.className = "commentList mt-2";
 
                     const commentText = document.createElement("div");
                     commentText.className = "commentText";
@@ -144,12 +144,25 @@ function loadDataAndEvent() {
                     author.className = "sub-text";
                     author.innerText = question.author;
                     author.onclick = () => sendToUserPage(question.author);
+
+                    const date = document.createElement("p");
+                    date.innerText = timeago.format(question.date, 'en_US', new Date());
+                    date.className = "commentDate";
                     const p = document.createElement("p");
                     p.innerText = question.description;
 
-                    commentText.appendChild(p);
                     commentText.appendChild(author);
+                    commentText.appendChild(p);
+                    commentText.appendChild(date);
 
+                    const commenterImage = document.createElement('div');
+                    commenterImage.className = 'commenterImage';
+                    const img = document.createElement("img");
+                    img.id = question.author + "-" + "image";
+                    img.setAttribute('src', 'static/images/profile-img.jpg');
+
+                    commenterImage.appendChild(img);
+                    aux.appendChild(commenterImage);
                     aux.appendChild(commentText);
                     forum.appendChild(aux);
                 }
@@ -168,18 +181,6 @@ function getQueryVariable(variable) {
     }
     return (false);
 }
-
-// function getHostUserById(id){
-//     const url = "http://localhost:8080/users/" + id;
-//     const request = new XMLHttpRequest();
-//     request.open("GET", url, true);
-//     request.setRequestHeader('Content-Type', 'application/json');
-//     request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-//     request.setRequestHeader('Accept', 'application/json');
-//     request.send();
-//     return request.response;
-// }
-
 
 function handleAssist(){
 

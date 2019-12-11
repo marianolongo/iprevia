@@ -5,6 +5,7 @@ import lab1.app.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class QuestionService {
     public void addQuestion(Question question, Long id, String author) {
         question.setEventId(id);
         question.setAuthor(author);
+        question.setDate(new Date());
         questionRepository.save(question);
     }
 
