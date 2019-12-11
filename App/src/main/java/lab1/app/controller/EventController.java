@@ -59,7 +59,7 @@ public class EventController {
     public Event addEvent(Authentication authentication, @RequestBody Event event){
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
         event.setHost(userService.getUserByName((String) oAuth2Authentication.getUserAuthentication().getPrincipal()));
-        event.setDateCreated(new Date());
+        event.setDateCreated(new Date().getTime());
         eventService.addEvent(event);
         return event;
     }

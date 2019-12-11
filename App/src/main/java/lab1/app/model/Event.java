@@ -24,12 +24,12 @@ public class Event {
     private String name;
     private String description;
     private Boolean isPrivate;
-    private Date dateCreated;
-    private Date date;
+    private Long dateCreated;
+    private Long date;
     private Double latitude;
     private Double longitude;
 
-    public Event(List<User> users, List<User> usersVoted, User host, String name, String description, Boolean isPrivate, Date dateCreated, Date date, Double latitude, Double longitude) {
+    public Event(List<User> users, List<User> usersVoted, User host, String name, String description, Boolean isPrivate, Long dateCreated, Long date, Double latitude, Double longitude) {
         this.users = users;
         this.usersVoted = usersVoted;
         this.host = host;
@@ -73,11 +73,11 @@ public class Event {
         return isPrivate;
     }
 
-    public Date getDateCreated() {
+    public Long getDateCreated() {
         return dateCreated;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
@@ -118,11 +118,11 @@ public class Event {
     }
 
     public void setIsPrivate(Boolean isPrivate){this.isPrivate = isPrivate;}
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(Long dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
@@ -135,6 +135,6 @@ public class Event {
     }
 
     public Boolean didFinish(){
-        return date.compareTo(new Date()) < 0;
+        return date - new Date().getTime() < 0;
     }
 }
