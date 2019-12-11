@@ -9,18 +9,30 @@ function crearEvento(){
     const dateAndTime = date + "T" + time + ":00.000Z";
     const latitude = document.getElementById("lat").innerText;
     const longitude = document.getElementById("lng").innerText;
-    console.log(latitude);
-    console.log(longitude);
-    const event = JSON.stringify({"name": name, "description": description, "date": dateAndTime, "isPrivate": isPrivate === true, latitude, longitude});
-    const request = new XMLHttpRequest();
-    request.open("POST", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
-    request.setRequestHeader('Accept', 'application/json');
-    request.send(event);
-    request.onload = () => {
-        let aux = JSON.parse(request.response);
-        location.replace("my_event.html?id=" + aux.id);
+    if (name !== "" && description !== "" && dateAndTime !== "" && latitude !== "" && longitude !== "") {
+        console.log(latitude);
+        console.log(longitude);
+        const event = JSON.stringify({
+            "name": name,
+            "description": description,
+            "date": dateAndTime,
+            "isPrivate": isPrivate === true,
+            latitude,
+            longitude
+        });
+        const request = new XMLHttpRequest();
+        request.open("POST", url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+        request.setRequestHeader('Accept', 'application/json');
+        request.send(event);
+        request.onload = () => {
+            let aux = JSON.parse(request.response);
+            location.replace("my_event.html?id=" + aux.id);
+        }
+    }
+    else {
+        document.getElementById("completeAll").innerText = "Por favor completar todos los campos";
     }
 }
 
