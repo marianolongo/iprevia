@@ -95,12 +95,12 @@ public class EventService {
 
     public List<Event> getAllPublicEvents(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(new Date(), user);
+        return eventRepository.findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(new Date().getTime(), user);
     }
 
     public List<Event> getAllEventsAfterNow(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByDateAfterAndHostNotOrderByDate(new Date(), user);
+        return eventRepository.findAllByDateAfterAndHostNotOrderByDate(new Date().getTime(), user);
     }
 
     public boolean checkIfFinished(Long id) {
@@ -166,7 +166,7 @@ public class EventService {
 
     public List<Event> getAllPastEvents(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByDateBeforeAndHostNot(new Date(), user);
+        return eventRepository.findAllByDateBeforeAndHostNot(new Date().getTime(), user);
     }
 
     public User getHost(Long id) {
@@ -175,7 +175,7 @@ public class EventService {
 
     public List<Event> getAllPrivateEvents(String host) {
         User user = userService.getUserByName(host);
-        return eventRepository.findAllByIsPrivateTrueAndDateAfterAndHostNotOrderByDate(new Date(), user);
+        return eventRepository.findAllByIsPrivateTrueAndDateAfterAndHostNotOrderByDate(new Date().getTime(), user);
     }
 
     public List<Event> getAllEventsIfUserIsGuest(String name) {

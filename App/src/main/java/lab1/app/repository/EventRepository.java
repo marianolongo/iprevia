@@ -21,15 +21,15 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findAllByNameContainingAndHostNot(String name, User host);
 
-    List<Event> findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(Date date, User host);
+    List<Event> findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(Long date, User host);
 
-    List<Event> findAllByIsPrivateTrueAndDateAfterAndHostNotOrderByDate(Date date, User host);
+    List<Event> findAllByIsPrivateTrueAndDateAfterAndHostNotOrderByDate(Long date, User host);
 
-    List<Event> findAllByDateAfter(Date date);
+    List<Event> findAllByDateAfter(Long date);
 
-    List<Event> findAllByDateBeforeAndHostNot(Date date, User host);
+    List<Event> findAllByDateBeforeAndHostNot(Long date, User host);
 
-    List<Event> findAllByDateAfterAndHostNotOrderByDate(Date date, User host);
+    List<Event> findAllByDateAfterAndHostNotOrderByDate(Long date, User host);
 
     List<Event> findAllByUsersContaining(User user);
 }
