@@ -23,7 +23,6 @@ import java.util.List;
         RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.GET, RequestMethod.OPTIONS})
 public class EventController {
 
-
     private final EventService eventService;
 
     private final UserService userService;
@@ -155,5 +154,10 @@ public class EventController {
     @RequestMapping("/events/getAllEventsIfUserIsGuest/{name}")
     public List<Event> getAllEventsIfUserIsGuest(@PathVariable String name){
         return eventService.getAllEventsIfUserIsGuest(name);
+    }
+
+    @RequestMapping("/events/getNearEvents")
+    public List<Event> getNearEvents(@RequestBody Double latitude, @RequestBody Double longitude, @RequestBody Double distance){
+        return eventService.getNearEvents(latitude, longitude, distance);
     }
 }
