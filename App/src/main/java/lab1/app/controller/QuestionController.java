@@ -23,10 +23,10 @@ public class QuestionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/questions/{id}/addQuestion")
-    public void addQuestion(Authentication authentication, @RequestBody Question question, @PathVariable Long id){
+    public Question addQuestion(Authentication authentication, @RequestBody Question question, @PathVariable Long id){
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
         String author = (String) oAuth2Authentication.getUserAuthentication().getPrincipal();
-        questionService.addQuestion(question, id, author);
+        return questionService.addQuestion(question, id, author);
     }
 
     @RequestMapping("/questions/{id}/getAllQuestionsFromEvent")
