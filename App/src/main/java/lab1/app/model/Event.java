@@ -1,6 +1,5 @@
 package lab1.app.model;
 
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +11,9 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String pictureURL;
 
     @ManyToMany
     private List<User> users;
@@ -117,7 +119,10 @@ public class Event {
         isPrivate = aPrivate;
     }
 
-    public void setIsPrivate(Boolean isPrivate){this.isPrivate = isPrivate;}
+    public void setIsPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
     public void setDateCreated(Long dateCreated) {
         this.dateCreated = dateCreated;
     }
@@ -134,7 +139,15 @@ public class Event {
         this.longitude = longitude;
     }
 
-    public Boolean didFinish(){
+    public Boolean didFinish() {
         return date - new Date().getTime() < 0;
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 }

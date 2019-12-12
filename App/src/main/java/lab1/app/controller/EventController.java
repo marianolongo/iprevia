@@ -71,6 +71,8 @@ public class EventController {
         oldEvent.setName(event.getName());
         oldEvent.setDescription(event.getDescription());
         oldEvent.setIsPrivate(event.getPrivate());
+        oldEvent.setLatitude(event.getLatitude());
+        oldEvent.setLongitude(event.getLongitude());
         eventService.updateEvent(oldEvent);
     }
 

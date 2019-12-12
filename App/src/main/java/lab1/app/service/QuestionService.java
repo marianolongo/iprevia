@@ -22,7 +22,7 @@ public class QuestionService {
     public void addQuestion(Question question, Long id, String author) {
         question.setEventId(id);
         question.setAuthor(author);
-        question.setDate(new Date());
+        question.setDate(System.currentTimeMillis());
         questionRepository.save(question);
     }
 

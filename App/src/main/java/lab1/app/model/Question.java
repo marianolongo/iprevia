@@ -16,7 +16,7 @@ public class Question {
     private Long eventId;
     private String author;
     private String description;
-    private Date date;
+    private Long date;
 
     public Long getId() {
         return id;
@@ -30,12 +30,11 @@ public class Question {
         return author;
     }
 
-
     public String getDescription() {
         return description;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
@@ -55,7 +54,7 @@ public class Question {
         this.description = description;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 }

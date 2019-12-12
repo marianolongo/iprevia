@@ -1,6 +1,5 @@
 package lab1.app.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -18,6 +17,9 @@ public class User {
     private Long rating;
     private Long ratingAmount;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String pictureURL;
+
     @ManyToMany
     @JsonIgnore
     private List<Event> eventsAssisted;
@@ -30,6 +32,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 
     public Long getId() {
