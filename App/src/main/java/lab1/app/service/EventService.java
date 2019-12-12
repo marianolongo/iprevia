@@ -211,4 +211,11 @@ public class EventService {
 //        }
 //        return result;
     }
+
+    public boolean checkIfAvailabilityToVote(Long id, String name) {
+        Event event = getEvent(id);
+        User user = userService.getUserByName(name);
+        Optional<Event> aux = eventRepository.findByIdAndUsersContaining(id, user);
+        return event.didFinish() && aux.isPresent();
+    }
 }

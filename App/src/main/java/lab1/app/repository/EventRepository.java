@@ -32,4 +32,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     List<Event> findAllByDateAfterAndHostNotOrderByDate(Long date, User host);
 
     List<Event> findAllByUsersContaining(User user);
+
+    Optional<Event> findByIdAndUsersContaining(Long id, User user);
 }

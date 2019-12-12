@@ -160,4 +160,11 @@ public class EventController {
     public List<Event> getNearEvents(@RequestBody Double latitude, @RequestBody Double longitude, @RequestBody Double distance){
         return eventService.getNearEvents(latitude, longitude, distance);
     }
+
+    @RequestMapping("/events/{id}/checkIfAvailabilityToVote")
+    public boolean checkIfAvailabilityToVote(@PathVariable Long id, Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String name = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.checkIfAvailabilityToVote(id, name);
+    }
 }
