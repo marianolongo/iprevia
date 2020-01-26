@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable String name){
+    public void updateUser(@RequestBody User user){
         userService.updateUser(user);
     }
 

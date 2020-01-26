@@ -34,4 +34,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     List<Event> findAllByUsersContaining(User user);
 
     Optional<Event> findByIdAndUsersContaining(Long id, User user);
+
+    Optional<Event> findByIdAndUsersVotedContaining(Long id, User user);
 }

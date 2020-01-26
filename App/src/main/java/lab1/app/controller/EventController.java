@@ -167,4 +167,10 @@ public class EventController {
         String name = (String) auth2Authentication.getUserAuthentication().getPrincipal();
         return eventService.checkIfAvailabilityToVote(id, name);
     }
+    @RequestMapping("/events/{id}/userDidVote")
+    public boolean userDidVote(@PathVariable Long id, Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String name = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.userDidVote(id, name);
+    }
 }
