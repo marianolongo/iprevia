@@ -1,10 +1,6 @@
 package lab1.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 public class Question {
@@ -14,7 +10,9 @@ public class Question {
     private Long id;
 
     private Long eventId;
-    private String author;
+
+    @ManyToOne
+    private User author;
     private String description;
     private Long date;
 
@@ -26,7 +24,7 @@ public class Question {
         return eventId;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
@@ -46,7 +44,7 @@ public class Question {
         this.eventId = eventId;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
