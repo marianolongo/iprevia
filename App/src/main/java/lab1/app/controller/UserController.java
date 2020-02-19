@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @RequestMapping("/users/{id}")
-    public void getUserById(@PathVariable long id){
-        userService.getUserById(id);
+    public User getUserById(@PathVariable long id){
+        return userService.getUserById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
