@@ -224,4 +224,9 @@ public class EventService {
         Optional<Event> aux = eventRepository.findByIdAndUsersContaining(id, user);
         return aux.isPresent();
     }
+
+    public List<Event> getAllEventsNotFromActiveUser(String host) {
+        User userHost = userService.getUser(host);
+        return eventRepository.findAllByHostIsNot(userHost);
+    }
 }

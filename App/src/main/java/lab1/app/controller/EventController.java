@@ -110,6 +110,13 @@ public class EventController {
         return eventService.getAllEventsAfterNow(host);
     }
 
+    @RequestMapping("/events/notFromActiveUser")
+    public List<Event> getAllEventsNotFromActiveUser(Authentication authentication){
+        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
+        return eventService.getAllEventsNotFromActiveUser(host);
+    }
+
     @RequestMapping("/events/{id}/checkDidFinished")
     public boolean checkIfFinished(@PathVariable Long id){
         return eventService.checkIfFinished(id);
