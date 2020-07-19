@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
 import java.util.Date;
@@ -129,14 +130,12 @@ public class EventController {
         return eventService.addVote(id, voterName, rating);
     }
 
-//    @RequestMapping("/events/sendMail")
-//    public void sendMail() throws MessagingException {
-//        eventService.sendSimpleMessage("mariano.longo@ing.austral.edu.ar","Inscripcion", "test", (long) 3, "Mariano");
-//    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/events/addUserViaConfirmation/{id}/{guestName}")
-    public void addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
-        eventService.addUserWithMail(id, guestName);
+    @RequestMapping(method = RequestMethod.GET, value = "/events/addUserViaConfirmation/{id}/{guestName}")
+    public RedirectView addUserWithMail(@PathVariable Long id, @PathVariable String guestName){
+        Event event = eventService.addUserWithMail(id, guestName);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:3000/confirmation/" + event.getName() + "/" + guestName);
+        return redirectView;
     }
 
     @RequestMapping("/events/getPastEvents")

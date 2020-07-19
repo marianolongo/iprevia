@@ -76,12 +76,8 @@ public class EventService {
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
-        String htmlMsg = "";
-        htmlMsg = "El usuario " + guestName + " desea participar del evento " + name + " , has click " +
-                "<a href=\"http://localhost:3000/confirmGuest/?"
-                + "username=" + guestName
-                + "&id=" + id
-                + "\">aqui</a>"
+        String htmlMsg = "El usuario " + guestName + " desea participar del evento " + name + " , has click " +
+                "<a href=\"http://localhost:8080/events/addUserViaConfirmation/" + id + "/" + guestName + "\">aqui</a>"
                 + " para aceptar o rechazar su solicitud";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(to);
@@ -147,10 +143,11 @@ public class EventService {
         return sb.toString();
     }
 
-    public void addUserWithMail(Long id, String guestName) {
+    public Event addUserWithMail(Long id, String guestName) {
         Event event = getEvent(id);
         User user = userService.getUserByName(guestName);
         addUserAndEvent(event, user);
+        return event;
     }
 
     private void addUserAndEvent(Event event, User user) {
