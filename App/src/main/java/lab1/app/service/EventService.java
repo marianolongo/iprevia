@@ -85,9 +85,8 @@ public class EventService {
         emailSender.send(mimeMessage);
     }
 
-    public List<Event> getAllEventsContaining(String inputText, String host) {
-        User user = userService.getUserByName(host);
-        return eventRepository.findAllByNameContainingAndHostNot(inputText, user);
+    public List<Event> getAllEventsContaining(String inputText) {
+        return eventRepository.findAllByNameContaining(inputText);
     }
 
     public List<Event> getAllPublicEvents(String host) {

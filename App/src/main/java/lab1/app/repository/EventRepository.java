@@ -19,7 +19,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     Optional<Event> findById(Long id);
 
-    List<Event> findAllByNameContainingAndHostNot(String name, User host);
+    List<Event> findAllByNameContaining(String name);
 
     List<Event> findAllByIsPrivateFalseAndDateAfterAndHostNotOrderByDate(Long date, User host);
 

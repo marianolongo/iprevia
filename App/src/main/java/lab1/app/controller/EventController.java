@@ -84,10 +84,8 @@ public class EventController {
     }
 
     @RequestMapping("/events/containing/{inputText}")
-    public List<Event> getAllEventsContaining(@PathVariable String inputText, Authentication authentication){
-        OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
-        String host = (String) auth2Authentication.getUserAuthentication().getPrincipal();
-        return eventService.getAllEventsContaining(inputText, host);
+    public List<Event> getAllEventsContaining(@PathVariable String inputText){
+        return eventService.getAllEventsContaining(inputText);
     }
 
     @RequestMapping("/events/getPublicEvents")
@@ -162,8 +160,8 @@ public class EventController {
         return eventService.getAllEventsIfUserIsGuest(name);
     }
 
-    @RequestMapping("/events/getNearEvents")
-    public List<Event> getNearEvents(@RequestBody Double latitude, @RequestBody Double longitude, @RequestBody Double distance){
+    @RequestMapping("/events/getNearEvents/{latitude}/{longitude}/{distance}")
+    public List<Event> getNearEvents(@PathVariable Double latitude, @PathVariable Double longitude, @PathVariable Double distance){
         return eventService.getNearEvents(latitude, longitude, distance);
     }
 
