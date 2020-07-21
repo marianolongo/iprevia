@@ -99,6 +99,10 @@ public class EventService {
         return eventRepository.findAllByDateAfterAndHostNotOrderByDate(new Date().getTime(), user);
     }
 
+    public List<Event> getAllEventsAfterNow() {
+        return eventRepository.findAllByDateAfter(new Date().getTime());
+    }
+
     public boolean checkIfFinished(Long id) {
         return eventRepository.findById(id).get().didFinish();
     }
@@ -185,7 +189,7 @@ public class EventService {
 
     public List<Event> getNearEvents(Double latitude, Double longitude, Double distance){
 
-        return getAllEvents().stream().filter(x -> {
+        return getAllEventsAfterNow().stream().filter(x -> {
             double theta = x.getLongitude() - longitude;
             double dist = Math.sin(Math.toRadians(x.getLatitude())) * Math.sin(Math.toRadians(latitude)) + Math.cos(Math.toRadians(x.getLatitude())) * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
@@ -193,19 +197,6 @@ public class EventService {
             dist = dist * 60 * 1.1515 * 1.609344;
                 return dist <= distance / 1000;
             }).collect(Collectors.toList());
-
-
-//        List<Event> result = new ArrayList<>();
-//        for (Event e :
-//                getAllEvents()) {
-//            double theta = e.getLongitude() - longitude;
-//            double dist = Math.sin(Math.toRadians(e.getLatitude())) * Math.sin(Math.toRadians(latitude)) + Math.cos(Math.toRadians(e.getLatitude())) * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(theta));
-//            dist = Math.acos(dist);
-//            dist = Math.toDegrees(dist);
-//            dist = dist * 60 * 1.1515 * 1.609344;
-//            if (dist <= distance/1000) result.add(e);
-//        }
-//        return result;
     }
 
     public boolean checkIfAvailabilityToVote(Long id, String name) {
