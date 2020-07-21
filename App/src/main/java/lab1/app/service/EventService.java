@@ -76,9 +76,10 @@ public class EventService {
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
-        String htmlMsg = "El usuario " + guestName + " desea participar del evento " + name + " , has click " +
-                "<a href=\"http://localhost:8080/events/addUserViaConfirmation/" + id + "/" + guestName + "\">aqui</a>"
-                + " para aceptar o rechazar su solicitud";
+        String htmlMsg = "El usuario <strong>" + guestName + "</strong> desea participar del evento <strong>" + name + "</strong>. \n" +
+                "Para acceptar a esta persona haz click " +
+                "<a href=\"http://localhost:8080/events/addUserViaConfirmation/" + id + "/" + guestName + "\">aquí</a>" +
+                ", en caso contrario ignorar este mail.";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(to);
         helper.setSubject(subject);
