@@ -209,7 +209,7 @@ public class EventService {
 
     public boolean userDidVote(Long id, String name) {
         User user = userService.getUserByName(name);
-        Optional<Event> aux = eventRepository.findByIdAndUsersContaining(id, user);
+        Optional<Event> aux = eventRepository.findByIdAndUsersVotedContaining(id, user);
         return aux.isPresent();
     }
 
